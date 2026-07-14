@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>learn html with phoebe - your first page to your first live site</title>
+<link rel="stylesheet" href="assets/style.css?v=1">
+<style>
+  .stats-row { display: flex; gap: 2.4rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 2.1rem; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .72rem; opacity: .85; text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
+
+  .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .course-card {
+    border: 1px solid var(--hairline);
+    border-top: 4px solid var(--diff, var(--indigo));
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+    position: relative;
+  }
+  .course-card:hover { border-color: var(--indigo-soft); border-top-color: var(--diff, var(--indigo)); box-shadow: 0 8px 28px rgba(227,79,38,.12); transform: translateY(-3px); }
+  .course-card .cicon { font-size: 1.7rem; line-height: 1; }
+  .course-card .cnum { font-size: .72rem; font-weight: 700; color: var(--indigo); text-transform: uppercase; letter-spacing: .1em; }
+  .course-card h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
+  .course-card p { font-size: .85rem; color: var(--muted); flex: 1; }
+  .course-card .meta { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+  .diff-legend { display: flex; gap: 1rem; margin-top: 1.6rem; font-size: .74rem; color: var(--muted); font-weight: 600; flex-wrap: wrap; }
+  .diff-legend i { display: inline-block; width: .85rem; height: .35rem; border-radius: 999px; margin-right: .35rem; vertical-align: middle; }
+
+  .paths { margin-top: 2.6rem; }
+  .paths h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .3rem; }
+  .paths .plede { color: var(--muted); font-size: .92rem; margin-bottom: .8rem; }
+  .path { display: flex; gap: .55rem; align-items: center; padding: .75rem 0; border-bottom: .5px solid var(--hairline); flex-wrap: wrap; }
+  .path:last-child { border-bottom: none; }
+  .path b { min-width: 15.5rem; font-size: .9rem; }
+  .path .pstep { background: var(--indigo-50); color: var(--indigo); border-radius: 999px; padding: .16rem .68rem; font-weight: 700; font-size: .8rem; text-decoration: none; transition: all .12s ease; }
+  .path .pstep:hover { background: var(--indigo); color: #fff; }
+  .path .parr { color: var(--faint); font-weight: 700; }
+
+  .dd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem; margin-top: .9rem; }
+  .dd { border: 1px solid var(--hairline); border-radius: 10px; padding: .6rem .85rem; display: flex; gap: .55rem; align-items: baseline; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .84rem; transition: all .12s ease; }
+  .dd b { color: var(--indigo); font-variant-numeric: tabular-nums; }
+  .dd:hover { border-color: var(--indigo); transform: translateY(-2px); }
+
+  .hero-live { margin-top: -1.4rem; }
+  .hero-live .hlede { color: var(--muted); font-size: .95rem; margin: 1.4rem 0 0; }
+  .hero-live .hlede b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe</div>
+    <h1>The web is a text file. Learn to write it.</h1>
+    <p class="sub">Six 45-minute sessions from your very first tag to your own page live on the internet - HTML that means something, enough CSS to be proud of it, and a real GitHub Pages ship day. No installs, no prerequisites, no fear.</p>
+    <div class="stats-row">
+      <div class="stat"><b data-count="6">6</b><span>sessions</span></div>
+      <div class="stat"><b data-count="3">3</b><span>deep dives</span></div>
+      <div class="stat"><b data-count="47">47</b><span>official lessons covered</span></div>
+      <div class="stat"><b data-count="1">1</b><span>live site you ship</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section hero-live" id="live-proof">
+    <p class="hlede"><b>Don't take our word for it - type.</b> The panel below is a real, editable HTML playground, the same kind that runs through every session. Change the words. Add a tag. Break it. The right side answers instantly.</p>
+    <div class="pg" data-caption="Lesson zero, free of charge: tags wrap meaning around text. Everything else is detail." data-height="200">
+<pre class="pg-src">
+&lt;h1&gt;Hello, I am about to learn HTML&lt;/h1&gt;
+&lt;p&gt;This page is &lt;strong&gt;mine&lt;/strong&gt;.
+   Edit me. Nothing can go wrong.&lt;/p&gt;
+</pre>
+    </div>
+  </section>
+
+  <section class="section" id="sessions">
+    <div class="course-grid">
+      <a class="course-card" href="courses/01-your-first-page.html" style="--diff:#34D399">
+        <span class="cicon">📄</span>
+        <span class="cnum">Session 1 · easiest</span>
+        <h3>Your first page, in a plain text file</h3>
+        <p>Elements, attributes, the skeleton every page wears, heading discipline - and index.html is born in your browser.</p>
+        <span class="meta"><span class="pill amber">▶ Start here</span><span class="pill light">Zero experience</span></span>
+      </a>
+      <a class="course-card" href="courses/02-words-that-link.html" style="--diff:#34D399">
+        <span class="cicon">🔗</span>
+        <span class="cnum">Session 2 · easy</span>
+        <h3>Words that link</h3>
+        <p>Meaningful text, lists, quotes and code - then links, the web's whole superpower, plus a finished head with favicon.</p>
+        <span class="meta"><span class="pill light">Everyone</span></span>
+      </a>
+      <a class="course-card" href="courses/03-pictures-and-structure.html" style="--diff:#FBBF24">
+        <span class="cicon">🖼️</span>
+        <span class="cnum">Session 3 · medium</span>
+        <h3>Pictures and structure</h3>
+        <p>Images with honest alt text, video and audio, and the semantic layout regions that give your page a professional skeleton.</p>
+        <span class="meta"><span class="pill light">Everyone</span></span>
+      </a>
+      <a class="course-card" href="courses/04-tables-and-forms.html" style="--diff:#FBBF24">
+        <span class="cicon">📋</span>
+        <span class="cnum">Session 4 · medium</span>
+        <h3>Tables and forms</h3>
+        <p>Accessible data tables (the data person's favorite) and forms with labels, input types, and free browser validation.</p>
+        <span class="meta"><span class="pill light">Data folks shine</span></span>
+      </a>
+      <a class="course-card" href="courses/05-enough-css.html" style="--diff:#FB923C">
+        <span class="cicon">🎨</span>
+        <span class="cnum">Session 5 · new territory</span>
+        <h3>Enough CSS to be proud</h3>
+        <p>Selectors, color and type, the box model, one flexbox trick - a starter kit chosen for maximum visible payoff.</p>
+        <span class="meta"><span class="pill light">The makeover</span></span>
+      </a>
+      <a class="course-card" href="courses/06-polish-and-ship.html" style="--diff:#F87171">
+        <span class="cicon">🚀</span>
+        <span class="cnum">Session 6 · ship day</span>
+        <h3>Polish and ship</h3>
+        <p>Validator, the 6-point accessibility audit, viewport meta - then GitHub Pages, and your page is LIVE on a real URL.</p>
+        <span class="meta"><span class="pill light">Everyone graduates</span></span>
+      </a>
+    </div>
+    <div class="diff-legend">
+      <span><i style="background:#34D399"></i>easy - zero experience</span>
+      <span><i style="background:#FBBF24"></i>medium - hands-on</span>
+      <span><i style="background:#FB923C"></i>new territory - CSS starter</span>
+      <span><i style="background:#F87171"></i>ship day - the finale</span>
+    </div>
+
+    <div class="paths">
+      <h2>Choose your path 🗺️</h2>
+      <p class="plede">Everyone starts at Session 1. The project compounds - each session edits the same page you ship in Session 6.</p>
+      <div class="path"><b>🚀 Full journey (recommended)</b>
+        <a class="pstep" href="courses/01-your-first-page.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/02-words-that-link.html">2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-pictures-and-structure.html">3</a><span class="parr">→</span>
+        <a class="pstep" href="courses/04-tables-and-forms.html">4</a><span class="parr">→</span>
+        <a class="pstep" href="courses/05-enough-css.html">5</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-polish-and-ship.html">6</a><span class="parr">→</span>
+        <a class="pstep" href="courses/61-interactive-html.html">deep dives</a>
+      </div>
+      <div class="path"><b>⚡ Fast track to shipped</b>
+        <a class="pstep" href="courses/01-your-first-page.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/02-words-that-link.html">2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-pictures-and-structure.html">3</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-polish-and-ship.html">6</a>
+      </div>
+      <div class="path"><b>📊 Data person's detour</b>
+        <a class="pstep" href="courses/01-your-first-page.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/04-tables-and-forms.html">4</a><span class="parr">→</span>
+        <a class="pstep" href="courses/62-embeds-and-vectors.html">6.2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/63-head-power-ups.html">6.3</a>
+      </div>
+    </div>
+
+    <div class="paths">
+      <h2>The deep-dive track 🔬</h2>
+      <p class="plede">Self-paced pages for after ship day - the modern HTML most tutorials skip, and the head upgrades that make your links look great on LinkedIn.</p>
+      <div class="dd-grid">
+        <a class="dd" href="courses/61-interactive-html.html"><b>6.1</b>Interactive HTML without JavaScript</a>
+        <a class="dd" href="courses/62-embeds-and-vectors.html"><b>6.2</b>Embeds and vectors: SVG, iframes</a>
+        <a class="dd" href="courses/63-head-power-ups.html"><b>6.3</b>Head power-ups: SEO, social cards</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>learn-html-with-phoebe · by Phoebe Fu · sources: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener">MDN Learn</a> + <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a></span>
+  </footer>
+</main>
+
+<script src="assets/app.js?v=1"></script>
+<script src="assets/html-live.js?v=1"></script>
+</body>
+</html>

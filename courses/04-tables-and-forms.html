@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 · Tables and forms - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 4 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 4 of 6</div>
+    <h1>Rows and <span class="accent">inputs</span>: tables and forms</h1>
+    <p class="sub">Two element families carry the working web: tables show data, forms collect it. Today your page learns both - a real data table with proper accessibility, and a contact form the browser validates for you, no code required.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Moderate</span>
+      <span class="chip audience">Data folks' favorite session</span>
+      <span class="chip audience">Total beginners welcome</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-22 · Concepts (live cards)</span>
+      <span class="a3" style="flex:4">22-40 · Three demos</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists</h2>
+    </div>
+    <p class="lede">Your page can already talk (Sessions 1-3: headings, links, images, structure). Today it learns to show data honestly and to listen. If you work with data for a living, this is the session where HTML starts feeling like home: a table element is a tiny dataset, and a form is a tiny data-collection pipeline - schema, types, validation and all.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A table you can read row by row with your eyes closed (caption, thead, scope - the accessibility trio), the iron rule about what tables are NOT for, the label habit that makes every form usable, an input-types tour where the browser does the validation, and a real skills table plus a real contact form on your own page.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: TABLES ============ -->
+  <section class="section" id="tables">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "Table basics" + web.dev "Tables"</span>
+      <h2>Tables - for data, never layout <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">A table is rows of cells. Four elements build one: <code>&lt;table&gt;</code> wraps it, <code>&lt;tr&gt;</code> makes a row, <code>&lt;td&gt;</code> holds data, <code>&lt;th&gt;</code> holds a header. Everything else is refinement on those four.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Build one from four elements<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Read it inside out: cells sit in rows, rows sit in the table. The browser draws the grid for you - column widths, alignment, all of it. Your only job is to put the right content in the right cell, one row at a time.</p>
+        <div class="pg" data-caption="A minimal table. Add a third row for JavaScript (born 1995) - copy a tr, change the cells." data-height="220">
+<pre class="pg-src">
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Language&lt;/th&gt;
+    &lt;th&gt;Job&lt;/th&gt;
+    &lt;th&gt;Born&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;HTML&lt;/td&gt;
+    &lt;td&gt;Structure&lt;/td&gt;
+    &lt;td&gt;1991&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;CSS&lt;/td&gt;
+    &lt;td&gt;Style&lt;/td&gt;
+    &lt;td&gt;1996&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+        </div>
+        <ul>
+          <li><strong>th is not "bold td".</strong> It declares "this cell names the others" - machines lean on that claim, so make it honestly.</li>
+          <li><strong>Every row carries the same number of cells.</strong> Miss one and the grid quietly shifts - the table version of an unclosed tag.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The accessible upgrade: caption, thead, scope<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A sighted reader scans a table in two dimensions at once. A screen reader visits one cell at a time - so the markup has to say what each cell means. Three additions do it:</p>
+        <ul>
+          <li><code>&lt;caption&gt;</code> - the table's title, first thing inside <code>&lt;table&gt;</code>. Announced before any cell, so listeners can skip tables they don't need.</li>
+          <li><code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> - name which rows are headers and which are data. <code>&lt;tfoot&gt;</code> holds totals.</li>
+          <li><code>scope="col"</code> on column headers, <code>scope="row"</code> on row headers - now every data cell can be announced with its full address: "HTML, Born, 1991".</li>
+        </ul>
+        <div class="pg" data-caption="The same table, fully dressed. Delete the caption and imagine hearing this table with no title." data-height="280">
+<pre class="pg-src">
+&lt;table&gt;
+  &lt;caption&gt;Languages of the web&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Language&lt;/th&gt;
+      &lt;th scope="col"&gt;Job&lt;/th&gt;
+      &lt;th scope="col"&gt;Born&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;HTML&lt;/th&gt;
+      &lt;td&gt;Structure&lt;/td&gt;
+      &lt;td&gt;1991&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;CSS&lt;/th&gt;
+      &lt;td&gt;Style&lt;/td&gt;
+      &lt;td&gt;1996&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+        </div>
+        <div class="callout tip">
+          <strong>Spanning cells, sparingly</strong>
+          <code>colspan="2"</code> makes a cell cover two columns, <code>rowspan="2"</code> two rows. Fine for the occasional merged header - but every span makes the table harder to announce, sort, and copy into a spreadsheet. If you need many, your data probably wants to be two tables.
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>The 1998 horror story:</strong> before CSS matured, whole websites were built as invisible tables - navigation in one giant cell, content in another, spacer images padding the gaps. Screen readers announced them as data ("row 1 of 47, column 3...") and redesigns meant rebuilding every page. The industry spent a decade digging out. Hence the iron rule: <strong>tables hold tabular data, never layout.</strong> Rows in a row problem? Table. Things placed side by side? That is Session 5's job.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: READING TABLES ============ -->
+  <section class="section" id="data-tables">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers MDN "Table accessibility"</span>
+      <h2>Reading tables like a data person <span class="tag concept">5 min live</span></h2>
+    </div>
+    <p class="lede">You already know when data belongs in a table: multiple records, same fields, comparison matters. HTML tables obey the same instincts as a good dataframe - and have the same smells when misused.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of an accessible table: caption on top, thead header row, scope col reading down, scope row reading across">
+        <style>
+          .t4T { font: 700 16px Inter, sans-serif; fill: #2B1D14; }
+          .t4H { font: 700 15px Inter, sans-serif; fill: #FDF0EA; }
+          .t4C { font: 600 15px Inter, sans-serif; fill: #2B1D14; }
+          .t4M { font: 600 14px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .t4X { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .t4N { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <defs>
+          <marker id="t4arw" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#A6300F"/>
+          </marker>
+        </defs>
+        <text class="t4T" x="200" y="38">Pipeline health - last 7 days</text>
+        <text class="t4M" x="480" y="38">&lt;caption&gt;</text>
+        <rect x="200" y="54" width="440" height="42" rx="8" fill="#E34F26"/>
+        <text class="t4H" x="220" y="80">Pipeline</text>
+        <text class="t4H" x="380" y="80">Runs</text>
+        <text class="t4H" x="500" y="80">Status</text>
+        <text class="t4M" x="660" y="80">&lt;thead&gt; + scope="col"</text>
+        <rect x="200" y="100" width="150" height="42" fill="#F8A47F"/>
+        <rect x="350" y="100" width="290" height="42" fill="#FDF0EA"/>
+        <text class="t4C" x="220" y="126">orders_daily</text>
+        <text class="t4C" x="380" y="126">7</text>
+        <text class="t4C" x="500" y="126">healthy</text>
+        <rect x="200" y="146" width="150" height="42" fill="#F8A47F"/>
+        <rect x="350" y="146" width="290" height="42" fill="#FDF0EA"/>
+        <text class="t4C" x="220" y="172">crm_sync</text>
+        <text class="t4C" x="380" y="172">5</text>
+        <text class="t4C" x="500" y="172">2 failed</text>
+        <text class="t4M" x="660" y="126">&lt;th scope="row"&gt;</text>
+        <text class="t4X" x="660" y="146">row headers read across</text>
+        <path d="M410,58 L410,46 L410,58 M410,96 L410,192" stroke="#A6300F" stroke-width="2.5" fill="none" marker-end="url(#t4arw)"/>
+        <text class="t4X" x="30" y="80">scope="col"</text>
+        <text class="t4X" x="30" y="98">labels its column,</text>
+        <text class="t4X" x="30" y="116">reading down</text>
+        <path d="M196,167 L100,167" stroke="#A6300F" stroke-width="2.5" fill="none" marker-end="url(#t4arw)"/>
+        <text class="t4X" x="30" y="200">scope="row" labels</text>
+        <text class="t4X" x="30" y="218">its row, reading across</text>
+        <rect x="200" y="222" width="440" height="8" rx="4" fill="#DDCBBE"/>
+        <text class="t4X" x="200" y="252">tfoot: totals live below the data</text>
+        <rect x="40" y="290" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="t4N" x="64" y="302">Caption names the table, thead names the columns, scope gives every cell an address.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the accessibility trio on one table: caption on top, thead announced first, scope arrows showing what each header labels.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>A metrics table, done properly<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Here is the diagram above as living markup - a monitoring table any data team would recognize. Every technique from Part 1 in one place, plus <code>&lt;tfoot&gt;</code> for the totals row.</p>
+        <div class="pg" data-caption="Change a status to 'failed', add a pipeline of your own, break a scope and feel guilty." data-height="340">
+<pre class="pg-src">
+&lt;table&gt;
+  &lt;caption&gt;Pipeline health - last 7 days&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Pipeline&lt;/th&gt;
+      &lt;th scope="col"&gt;Runs&lt;/th&gt;
+      &lt;th scope="col"&gt;Rows/day&lt;/th&gt;
+      &lt;th scope="col"&gt;Status&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;orders_daily&lt;/th&gt;
+      &lt;td&gt;7&lt;/td&gt;&lt;td&gt;1.2M&lt;/td&gt;&lt;td&gt;healthy&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;events_stream&lt;/th&gt;
+      &lt;td&gt;168&lt;/td&gt;&lt;td&gt;40M&lt;/td&gt;&lt;td&gt;healthy&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;crm_sync&lt;/th&gt;
+      &lt;td&gt;5&lt;/td&gt;&lt;td&gt;80k&lt;/td&gt;&lt;td&gt;2 failed&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Total&lt;/th&gt;
+      &lt;td&gt;180&lt;/td&gt;&lt;td&gt;41.3M&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>When a table beats a list, and table smells<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The decision is the same one you make before reaching for a dataframe: <strong>multiple records, shared fields, comparison across them?</strong> Table. One field per item, order or grouping is the point? List (Session 2). Two smells tell you the choice went wrong:</p>
+        <ul>
+          <li><strong>The single-column table</strong> - one field means it is a list wearing a table costume. Simpler markup, same meaning: use <code>&lt;ul&gt;</code>.</li>
+          <li><strong>The merged-cell maze</strong> - colspan and rowspan stacked three deep means the data is not really rectangular. Split it into two honest tables, or rethink the shape.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Every BI export, HTML email report, and "download as web page" from a spreadsheet is this exact markup. A data person who can read <code>thead</code>/<code>tbody</code>/<code>scope</code> can also <em>scrape</em> confidently - well-structured tables are what makes <code>pandas.read_html()</code> feel like magic.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: FORMS ============ -->
+  <section class="section" id="forms">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers MDN "Forms and buttons" + web.dev "Forms"</span>
+      <h2>Forms - the input side of the web <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">Everything you have written so far talks AT the visitor. A form listens: it is a collection of typed inputs wrapped in an envelope that knows where to send itself. Schema design, types, validation - data thinking, in markup.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The form element - an envelope with an address<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;form action="/where" method="post"&gt;</code> wraps the inputs. <code>action</code> says where the data goes when submitted; <code>method</code> says how (<code>get</code> puts answers in the URL - fine for searches; <code>post</code> sends them in the request body - right for anything personal).</p>
+        <p><strong>The honest part:</strong> receiving form data needs a server. Your page on GitHub Pages (Session 6) has no server - so a form there either opens the visitor's email app (<code>action="mailto:you@example.com"</code>, clunky but zero setup) or points at a free form-handling service. We wire that up in Session 6; today we build the form itself, which is most of the work anyway.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>label + for - THE accessibility habit<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every input gets a <code>&lt;label&gt;</code>, and the label's <code>for</code> attribute holds the input's <code>id</code>. That one wire does three jobs: screen readers announce the label when the input gets focus, clicking the label focuses the input (a huge tap target on phones), and your form documents itself.</p>
+        <div class="pg" data-caption="Click the WORDS, not the boxes - focus jumps because for and id match. Break one id and feel the label go dead." data-height="200">
+<pre class="pg-src">
+&lt;label for="name"&gt;Your name&lt;/label&gt;
+&lt;input id="name" type="text"&gt;
+
+&lt;label for="topic"&gt;Favorite data topic&lt;/label&gt;
+&lt;input id="topic" type="text"
+       placeholder="e.g. dbt, DuckDB, evals"&gt;
+</pre>
+        </div>
+        <div class="callout tip">
+          <strong>Placeholder is a hint, not a label</strong>
+          Placeholder text vanishes the moment typing starts - a form with only placeholders becomes a memory test half-filled. Label says what the field IS (always visible); placeholder shows an example answer. You need the first; the second is optional garnish.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The input types tour - one element, many costumes<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>One element, <code>&lt;input&gt;</code>, changes personality with its <code>type</code> attribute. Declaring the right type buys you the right keyboard on phones, the right picker widgets, and free validation:</p>
+        <table class="clean">
+          <thead><tr><th>type</th><th>You get</th></tr></thead>
+          <tbody>
+            <tr><td><code>text</code></td><td>The default one-line box</td></tr>
+            <tr><td><code>email</code> / <code>number</code></td><td>Format checking + the matching phone keyboard</td></tr>
+            <tr><td><code>date</code></td><td>A calendar picker, localized for free</td></tr>
+            <tr><td><code>checkbox</code></td><td>Independent yes/no boxes</td></tr>
+            <tr><td><code>radio</code></td><td>Pick ONE of a group - grouped by sharing a <code>name</code></td></tr>
+            <tr><td><code>range</code> / <code>color</code></td><td>A slider / a color swatch picker</td></tr>
+          </tbody>
+        </table>
+        <div class="pg" data-caption="Radios sharing name='fmt' are one question - click around, only one stays picked. Add a fourth option; then give it a DIFFERENT name and watch it defect from the group." data-height="240">
+<pre class="pg-src">
+&lt;p&gt;How do you take your data?&lt;/p&gt;
+&lt;label&gt;&lt;input type="radio" name="fmt" checked&gt; CSV&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="fmt"&gt; Parquet&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="fmt"&gt; JSON&lt;/label&gt;
+
+&lt;p&gt;Extras - each checkbox is independent:&lt;/p&gt;
+&lt;label&gt;&lt;input type="checkbox" checked&gt; Send charts&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox"&gt; Weekly digest&lt;/label&gt;
+
+&lt;label for="d"&gt;Start date&lt;/label&gt;
+&lt;input id="d" type="date"&gt;
+</pre>
+        </div>
+        <p>Wrapping the input inside its label (as above) is the second legal way to pair them - no <code>for</code>/<code>id</code> needed. Handy for radios and checkboxes.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Validation - the browser does the work<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Sprinkle constraint attributes on inputs and the browser enforces them at submit time, with its own error bubbles, in the visitor's own language. Zero code:</p>
+        <ul>
+          <li><code>required</code> - may not be empty. <code>type="email"</code> - must look like an address.</li>
+          <li><code>min</code>/<code>max</code> for numbers and dates, <code>minlength</code>/<code>maxlength</code> for text, <code>pattern</code> for regex-shaped rules.</li>
+        </ul>
+        <p>Two more elements complete the kit: <code>&lt;textarea&gt;</code> for multi-line text, and <code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> children for dropdown lists. A <code>&lt;button&gt;</code> inside a form submits it by default.</p>
+        <div class="pg" data-caption="The whole toolkit as one contact form. Type a non-email in the email box and click away - some browsers hint immediately. This sandbox blocks actual submission (nowhere to send it anyway), so the Send button is honest decoration until Session 6." data-height="380">
+<pre class="pg-src">
+&lt;form action="#" method="post"&gt;
+  &lt;label for="n"&gt;Name&lt;/label&gt;
+  &lt;input id="n" type="text" required&gt;
+
+  &lt;label for="e"&gt;Email&lt;/label&gt;
+  &lt;input id="e" type="email" required&gt;
+
+  &lt;label for="how"&gt;How did you find me?&lt;/label&gt;
+  &lt;select id="how"&gt;
+    &lt;option&gt;LinkedIn&lt;/option&gt;
+    &lt;option&gt;GitHub&lt;/option&gt;
+    &lt;option&gt;Search&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;label for="msg"&gt;Message&lt;/label&gt;
+  &lt;textarea id="msg" rows="4"
+    minlength="10" required&gt;&lt;/textarea&gt;
+
+  &lt;button&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>fieldset, autocomplete, datalist<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></strong> - group related inputs under a caption. For radio groups it is the polite move: the legend ("How do you take your data?") gets announced with every option, so listeners always know which question they are answering.</li>
+          <li><strong><code>autocomplete</code></strong> - values like <code>autocomplete="name"</code> or <code>"email"</code> let the browser offer its saved answers. One attribute, dramatically faster forms - and an accessibility win for anyone who finds typing hard.</li>
+          <li><strong><code>&lt;datalist&gt;</code></strong> - attach a list of suggestions to a free text input via its <code>list</code> attribute: a dropdown that still accepts anything. The relaxed cousin of <code>&lt;select&gt;</code>.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Forms are where the web makes its money - every checkout, signup, and survey. Industry studies keep finding the same top abandonment causes: unclear labels and surprise validation errors. The label habit and honest input types you just learned are, unglamorously, conversion optimization.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3 · the running project grows</span>
+      <h2>A real table on your page <span class="tag demo">★ 8 min · follow along</span></h2>
+    </div>
+    <p class="lede">Your Projects section (outlined in Session 1, structured in Session 3) gets an upgrade: a proper data table of what you have built or learned - caption, thead, scope, the works.</p>
+
+    <div class="steps">
+      <div class="step"><p>Open your <code>index.html</code>. Inside the Projects section, start a <code>&lt;table&gt;</code> with a <code>&lt;caption&gt;</code>: "Things I have built" or "My skills" - your call.</p></div>
+      <div class="step"><p>Add a <code>&lt;thead&gt;</code> with one row of four <code>&lt;th scope="col"&gt;</code> headers: Name, What it is, Year, Status.</p></div>
+      <div class="step"><p>Add a <code>&lt;tbody&gt;</code> with 3-4 rows. First cell of each row is a <code>&lt;th scope="row"&gt;</code> with the project name; the rest are <code>&lt;td&gt;</code>.</p></div>
+      <div class="step"><p>Data people: make it your REAL project list - the dashboard, the pipeline, the model. This page becomes your portfolio in Session 6; real rows beat placeholder rows.</p></div>
+      <div class="step"><p>Save, reload. Unstyled tables look austere - resist the urge to fix that with markup. Session 5 dresses it properly.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Grid looks shifted?</strong>
+      Count cells per row - every row needs the same number (a th counts as a cell). One missing td shifts everything after it left by one column.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>A contact form that validates itself <span class="tag demo">★ 7 min · build your own</span></h2>
+    </div>
+    <p class="lede">The Contact section stops being a placeholder. Name, email, a message box, one dropdown, one button - with the browser guarding the door.</p>
+
+    <div class="steps">
+      <div class="step"><p>In your Contact section, open a <code>&lt;form action="#" method="post"&gt;</code>. The <code>#</code> is an honest placeholder address - Session 6 gives it a real one.</p></div>
+      <div class="step"><p>Add three labeled inputs: Name (<code>type="text" required</code>), Email (<code>type="email" required</code>), and a <code>&lt;textarea&gt;</code> for the message. Every input gets an <code>id</code>; every label gets the matching <code>for</code>.</p></div>
+      <div class="step"><p>Add a <code>&lt;select id="how"&gt;</code> - "How did you find me?" - with 3-4 <code>&lt;option&gt;</code>s (LinkedIn, GitHub, search, a friend).</p></div>
+      <div class="step"><p>Finish with <code>&lt;button&gt;Send&lt;/button&gt;</code>. Save, reload, click Send with everything empty - watch the browser refuse politely, in your system language, for free.</p></div>
+      <div class="step"><p>Honest check: it validates but does not send yet - there is no server behind it. That is correct and expected until Session 6.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3</span>
+      <h2>The label audit <span class="tag demo">★ 3 min · build your own</span></h2>
+    </div>
+    <p class="lede">A three-minute quality gate you will reuse on every form you ever ship: labels are wired or they are not, and one click tells you which.</p>
+
+    <div class="steps">
+      <div class="step"><p>On your reloaded page, click the TEXT of every label on your form - the word "Name", not the box.</p></div>
+      <div class="step"><p>Focus jumps into the matching input? Wired. Nothing happens? That <code>for</code>/<code>id</code> pair is broken - typo, missing id, or duplicate id.</p></div>
+      <div class="step"><p>Fix every dead label and re-click. When all of them jump, your form works for screen readers, phone thumbs, and shaky mice alike.</p></div>
+    </div>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p>Accessibility auditors literally do this exact click-test on client sites - it is the fastest form check that exists. You now perform a professional audit technique after four HTML lessons.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Fill your table with real rows - at least four projects or skills, honest statuses. Add a <code>&lt;tfoot&gt;</code> row if a total makes sense.</li>
+      <li>Extend the form: add one radio group (wrapped in <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>, from the self-study card) and <code>autocomplete="name"</code> / <code>autocomplete="email"</code> on the first two inputs.</li>
+      <li>Find one data table in the wild (Wikipedia is full of them), view source, and check: caption? thead? scope? Grade it like the auditor you now are.</li>
+      <li>The smell hunt: find one single-column table or one merged-cell maze anywhere on the web. Decide what markup it should have used.</li>
+      <li>Bring to Session 5: your page with table and form in place - it is the "before" photo. Session 5 is the makeover.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working content of the table and form lessons from <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content" target="_blank" rel="noopener">MDN's Structuring content with HTML</a> and the Tables and Forms chapters of <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a>. Their interactive challenges stay with the originals - our exercises are equivalents, not copies.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Table basics</span><span class="note">Part 1 - table/tr/td/th, spanning, the layout ban</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Table accessibility</span><span class="note">Parts 1-2 - caption, thead/tbody/tfoot, scope</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Forms and buttons</span><span class="note">Part 3 - form, label, input types, validation, button</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Tables + Forms chapters</span><span class="note">taught alongside the MDN lessons throughout</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">fieldset/legend, autocomplete, datalist</span><span class="note">self-study card - read before doing the homework</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Where form data actually goes</span><span class="note">honest gap: needs a server; Session 6 wires a real destination</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · What does scope="col" on a th element actually do?</p>
+      <button class="qopt" type="button">A · Makes the column wider to fit the header text</button>
+      <button class="qopt" type="button">B · Sorts the table by that column</button>
+      <button class="qopt" type="button">C · Tells assistive tech this header labels the cells below it</button>
+      <p class="qwhy">Scope is pure meaning, zero looks: it gives every data cell an announced address ("crm_sync, Status, 2 failed"). Width and sorting are other tools' jobs.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · How do a label and its input get wired together?</p>
+      <button class="qopt" type="button">A · The label's for attribute matches the input's id</button>
+      <button class="qopt" type="button">B · The label's id matches the input's name</button>
+      <button class="qopt" type="button">C · They just need to sit next to each other</button>
+      <p class="qwhy">for ↔ id is the wire (or wrap the input inside the label). Proximity does nothing - that is why the click-the-label audit catches broken forms.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · You want the browser to check that visitors enter a real-looking email address. Which input?</p>
+      <button class="qopt" type="button">A · &lt;input type="text" placeholder="email"&gt;</button>
+      <button class="qopt" type="button">B · &lt;input type="email" required&gt;</button>
+      <button class="qopt" type="button">C · &lt;input type="mail" check="true"&gt;</button>
+      <p class="qwhy">type="email" brings format checking and the @ keyboard on phones; required refuses emptiness. A placeholder checks nothing, and type="mail" is not a thing.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 4 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Table anatomy</b><span>table &gt; tr &gt; td/th. Same cell count in every row. th = "this cell names the others".</span></div>
+      <div class="cheat-item"><b>The accessibility trio</b><span>caption (table's title, first inside table) + thead/tbody/tfoot + scope="col|row" on every th.</span></div>
+      <div class="cheat-item"><b>The iron rule</b><span>Tables hold tabular data only - never layout. Side-by-side placement is CSS (Session 5).</span></div>
+      <div class="cheat-item"><b>Table smells</b><span>Single-column table = a list in costume. Deep colspan/rowspan mazes = data that wants two tables.</span></div>
+      <div class="cheat-item"><b>Form envelope</b><span>form action="where" method="get|post". get = answers in URL; post = in the body. Data needs a server (Session 6).</span></div>
+      <div class="cheat-item"><b>The label habit</b><span>Every input labeled: for ↔ id, or wrap the input in the label. Placeholder is a hint, never the label.</span></div>
+      <div class="cheat-item"><b>Types + groups</b><span>type= text/email/number/date/checkbox/radio/range/color. Radios sharing one name = pick-one group.</span></div>
+      <div class="cheat-item"><b>Free validation</b><span>required, type="email", min/max, minlength, pattern - browser enforces at submit, no code.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 4 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="03-pictures-and-structure.html">← Pictures and structure</a> &nbsp;·&nbsp; <a href="05-enough-css.html">Next: Enough CSS to be proud →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

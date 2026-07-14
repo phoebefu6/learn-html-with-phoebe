@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 · Enough CSS to be proud - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 5 of 6</div>
+    <h1>Enough <span class="accent">CSS</span> to be proud of your page</h1>
+    <p class="sub">Four sessions of honest structure have been wearing browser defaults. Today the payoff: one new language with one grammar rule, and by the end your page has real typography, a readable column, cards, and a proper header row - styling you chose, not inherited.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 New territory</span>
+      <span class="chip audience">Total beginners welcome</span>
+      <span class="chip audience">Data &amp; AI folks too</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-23 · Concepts (live cards)</span>
+      <span class="a3" style="flex:4">23-40 · Three demos</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists (and what it honestly is)</h2>
+    </div>
+    <p class="lede">Full CSS is a deep discipline - layout systems, animation, a whole cascade of rules about rules. This is deliberately a STARTER session: the smallest slice of CSS that delivers the biggest visible win on your page. When you want the deep end, <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics" target="_blank" rel="noopener">MDN's Styling basics path</a> continues exactly where today stops. One mechanical note: the playgrounds below put CSS in a <code>&lt;style&gt;</code> element right next to the HTML so you can see both halves together; on your real project it goes in the head, then migrates to a linked file in Demo 2.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      The one CSS grammar rule (selector { property: value }), the three places CSS can live and which to use, color and typography that make a page feel designed, the box model that explains every spacing mystery, a reusable .card class, and a flexbox one-liner that puts your name and nav on one row. Your project page will look like you meant it.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: THE GRAMMAR ============ -->
+  <section class="section" id="grammar">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "What is CSS" + "Getting started with CSS"</span>
+      <h2>CSS in one idea: selector { property: value } <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">Session 1 dissected one HTML element and you had the whole language. Same trick today: one ruleset, fully dissected, and you can read every stylesheet on the internet. WHO to style, WHAT to change, what to change it TO.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of a CSS ruleset: selector, then braces containing property colon value semicolon">
+        <style>
+          .crS { font: 600 26px 'SF Mono', Menlo, monospace; fill: #E34F26; }
+          .crB { font: 600 26px 'SF Mono', Menlo, monospace; fill: #2B1D14; }
+          .crP { font: 600 26px 'SF Mono', Menlo, monospace; fill: #1572B6; }
+          .crV { font: 600 26px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .crT { font: 700 16px Inter, sans-serif; fill: #2B1D14; }
+          .crX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .crN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .crBr { stroke: #DDCBBE; stroke-width: 2; fill: none; }
+        </style>
+        <rect x="40" y="60" width="800" height="64" rx="12" fill="#FDF0EA"/>
+        <text class="crS" x="90" y="102">h1</text>
+        <text class="crB" x="140" y="102">{</text>
+        <text class="crP" x="180" y="102">color</text>
+        <text class="crB" x="258" y="102">:</text>
+        <text class="crV" x="280" y="102">darkred</text>
+        <text class="crB" x="398" y="102">;</text>
+        <text class="crB" x="430" y="102">}</text>
+        <path class="crBr" d="M92,130 L92,148 L128,148 L128,130"/>
+        <text class="crT" x="60" y="176">selector - WHO</text>
+        <text class="crX" x="60" y="196">which elements this rule grabs</text>
+        <path class="crBr" d="M182,130 L182,148 L250,148 L250,130"/>
+        <text class="crT" x="260" y="176">property - WHAT</text>
+        <text class="crX" x="260" y="196">the dial you are turning</text>
+        <path class="crBr" d="M282,130 L282,140 L392,140 L392,130"/>
+        <text class="crT" x="470" y="176">value - TO WHAT</text>
+        <text class="crX" x="470" y="196">the new setting, ended with ;</text>
+        <rect x="40" y="240" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="crN" x="64" y="252">Same shape every time. A stylesheet is just a stack of these - visual rhyme with Session 1's element anatomy.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one ruleset, fully dissected. All of CSS is this shape repeated.</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Your first ruleset<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A rule targeting <code>body</code> styles the whole page at once, because most text properties inherit downward - set the font on the body and every paragraph, list, and heading follows. Watch one rule change everything:</p>
+        <div class="pg" data-caption="Change Georgia to 'Courier New', then darkslategray to darkred. One rule, whole page - that is inheritance working for you." data-height="220">
+<pre class="pg-src">
+&lt;style&gt;
+  body {
+    font-family: Georgia, serif;
+    color: darkslategray;
+  }
+&lt;/style&gt;
+
+&lt;h1&gt;Hello, CSS&lt;/h1&gt;
+&lt;p&gt;One ruleset and the whole page changes clothes.
+The HTML underneath did not change at all.&lt;/p&gt;
+</pre>
+        </div>
+        <p>Where can CSS live? Three homes, one verdict each:</p>
+        <ul>
+          <li><strong>Inline</strong> - a <code>style</code> attribute on one element. Avoid: unfindable, unreusable, overrides everything.</li>
+          <li><strong>A <code>&lt;style&gt;</code> element in the head</strong> - fine for learning and one-page experiments. Today's playgrounds live here.</li>
+          <li><strong>A linked .css file</strong> - <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> in the head. The grown-up way: one file styles every page of a site. Demo 2 moves you there.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Element selectors, and the cascade in one paragraph<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The simplest selector is an element name: <code>p</code> grabs every paragraph, <code>h2</code> every second-level heading. One rule, every match - the same power a good regex has over a text file.</p>
+        <div class="pg" data-caption="Both h2s obey one rule. Add a rule for strong (try background-color: gold) and watch every strong on the page light up at once." data-height="260">
+<pre class="pg-src">
+&lt;style&gt;
+  h2 { color: darkred; }
+  p  { line-height: 1.6; }
+&lt;/style&gt;
+
+&lt;h2&gt;Every h2 obeys&lt;/h2&gt;
+&lt;p&gt;One rule styles &lt;strong&gt;every&lt;/strong&gt; matching
+element on the page, present and future.&lt;/p&gt;
+&lt;h2&gt;This one too&lt;/h2&gt;
+&lt;p&gt;No copy-paste styling, ever.&lt;/p&gt;
+</pre>
+        </div>
+        <p><strong>The cascade, one paragraph, no math:</strong> when two rules disagree, the more specific selector wins (a class beats a bare element name), and among equals, the later one wins. That is genuinely enough for this course - if you ever find yourself fighting a style, write a slightly more specific selector or move your rule later, and read the full cascade story on MDN when curiosity strikes.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: COLOR AND TYPE ============ -->
+  <section class="section" id="visible-wins">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers MDN styling basics: colors + typography essentials</span>
+      <h2>The visible wins: color and type <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">Ninety percent of "this page looks designed" is four dials: text color, background color, font, and line spacing. Plus one magic line that makes any page instantly readable.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The type makeover recipe<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>color</strong> and <strong>background-color</strong> take named colors (<code>darkslategray</code>) or hex codes (<code>#2B1D14</code>) - hex is what design tools hand you. Soft dark on soft light beats pure black on pure white for long reading.</li>
+          <li><strong>font-family</strong> takes a comma-separated wish list; the browser uses the first font it has. The <em>system font stack</em> below means "whatever this device uses natively" - free polish, zero downloads.</li>
+          <li><strong>line-height: 1.6</strong> - the single cheapest readability upgrade in CSS. Default is cramped; 1.6 lets text breathe.</li>
+          <li><strong>max-width + margin auto</strong> - cap the line length and center the column. Full-window text lines are unreadable; this one-two is why every article site has a centered column.</li>
+        </ul>
+        <div class="pg" data-caption="Delete the max-width line and watch the text sprawl. Put it back. Then swap the background-color for lavenderblush - your palette, your call." data-height="300">
+<pre class="pg-src">
+&lt;style&gt;
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto,
+                 Helvetica, Arial, sans-serif;
+    color: #2B1D14;
+    background-color: #FDF6F0;
+    line-height: 1.6;
+    max-width: 34em;
+    margin: 0 auto;
+  }
+  h1 { color: #A6300F; }
+&lt;/style&gt;
+
+&lt;h1&gt;A readable column&lt;/h1&gt;
+&lt;p&gt;Capped width, centered, breathing room between
+lines, a font the device already loves. This is
+most of what "professionally styled" means.&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>This recipe is the whole first impression of a report.</strong> The same eight lines dropped into a Jupyter HTML export, a Streamlit custom style, or an emailed analysis turn "raw output" into "someone crafted this". Stakeholders cannot name why they trust the second one more - but they do.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: BOXES ============ -->
+  <section class="section" id="boxes">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers MDN box model + selectors (class) + a first taste of flexbox</span>
+      <h2>Boxes, and a row of them <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">Every element on a page is a rectangular box wearing up to four layers. Once you can see the layers, every spacing mystery you will ever debug becomes a question with exactly four possible answers.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The CSS box model: content inside padding inside border inside margin">
+        <style>
+          .bmT { font: 700 16px Inter, sans-serif; fill: #2B1D14; }
+          .bmW { font: 700 15px Inter, sans-serif; fill: #FDF0EA; }
+          .bmK { font: 600 14px 'SF Mono', Menlo, monospace; fill: #86705F; }
+          .bmX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .bmN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <rect x="60" y="24" width="500" height="300" rx="12" fill="#FDF0EA" stroke="#DDCBBE" stroke-width="2" stroke-dasharray="8 6"/>
+        <text class="bmK" x="80" y="52">margin</text>
+        <rect x="130" y="70" width="360" height="208" rx="10" fill="#E34F26"/>
+        <text class="bmW" x="150" y="96">border</text>
+        <rect x="160" y="110" width="300" height="140" rx="8" fill="#F8A47F"/>
+        <text class="bmT" x="180" y="136">padding</text>
+        <rect x="200" y="150" width="220" height="66" rx="6" fill="#FDF0EA"/>
+        <text class="bmT" x="222" y="188">content</text>
+        <text class="bmT" x="600" y="90">margin - space OUTSIDE</text>
+        <text class="bmX" x="600" y="110">pushes neighbors away; between boxes</text>
+        <text class="bmT" x="600" y="150">border - the visible edge</text>
+        <text class="bmX" x="600" y="170">3px solid darkred; radius rounds it</text>
+        <text class="bmT" x="600" y="210">padding - space INSIDE</text>
+        <text class="bmX" x="600" y="230">pushes the border away from content</text>
+        <text class="bmT" x="600" y="270">content - the text itself</text>
+        <text class="bmX" x="600" y="290">what the element actually holds</text>
+        <rect x="60" y="348" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="bmN" x="84" y="360">Plain-language rule: padding = breathing room inside the frame, margin = personal space between frames.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the box model rings. Every "why is there a gap here" question ends at one of these four layers.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Padding, margin, border - feel the difference<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Don't memorize the diagram - poke it. The playground below has both spacing dials on real boxes; the fastest way to own the box model is to turn one dial at a time and watch what moves.</p>
+        <div class="pg" data-caption="Turn one dial at a time: set padding to 40px (inside grows), then margin to 4px (boxes huddle), then border-radius to 30px. Watch what moves each time." data-height="280">
+<pre class="pg-src">
+&lt;style&gt;
+  p {
+    padding: 16px;
+    margin: 24px;
+    border: 3px solid darkred;
+    border-radius: 12px;
+    background-color: papayawhip;
+  }
+&lt;/style&gt;
+
+&lt;p&gt;Box one - my padding is space inside my border.&lt;/p&gt;
+&lt;p&gt;Box two - the gap between us is our margins.&lt;/p&gt;
+</pre>
+        </div>
+        <ul>
+          <li><strong>Background color fills the padding</strong> but not the margin - which is how you can always tell them apart on screen.</li>
+          <li><strong>border-radius</strong> rounds the corners; it is why the modern web looks friendly.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Class selectors - style a family you choose<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Element selectors grab every p, but you rarely want EVERY p to be a card. A <code>class</code> attribute names your own family of elements, and a selector starting with a dot grabs exactly that family: <code>.card</code> in CSS matches <code>class="card"</code> in HTML. Define once, reuse everywhere - this is the pattern behind every design system you have ever used.</p>
+        <div class="pg" data-caption="Add class='card' to the last div and watch it join the family. Then invent a second class (.highlight with a background-color) and put both classes on one div: class='card highlight'." data-height="300">
+<pre class="pg-src">
+&lt;style&gt;
+  .card {
+    border: 1px solid darksalmon;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+&lt;/style&gt;
+
+&lt;div class="card"&gt;
+  &lt;h3&gt;Sales dashboard&lt;/h3&gt;
+  &lt;p&gt;A weekend build with real numbers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="card"&gt;
+  &lt;h3&gt;This course site&lt;/h3&gt;
+  &lt;p&gt;Yes, these cards are the same trick.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;h3&gt;No class yet&lt;/h3&gt;
+  &lt;p&gt;Not in the family, no card styling.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Flexbox starter - one row, solved<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Full CSS layout is Session 6-and-beyond territory, but one flexbox move is too useful to wait: <code>display: flex</code> on a container lays its children out in a row, <code>gap</code> spaces them evenly, and <code>justify-content: space-between</code> pushes the first and last child to opposite ends. That is the classic site header - name left, nav right - in three properties.</p>
+        <div class="pg" data-caption="Delete the display: flex line and watch the header collapse back to a stack - that one line IS the row. Then try justify-content: center." data-height="240">
+<pre class="pg-src">
+&lt;style&gt;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 3px solid darkred;
+  }
+  nav { display: flex; gap: 16px; }
+&lt;/style&gt;
+
+&lt;header&gt;
+  &lt;strong&gt;Phoebe Fu&lt;/strong&gt;
+  &lt;nav&gt;
+    &lt;a href="#about"&gt;About&lt;/a&gt;
+    &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+    &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>id vs class, descendant selectors, and one treat<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>id vs class:</strong> ids are unique anchors (Session 2's #about) and CSS can target them with <code>#about</code> - but ids win specificity fights so hard they cause them. House rule: ids for anchors, classes for styling.</li>
+          <li><strong>Descendant selectors:</strong> <code>nav a</code> (with a space) means "links INSIDE a nav" - style the menu links without touching links in your paragraphs. Read right to left: a, inside nav.</li>
+          <li><strong>Specificity fights:</strong> if a style refuses to apply, something more specific is winning. Resist the urge to pile on <code>!important</code> - inspect the element (Demo 3), find the winning rule, and write yours smarter. Every CSS veteran learned this the loud way.</li>
+          <li><strong>One treat:</strong> <code>a:hover { color: darkred; }</code> styles links only while the mouse is over them. Your first taste of interactive CSS - one line, try it on your nav tonight.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3 · the running project gets dressed</span>
+      <h2>Style your page, top to bottom <span class="tag demo">★ 9 min · follow along</span></h2>
+    </div>
+    <p class="lede">Everything from Parts 1-3 lands on your real page in one pass. A style element in the head for now - Demo 2 moves it out.</p>
+
+    <div class="steps">
+      <div class="step"><p>In your index.html head, add an empty <code>&lt;style&gt;</code> element below the title. All of today's CSS goes inside it.</p></div>
+      <div class="step"><p>The body rule first: the system font stack, a soft text color, a soft background, <code>line-height: 1.6</code>, <code>max-width: 40em</code>, <code>margin: 0 auto</code>, and <code>padding: 0 16px</code> so the text never touches the window edge. Save, reload - biggest visual jump of the course.</p></div>
+      <div class="step"><p>Headings next: give <code>h1</code> and <code>h2</code> an accent color you like. One accent color, used consistently, reads as a brand; five read as a fruit salad.</p></div>
+      <div class="step"><p>The header row: <code>header { display: flex; justify-content: space-between; align-items: center; }</code> plus <code>nav ul { display: flex; gap: 16px; list-style: none; padding: 0; }</code> - your Session 3 regions just became styling hooks, exactly as promised.</p></div>
+      <div class="step"><p>Cards: add <code>class="card"</code> to each project entry in your Projects section, then write one <code>.card</code> rule with border, border-radius, padding, and margin-bottom. Two projects, one rule.</p></div>
+      <div class="step"><p>Save, reload, and compare against your Session 1 memory of the same page. Same honest HTML underneath - that is the whole point of keeping structure and style separate.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>Graduation: the linked stylesheet <span class="tag demo">★ 5 min · follow along</span></h2>
+    </div>
+    <p class="lede">The style element was training wheels. Real sites keep CSS in its own file so every page can share it - the move takes two minutes and the proof of success is that nothing changes.</p>
+
+    <div class="steps">
+      <div class="step"><p>Create a new file next to index.html called <code>styles.css</code>. Cut everything from INSIDE your style element (not the tags themselves) and paste it there. A .css file is pure rules - no HTML tags anywhere in it.</p></div>
+      <div class="step"><p>Delete the now-empty style element and replace it with <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> - in the head, right where Session 2's finished head left room for it.</p></div>
+      <div class="step"><p>Save both files, reload. The page looks EXACTLY the same - that is success. If it suddenly lost all styling, check the href spelling and that both files sit in the same folder: it is a relative path, same rules as images.</p></div>
+      <div class="step"><p>Feel the payoff: when your site grows a second page, one link line gives it the entire look. One file to rule every page.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Cache gotcha</strong>
+      If a CSS change ever refuses to show up, the browser may be serving an old cached copy. Hard-reload (Cmd+Shift+R or Ctrl+Shift+R) before you doubt your code.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3</span>
+      <h2>Steal like a designer <span class="tag demo">★ 3 min · build your own</span></h2>
+    </div>
+    <p class="lede">Every site you admire publishes its design decisions in plain sight - devtools reads them. Ethical theft: take the palette and type choices, not the content.</p>
+
+    <div class="steps">
+      <div class="step"><p>Open a site whose look you love. Right-click its body text and choose Inspect - the Styles panel shows every rule hitting that element, winners on top.</p></div>
+      <div class="step"><p>Read three decisions: the <code>font-family</code> stack, the text <code>color</code>, and the <code>line-height</code>. Click any color swatch to see the hex code.</p></div>
+      <div class="step"><p>Edit the values live in the panel - devtools changes are a scratchpad, gone on reload. Nothing you break is real.</p></div>
+      <div class="step"><p>Take one hex color and one type decision home to your styles.css. Your palette, upgraded by observation - the same skill as reading a good notebook to improve your own.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Style your Session 4 work: give <code>table</code> collapsed borders (<code>border-collapse: collapse</code>) and padded cells, and give your form's inputs some padding. Notice how much of it is just the box model again.</li>
+      <li>Add the self-study treat: <code>a:hover</code> with your accent color on the nav links. One line, disproportionate delight.</li>
+      <li>Palette hunt: inspect three sites you trust, collect their body text colors, and pick your favorite pairing of text + background for your own page.</li>
+      <li>Break-and-fix: set your body max-width to 10em, reload, feel the pain, put it back. Then set line-height to 1 and do the same. Bad values teach faster than good ones.</li>
+      <li>Bring to Session 6: your styled page plus one thing that still bugs you about it - polish, validation, and shipping to a real URL are next.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working core of <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics" target="_blank" rel="noopener">MDN's CSS styling basics</a> - deliberately the starter slice, chosen for visible payoff. The full module (values and units, sizing, overflow, images in CSS, the complete cascade) is the honest deep end, linked here for when you want it.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: What is CSS + Getting started</span><span class="note">Part 1 - ruleset anatomy, the three homes for CSS, applying styles</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Basic selectors (element + class)</span><span class="note">Parts 1 and 3 - element selectors, .class; id and descendant in self-study</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Box model</span><span class="note">Part 3 - content/padding/border/margin, felt live in the playground</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Colors + text and font styling essentials</span><span class="note">Part 2 - color, background, font stacks, line-height, the readable column</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Flexbox</span><span class="note">starter only - display:flex, gap, space-between; full layout is MDN's flexbox lesson</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The full cascade, specificity, and layout systems</span><span class="note">one honest paragraph today; MDN's CSS path continues from here</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Your cards feel cramped - the text touches the border. Which dial do you turn?</p>
+      <button class="qopt" type="button">A · margin - add space around each card</button>
+      <button class="qopt" type="button">B · padding - add space inside the border</button>
+      <button class="qopt" type="button">C · line-height - space out the lines</button>
+      <p class="qwhy">Space between content and its own border is padding. Margin would move the cards apart from each other but the text would still hug the frame.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · You wrote class="card" on three divs. Which selector styles them?</p>
+      <button class="qopt" type="button">A · card { ... }</button>
+      <button class="qopt" type="button">B · #card { ... }</button>
+      <button class="qopt" type="button">C · .card { ... }</button>
+      <p class="qwhy">Dot means class, hash means id, bare name means element type. A bare "card" would look for a &lt;card&gt; element that does not exist.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Where does the link element for styles.css belong?</p>
+      <button class="qopt" type="button">A · In the head, alongside title and meta charset</button>
+      <button class="qopt" type="button">B · At the top of the body, so it loads first</button>
+      <button class="qopt" type="button">C · At the bottom of the body, so content loads first</button>
+      <p class="qwhy">The stylesheet link is about the page, not on it - head territory from Session 1. Browsers want styles known before they paint the body.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 5 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The grammar</b><span>selector { property: value; } - WHO, WHAT, TO WHAT. Semicolon after every declaration. All of CSS is this shape.</span></div>
+      <div class="cheat-item"><b>Three homes</b><span>Inline style attribute (avoid) · style element in head (learning) · linked styles.css via link rel="stylesheet" (the real way).</span></div>
+      <div class="cheat-item"><b>Cascade, no math</b><span>More specific selector wins; among equals, later wins. Fighting a style? Get more specific or move your rule later.</span></div>
+      <div class="cheat-item"><b>Readable column</b><span>body { max-width: 40em; margin: 0 auto; line-height: 1.6; padding: 0 16px; } - the one-line professional look.</span></div>
+      <div class="cheat-item"><b>System font stack</b><span>font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; - native polish, zero downloads.</span></div>
+      <div class="cheat-item"><b>Box model</b><span>content → padding (inside the border) → border → margin (between boxes). Background fills padding, never margin.</span></div>
+      <div class="cheat-item"><b>Class recipe</b><span>class="card" in HTML, .card { } in CSS. Define once, reuse everywhere. Ids for anchors, classes for styling.</span></div>
+      <div class="cheat-item"><b>Flex starter</b><span>display: flex; gap: 16px; justify-content: space-between; - name left, nav right, done.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 5 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="04-tables-and-forms.html">← Tables and forms</a> &nbsp;·&nbsp; <a href="06-polish-and-ship.html">Next: Polish and ship →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

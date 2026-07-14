@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 2 · Words that link - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 2 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 2 of 6</div>
+    <h1>Words that <span class="accent">link</span>: text, lists, and the web's superpower</h1>
+    <p class="sub">Session 1 gave your page a skeleton. Today it learns to speak: emphasis that means something, lists that organize, quotes and code marked honestly - and then the one feature that makes the web the web. By the end, your page links out to real places and jumps to its own sections.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Easy</span>
+      <span class="chip audience">Total beginners welcome</span>
+      <span class="chip audience">Data &amp; AI folks too</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Recap</span>
+      <span class="a2" style="flex:4">3-23 · Concepts (live cards)</span>
+      <span class="a3" style="flex:4">23-40 · Three demos</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists</h2>
+    </div>
+    <p class="lede">A page of headings and paragraphs is a document. A page that links is part of the web - that is the entire difference between a file and a site. Today your <code>index.html</code> outline from Session 1 becomes a real, connected page: meaningful text inside, honest links outward, and a finished head on top.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      The meaning-first text toolkit (strong, em, lists, dl, blockquote, code), the full anatomy of a link including relative paths you can actually read, anchor navigation inside your own page, and a head with a real title, description, and favicon. Your project page ends the session with a working nav and five real links out into the world.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: MEANINGFUL TEXT ============ -->
+  <section class="section" id="text">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "Emphasis and importance" + "Lists" + "Advanced text features"</span>
+      <h2>Meaningful text - say what you mean <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">HTML's text elements are a vocabulary of meaning, not a styling menu. Pick the element that says what the text IS, and every machine that reads your page - browser, screen reader, search engine, AI assistant - understands you.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>strong and em - meaning, not looks<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;em&gt;</code> marks stress emphasis - the word you would lean on out loud, which can flip a sentence's meaning. <code>&lt;strong&gt;</code> marks strong importance - warnings, the part that must not be missed. Yes, <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> exist and look the same, but they carry no meaning: bold and italic with nothing to say. Machines hear strong and em; they shrug at b and i.</p>
+        <div class="pg" data-caption="Move the em to a different word and re-read each sentence aloud - the meaning moves with it. Then try swapping strong for b: same look, empty meaning." data-height="200">
+<pre class="pg-src">
+&lt;p&gt;I &lt;em&gt;said&lt;/em&gt; the model was ready.&lt;/p&gt;
+&lt;p&gt;I said the model was &lt;em&gt;ready&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; retraining overwrites
+the old weights.&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Screen readers can change intonation on <code>em</code> and announce importance on <code>strong</code> - your emphasis survives for people who never see the italics. In a data team's runbook, <code>&lt;strong&gt;do not rerun this backfill twice&lt;/strong&gt;</code> is a machine-readable warning, not just bold decoration.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Lists - ul, ol, and lists inside lists<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Two list flavors, one rule. <code>&lt;ul&gt;</code> when order doesn't matter (groceries, skills, links you love), <code>&lt;ol&gt;</code> when it does (steps, rankings). Both hold only <code>&lt;li&gt;</code> children. To nest, put the whole inner list INSIDE an <code>&lt;li&gt;</code> - a list item can contain its own sub-list.</p>
+        <div class="pg" data-caption="Add a third bullet inside the nested ul, then change the outer ol to a ul - numbers become dots because the meaning changed." data-height="240">
+<pre class="pg-src">
+&lt;h3&gt;Training a model, honestly&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Collect the data&lt;/li&gt;
+  &lt;li&gt;Clean it
+    &lt;ul&gt;
+      &lt;li&gt;drop duplicates&lt;/li&gt;
+      &lt;li&gt;fill missing values&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Train, evaluate, repeat&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+        </div>
+        <p>One habit worth building now: navigation menus are lists of links. Session demos below use exactly that pattern, and Session 3 wraps it in a <code>&lt;nav&gt;</code>.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>dl - when your content comes in pairs<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Term and definition, name and value, question and answer - paired content gets the description list: <code>&lt;dl&gt;</code> wraps the whole thing, <code>&lt;dt&gt;</code> holds each term, <code>&lt;dd&gt;</code> holds its description. Glossaries, FAQ pages, and metadata panels are all dl territory.</p>
+        <div class="pg" data-caption="Add a fourth pair: a term you had to look up recently - dt for the word, dd for the plain-English meaning." data-height="230">
+<pre class="pg-src">
+&lt;dl&gt;
+  &lt;dt&gt;Model&lt;/dt&gt;
+  &lt;dd&gt;A program that learned patterns from data.&lt;/dd&gt;
+  &lt;dt&gt;Training&lt;/dt&gt;
+  &lt;dd&gt;Showing it examples until the patterns stick.&lt;/dd&gt;
+  &lt;dt&gt;Overfitting&lt;/dt&gt;
+  &lt;dd&gt;Memorizing the examples instead of the pattern.&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Quotes and code - blockquote, cite, code, pre<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Borrowed words and computer words both get marked honestly:</p>
+        <ul>
+          <li><code>&lt;blockquote&gt;</code> wraps a quoted block; its <code>cite</code> attribute holds the source URL (invisible, but machines can read it). The <code>&lt;cite&gt;</code> element, separately, marks the title of a work in your visible text.</li>
+          <li><code>&lt;q&gt;</code> is the inline version - the browser adds the quote marks for you.</li>
+          <li><code>&lt;code&gt;</code> marks inline computer text: <code>index.html</code>, <code>href</code>, a function name. Readers instantly see "this is literal, type it exactly".</li>
+          <li><code>&lt;pre&gt;</code> preserves whitespace - the one place Session 1's collapsing rule is switched off. Wrap <code>&lt;pre&gt;&lt;code&gt;</code> together for multi-line code blocks, exactly like the orange panels on this page.</li>
+        </ul>
+        <div class="callout tip">
+          <strong>The quote habit, extended</strong>
+          Quoting someone? blockquote + a visible credit line. Naming a book or paper? cite element. Pasting terminal output or a config snippet into a doc page? pre + code. Meaning first, styling in Session 5.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The small-print squad - small, sub, sup, time, address<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Five specialists you'll reach for occasionally, worth recognizing on sight:</p>
+        <ul>
+          <li><code>&lt;small&gt;</code> - side comments and fine print: copyright lines, disclaimers.</li>
+          <li><code>&lt;sub&gt;</code> and <code>&lt;sup&gt;</code> - subscript and superscript: H&lt;sub&gt;2&lt;/sub&gt;O, x&lt;sup&gt;2&lt;/sup&gt;, footnote markers.</li>
+          <li><code>&lt;time&gt;</code> - a date or time with a machine-readable twin: <code>&lt;time datetime="2026-07-13"&gt;this Monday&lt;/time&gt;</code>. Humans read the words, calendars and search engines read the attribute.</li>
+          <li><code>&lt;address&gt;</code> - contact information for the page or article author. It lands in your project footer in Session 3.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: LINKS ============ -->
+  <section class="section" id="links">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers MDN "Creating links" + web.dev "Links"</span>
+      <h2>Links - the superpower <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">The a element is why it's called a web. One element, one attribute that matters most - href - and two ways to write an address: the full URL, or a path measured from the file the link lives in.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Relative URLs: same folder uses the file name, subfolder adds folder slash, parent folder starts with dot dot slash">
+        <style>
+          .rlT { font: 700 16px Inter, sans-serif; fill: #2B1D14; }
+          .rlW { font: 600 15px 'SF Mono', Menlo, monospace; fill: #FFFFFF; }
+          .rlK { font: 600 15px 'SF Mono', Menlo, monospace; fill: #2B1D14; }
+          .rlM { font: 600 16px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .rlX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .rlN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .rlA { stroke: #A6300F; stroke-width: 2.5; fill: none; marker-end: url(#rlArw); }
+        </style>
+        <defs>
+          <marker id="rlArw" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9 Z" fill="#A6300F"/>
+          </marker>
+        </defs>
+        <rect x="40" y="24" width="400" height="284" rx="12" fill="none" stroke="#DDCBBE" stroke-width="2"/>
+        <text class="rlX" x="60" y="50">📁 Documents/ (the folder above)</text>
+        <rect x="64" y="64" width="352" height="228" rx="10" fill="#FDF0EA"/>
+        <text class="rlT" x="84" y="92">📁 my-site/</text>
+        <rect x="100" y="106" width="170" height="34" rx="8" fill="#E34F26"/>
+        <text class="rlW" x="114" y="128">index.html</text>
+        <text class="rlX" x="284" y="128">← links live here</text>
+        <rect x="100" y="152" width="170" height="34" rx="8" fill="#F06529"/>
+        <text class="rlW" x="114" y="174">about.html</text>
+        <rect x="100" y="198" width="290" height="78" rx="8" fill="none" stroke="#DDCBBE" stroke-width="2"/>
+        <text class="rlX" x="114" y="222">📁 images/</text>
+        <rect x="130" y="234" width="150" height="30" rx="8" fill="#F8A47F"/>
+        <text class="rlK" x="144" y="254">cat.jpg</text>
+        <path class="rlA" d="M270,123 C330,123 330,169 278,169"/>
+        <path class="rlA" d="M270,133 C350,150 350,220 288,244"/>
+        <path class="rlA" d="M185,106 C185,60 120,44 90,42"/>
+        <text class="rlM" x="480" y="128">href="about.html"</text>
+        <text class="rlX" x="480" y="148">same folder: just the file name</text>
+        <text class="rlM" x="480" y="196">href="images/cat.jpg"</text>
+        <text class="rlX" x="480" y="216">into a subfolder: folder/ then name</text>
+        <text class="rlM" x="480" y="264">href="../resume.html"</text>
+        <text class="rlX" x="480" y="284">up one level: ../ climbs out first</text>
+        <rect x="40" y="318" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="rlN" x="64" y="330">A relative path is always read from the file the link lives in - not from the folder you happen to have open.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the three relative moves: sibling, into a subfolder, up to the parent. Learn to read them and broken links stop being mysteries.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Anatomy of a link - absolute vs relative<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>An absolute URL is the full postal address - protocol, site, path - and works from anywhere: <code>https://developer.mozilla.org</code>. A relative URL is directions from where you're standing: <code>about.html</code>, <code>images/cat.jpg</code>, <code>../index.html</code>. Use relative links between your own files (they keep working when the whole folder moves, including to GitHub Pages in Session 6) and absolute links for everyone else's sites.</p>
+        <div class="pg" data-caption="Swap the absolute link for a site you actually love. The relative ones would resolve next to your real file - here in the sandbox they lead nowhere, which neatly proves paths are measured from the file." data-height="230">
+<pre class="pg-src">
+&lt;p&gt;Absolute - the full address:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://developer.mozilla.org"&gt;MDN Web Docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Relative - measured from this file:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="about.html"&gt;About me&lt;/a&gt; (same folder)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="images/cat.jpg"&gt;My cat&lt;/a&gt; (subfolder)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="../index.html"&gt;Home&lt;/a&gt; (up one level)&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Link text - say where it goes<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Screen-reader users routinely pull up a list of every link on the page, out of context. A list that reads "click here, click here, here, this link" is useless; a list that reads "MDN's link guide, my projects, email Phoebe" is a table of contents. The link text itself must say where the link goes.</p>
+        <div class="prompt-box bad"><span class="label">Weak</span>To see my projects, &lt;a href="#projects"&gt;click here&lt;/a&gt;. The destination is a secret; "click here" also assumes a mouse.</div>
+        <div class="prompt-box good"><span class="label">Strong</span>See &lt;a href="#projects"&gt;the projects I have shipped&lt;/a&gt;. The link text alone tells you where you'll land - in context or out.</div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Search engines weigh link text when deciding what the destination page is about - every "click here" on the web is a wasted vote. Good link text is free SEO, free accessibility, and better writing, all in one habit.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Anchors - links that jump within the page<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Give any element an <code>id</code>, and <code>href="#that-id"</code> jumps straight to it - same page, no reload. This is how tables of contents, "back to top" links, and your project page's nav all work. Two halves, one contract: the id on the target, the # in the link.</p>
+        <div class="pg" data-caption="Click the nav links and watch the preview jump. Add a fourth section with its own id and wire a nav link to it - both halves or it silently does nothing." data-height="260">
+<pre class="pg-src">
+&lt;p&gt;
+  &lt;a href="#about"&gt;About&lt;/a&gt; ·
+  &lt;a href="#projects"&gt;Projects&lt;/a&gt; ·
+  &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;A paragraph tall enough to scroll past.&lt;/p&gt;
+&lt;p&gt;And another, for honest scrolling room.&lt;/p&gt;
+&lt;h2 id="projects"&gt;Projects&lt;/h2&gt;
+&lt;p&gt;Things I have shipped.&lt;/p&gt;
+&lt;p&gt;More filler so the jump is visible.&lt;/p&gt;
+&lt;h2 id="contact"&gt;Contact&lt;/h2&gt;
+&lt;p&gt;Say hi. &lt;a href="#about"&gt;Back to top-ish&lt;/a&gt;&lt;/p&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>mailto, download, and new tabs done honestly<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Email links:</strong> <code>href="mailto:you@example.com"</code> opens the visitor's mail app with the address filled in. Fair warning: any address published this way is harvestable by spam bots - many people prefer a spelled-out "phoebe at example dot com" or a contact form (Session 4).</li>
+          <li><strong>The download attribute:</strong> <code>&lt;a href="report.pdf" download&gt;</code> asks the browser to save the file instead of opening it. It only works for files on your own site.</li>
+          <li><strong>New tabs:</strong> <code>target="_blank"</code> opens the link in a new tab. Pair it with <code>rel="noopener"</code>, which stops the new page from reaching back and controlling yours (modern browsers now do this by default, but writing it keeps you explicit and covers older ones). Honesty rule: users can open a new tab themselves whenever they want - force it only when losing the current page would hurt, like mid-form.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: FINISHING THE HEAD ============ -->
+  <section class="section" id="head-finish">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · finishes MDN "What's in the head"</span>
+      <h2>Finishing the head <span class="tag concept">4 min live</span></h2>
+    </div>
+    <p class="lede">Session 1 put a charset and a title in your head. Three more lines make it professional: a description search engines can quote, a favicon for the browser tab, and the stylesheet link that Session 5 will bring to life.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Title, description, favicon, and a CSS teaser<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>title, revisited:</strong> it's also the bookmark name and the headline search results show. "Phoebe Fu - data and AI" beats "index".</li>
+          <li><strong>meta description:</strong> the grey sentence under your headline in search results. One honest sentence, roughly 150 characters - if you don't write it, the search engine improvises from your page.</li>
+          <li><strong>Favicon:</strong> <code>&lt;link rel="icon" href="favicon.ico"&gt;</code> points at a small icon file next to your page. No icon file yet? The emoji trick below inlines one as an SVG data URL - zero files, instant personality.</li>
+          <li><strong>The Session 5 teaser:</strong> <code>&lt;link rel="stylesheet" href="css/site.css"&gt;</code> is how a page puts on clothes. We add the line now; the wardrobe arrives in Session 5.</li>
+        </ul>
+        <div class="pg" data-raw data-caption="A finished head. The tab-level effects (title, favicon) don't show in this mini preview - copy the head lines into your real file, reload, and watch the tab change. Swap the 🌸 for your emoji." data-height="240">
+<pre class="pg-src">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Phoebe Fu - data and AI&lt;/title&gt;
+    &lt;meta name="description"
+      content="Phoebe's corner of the internet: projects, notes, and experiments in data and AI."&gt;
+    &lt;link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🌸&lt;/text&gt;&lt;/svg&gt;"&gt;
+    &lt;link rel="stylesheet" href="css/site.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Everything above renders nothing&lt;/h1&gt;
+    &lt;p&gt;Yet tabs, bookmarks, and search snippets all read it.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Head hygiene - lang, author, and what stays out<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>lang on elements:</strong> the <code>lang</code> attribute from your html tag also works on any element. Quoting a French sentence on an English page? <code>&lt;q lang="fr"&gt;</code> tells screen readers to switch pronunciation mid-page.</li>
+          <li><strong>meta author:</strong> <code>&lt;meta name="author" content="Phoebe Fu"&gt;</code> - a polite credit some tools read. Harmless, occasionally useful.</li>
+          <li><strong>What does NOT belong in the head:</strong> anything visible. Headings, paragraphs, images placed in the head get silently relocated into the body by the browser - your structure rewritten without a warning. And no secrets anywhere in the file: the head is the first thing "View Source" shows.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3 · the project grows</span>
+      <h2>From outline to real page <span class="tag demo">★ 8 min · follow along</span></h2>
+    </div>
+    <p class="lede">Your Session 1 outline becomes a navigable page: a nav list at the top that jumps to each section, and honest text inside them.</p>
+
+    <div class="steps">
+      <div class="step"><p>Open your <code>index.html</code>. Give each of your three <code>&lt;h2&gt;</code> elements an id: <code>id="about"</code>, <code>id="projects"</code>, <code>id="contact"</code>. Lowercase, no spaces - ids are picky.</p></div>
+      <div class="step"><p>Right under your h1, add a <code>&lt;ul&gt;</code> of three links: <code>&lt;a href="#about"&gt;About&lt;/a&gt;</code> and friends. A list of links - the classic nav pattern, formalized in Session 3.</p></div>
+      <div class="step"><p>Save, reload, click all three. If one doesn't jump, the id and the href disagree - check spelling and case, they must match exactly.</p></div>
+      <div class="step"><p>Now the words: 2-3 real paragraphs per section, written like you talk. Add <code>&lt;strong&gt;</code> only where something genuinely matters and <code>&lt;em&gt;</code> only where you'd stress the word aloud - honest emphasis, sparingly.</p></div>
+      <div class="step"><p>Under Projects, turn your two h3 entries into an honest description: one paragraph each, with <code>&lt;code&gt;</code> around any tool or file names.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Emphasis budget</strong>
+      If everything is strong, nothing is. A good page uses strong a handful of times, em even less. When tempted to bold a whole paragraph, the fix is better writing, not more tags.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>Links I love <span class="tag demo">★ 5 min · build your own</span></h2>
+    </div>
+    <p class="lede">Your page joins the web: a small, honest blogroll of places you actually recommend, plus a way to reach you.</p>
+
+    <div class="steps">
+      <div class="step"><p>In your About or Contact section, add an <code>&lt;h3&gt;Links I love&lt;/h3&gt;</code> and a <code>&lt;ul&gt;</code> of five real external links - sites, newsletters, docs, tools you genuinely rate.</p></div>
+      <div class="step"><p>Write the link text as a recommendation: "MDN's HTML reference", not "click here for HTML stuff". Each link should make sense read alone.</p></div>
+      <div class="step"><p>Make one of the five a <code>mailto:</code> link to an address you're comfortable publishing (or a spelled-out address if you're not - see the self-study card).</p></div>
+      <div class="step"><p>Click all five. A link you haven't clicked is a link you haven't tested - habit for life.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3</span>
+      <h2>Head upgrade <span class="tag demo">★ 4 min · build your own</span></h2>
+    </div>
+    <p class="lede">Three lines in the head and your page looks professional in the tab, the bookmark bar, and (one day) the search results.</p>
+
+    <div class="steps">
+      <div class="step"><p>Rewrite your <code>&lt;title&gt;</code> as "Your Name - what you do". Check the browser tab after reload.</p></div>
+      <div class="step"><p>Add <code>&lt;meta name="description" content="..."&gt;</code> with one honest sentence about the page. Aim near 150 characters - write it for a human skimming search results.</p></div>
+      <div class="step"><p>Add the emoji favicon from the Part 3 playground (copy the whole <code>&lt;link rel="icon" ...&gt;</code> line, swap the emoji). Reload and enjoy your tab. Prefer a real file later? Drop a <code>favicon.ico</code> next to index.html and point the link at it.</p></div>
+      <div class="step"><p>Add the Session 5 teaser line: <code>&lt;link rel="stylesheet" href="css/site.css"&gt;</code>. It quietly does nothing until the file exists - a reserved parking spot for your future styles.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Grow "Links I love" to ten, grouped with nested lists (a "Reading" sub-list, a "Tools" sub-list). Every link text a real recommendation.</li>
+      <li>Add one <code>&lt;dl&gt;</code> to your page: 4-5 terms from your world (data, cooking, climbing - your call), each with a one-line plain-English dd.</li>
+      <li>Add one honest <code>&lt;blockquote&gt;</code> - a line that stuck with you, with a visible credit and the source URL in the cite attribute.</li>
+      <li>Link-text audit: open any news site, list its first ten links out of context, and count how many still make sense. Feel the difference discipline makes.</li>
+      <li>Bring to Session 3: one photo of yourself (or anything you'd put on your page) - images land next week and yours goes live.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working content of these lessons from <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content" target="_blank" rel="noopener">MDN's Structuring content with HTML</a> and <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a>. Their interactive challenges stay with the originals - our exercises are equivalents, not copies.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Emphasis and importance</span><span class="note">Part 1 - strong/em vs b/i, meaning first</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Lists</span><span class="note">Part 1 - ul, ol, li, nesting</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Advanced text features</span><span class="note">Part 1 - dl, blockquote, cite, code, pre, small-print squad</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Creating links</span><span class="note">Part 2 - href anatomy, relative paths, anchors, link text</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: What's in the head</span><span class="note">Part 3 - description, favicon, stylesheet link; started in Session 1</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Links + Lists + Navigation + Text basics</span><span class="note">shared core taught once across Parts 1-2</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">web.dev: Metadata (social/OG images)</span><span class="note">description today; social cards deep dive in 6.3</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · You're marking a genuine warning in a runbook: "never rerun the backfill twice". Which element?</p>
+      <button class="qopt" type="button">A · b - it makes the text bold</button>
+      <button class="qopt" type="button">B · strong - importance machines can hear</button>
+      <button class="qopt" type="button">C · em - it adds emphasis</button>
+      <p class="qwhy">strong carries importance for every reader, including screen readers and search engines. b looks identical but says nothing; em is spoken stress, not a warning.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Your link lives in my-site/index.html. The photo is at my-site/images/me.jpg. Which href?</p>
+      <button class="qopt" type="button">A · images/me.jpg</button>
+      <button class="qopt" type="button">B · /me.jpg</button>
+      <button class="qopt" type="button">C · ../images/me.jpg</button>
+      <p class="qwhy">Paths are measured from the file the link lives in: index.html sits next to the images folder, so it steps into it directly. ../ would climb out of my-site first - one level too far.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">3 · You have &lt;h2 id="projects"&gt; on the page. Which link jumps to it?</p>
+      <button class="qopt" type="button">A · &lt;a href="projects.html"&gt;</button>
+      <button class="qopt" type="button">B · &lt;a href="id=projects"&gt;</button>
+      <button class="qopt" type="button">C · &lt;a href="#projects"&gt;</button>
+      <p class="qwhy">The # prefix means "an id on this page". A goes looking for a separate file; B is a made-up syntax the browser treats as a (broken) relative path.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Emphasis with meaning</b><span>em = spoken stress, strong = real importance. b and i look the same and mean nothing - machines only hear the first two.</span></div>
+      <div class="cheat-item"><b>Lists</b><span>ul unordered, ol ordered, li items only. Nest by putting the inner list INSIDE an li. Navs are lists of links.</span></div>
+      <div class="cheat-item"><b>Paired content</b><span>dl wraps, dt = term, dd = description. Glossaries, FAQs, metadata panels.</span></div>
+      <div class="cheat-item"><b>Quotes and code</b><span>blockquote (+ cite attribute for the URL), cite element for work titles, q inline, code for literals, pre keeps whitespace.</span></div>
+      <div class="cheat-item"><b>Link anatomy</b><span>a href="..." + link text that says where it goes. "Click here" is a crime against skimmers and screen readers.</span></div>
+      <div class="cheat-item"><b>Relative paths</b><span>Same folder: name. Subfolder: folder/name. Up one: ../name. Always measured from the file the link lives in.</span></div>
+      <div class="cheat-item"><b>Anchors</b><span>id="section" on the target, href="#section" on the link. Both halves, exact spelling, or nothing happens.</span></div>
+      <div class="cheat-item"><b>The finished head</b><span>title as "Name - what you do", meta description ~150 chars, link rel="icon" favicon, link rel="stylesheet" waiting for Session 5.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 2 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="03-pictures-and-structure.html">Next: Pictures and structure →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

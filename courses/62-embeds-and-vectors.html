@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep dive 6.2 · Embeds and vectors - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Deep dive 6.2 of 3</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Deep dive 6.2 of 3</div>
+    <h1>Other people's pixels: <span class="accent">SVG</span>, iframes, and embeds</h1>
+    <p class="sub">Your page can draw pictures out of pure text, and it can hold entire other pages inside it. Today: SVG (shapes as markup - the diagrams-as-code idea in its purest form), the iframe that powers every YouTube embed, the legacy plugins they replaced, and the template element quietly waiting for JavaScript.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Self-paced</span>
+      <span class="chip time">~30 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:3">Inline SVG</span>
+      <span class="a2" style="flex:3">iframe</span>
+      <span class="a3" style="flex:2">embed / object</span>
+      <span class="a4" style="flex:3">template + shadow</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this deep dive exists</h2>
+    </div>
+    <p class="lede">Session 3 taught you to place an image with <code>&lt;img&gt;</code>. This dive teaches the two bigger moves: drawing graphics directly in markup with SVG, and embedding whole external things - videos, maps, other pages - with <code>&lt;iframe&gt;</code>. Both are pure HTML skills, and both show up constantly in the wild: every chart export, every icon set, every YouTube embed on every blog.</p>
+    <div class="legend">
+      <span class="pill solid">Core - read carefully</span>
+      <span class="pill light">Self-study - recognition level</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Orange panels are editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with</strong>
+      You can draw shapes, lines, and text as markup and drop them into any page. You can embed a page inside your page safely (title, sandbox, lazy loading). You recognize <code>&lt;object&gt;</code> and <code>&lt;template&gt;</code> when you meet them in view-source, and you know exactly which of today's elements need JavaScript before they do anything - honesty included.
+    </div>
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hub diagram: your index.html embedding SVG drawings, iframes, PDFs via object, and inert templates">
+        <style>
+          .hbT { font: 700 17px Inter, sans-serif; fill: #2B1D14; }
+          .hbW { font: 700 15px Inter, sans-serif; fill: #FFFFFF; }
+          .hbM { font: 600 14px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .hbX { font: 400 12px Inter, sans-serif; fill: #86705F; }
+          .hbN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .hbL { stroke: #DDCBBE; stroke-width: 2.5; fill: none; }
+        </style>
+        <rect x="330" y="110" width="220" height="76" rx="14" fill="#E34F26"/>
+        <text class="hbW" x="440" y="142" text-anchor="middle">your index.html</text>
+        <text class="hbW" x="440" y="164" text-anchor="middle" opacity="0.85">one file, many guests</text>
+        <path class="hbL" d="M330,138 L200,80"/>
+        <path class="hbL" d="M330,166 L200,236"/>
+        <path class="hbL" d="M550,138 L680,80"/>
+        <path class="hbL" d="M550,166 L680,236"/>
+        <rect x="60" y="40" width="200" height="60" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <text class="hbM" x="76" y="66">&lt;svg&gt;</text>
+        <text class="hbX" x="76" y="86">drawings written as text</text>
+        <rect x="60" y="216" width="200" height="60" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <text class="hbM" x="76" y="242">&lt;iframe&gt;</text>
+        <text class="hbX" x="76" y="262">a whole page in a window</text>
+        <rect x="620" y="40" width="200" height="60" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <text class="hbM" x="636" y="66">&lt;object&gt;</text>
+        <text class="hbX" x="636" y="86">PDFs and legacy plugins</text>
+        <rect x="620" y="216" width="200" height="60" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <text class="hbM" x="636" y="242">&lt;template&gt;</text>
+        <text class="hbX" x="636" y="262">inert HTML, waits for JS</text>
+        <rect x="60" y="296" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="hbN" x="84" y="308">SVG is drawn by you. iframe borrows someone else's page. object is the past. template is the future (with JS).</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - your page embedding the world: four ways HTML brings outside things in.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ PART 1: INLINE SVG ============ -->
+  <section class="section" id="svg">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "Including vector graphics in HTML"</span>
+      <h2>Inline SVG - drawings written as text <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">SVG is an image format made of markup: instead of storing pixels, it stores instructions - "a circle here, this big, this color". Because the instructions are text, an SVG stays razor sharp at any zoom, weighs almost nothing, and can be written by hand, by a tool, or by an AI. Every diagram on this course site is exactly this.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The shape vocabulary: rect, circle, line, text<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>An <code>&lt;svg&gt;</code> element is a canvas; inside it, each child element draws one thing. <code>&lt;rect&gt;</code> takes a position (<code>x</code>, <code>y</code>) and a size; <code>&lt;circle&gt;</code> takes a center (<code>cx</code>, <code>cy</code>) and a radius <code>r</code>; <code>&lt;line&gt;</code> connects two points; <code>&lt;text&gt;</code> writes real, selectable text. Shapes paint in source order - later elements sit on top.</p>
+        <div class="pg" data-caption="Draw live: change the circle's r and fill, move the rect, rotate nothing - just edit numbers and watch." data-height="220">
+<pre class="pg-src">
+&lt;svg viewBox="0 0 320 130" width="320"&gt;
+  &lt;rect x="10" y="15" width="80" height="80" rx="12" fill="#E34F26"/&gt;
+  &lt;circle cx="160" cy="55" r="40" fill="#F8A47F"/&gt;
+  &lt;line x1="230" y1="95" x2="305" y2="15" stroke="#2B1D14" stroke-width="4"/&gt;
+  &lt;text x="12" y="122" font-size="14"&gt;all of this is text&lt;/text&gt;
+&lt;/svg&gt;
+</pre>
+        </div>
+        <p>One paragraph on <code>viewBox</code>, because it confuses everyone once: <code>viewBox="0 0 320 130"</code> defines the drawing's own coordinate system - "my world is 320 wide and 130 tall". The <code>width</code> attribute then says how big to display that world. Scale the display up or down and every shape scales with it, perfectly, because the browser is re-running the instructions, not stretching pixels.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>This rhymes with everything a data person already loves.</strong> SVG is diagrams-as-code: version-controllable, diff-able, generatable. Matplotlib, plotly, and D3 all export SVG; when Claude draws you an architecture diagram, it is writing exactly these elements. Read the vocabulary once and every generated chart becomes editable text instead of a locked picture.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Build a tiny logo, then meet path<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Stack a few shapes and you have an icon. This is genuinely how favicons, logos, and UI icons get made - a circle, a letter, done. And when shapes are not enough, <code>&lt;path&gt;</code> draws anything: its <code>d</code> attribute is a walk ("Move to 10,80. Curve to 150,80...") that pens out any outline you can imagine.</p>
+        <div class="pg" data-caption="Your monogram in 5 lines: change the P to your initial, the stroke color, the radius. Congratulations, you are a logo designer." data-height="200">
+<pre class="pg-src">
+&lt;svg viewBox="0 0 120 120" width="110"&gt;
+  &lt;circle cx="60" cy="60" r="52" fill="#FDF0EA"
+          stroke="#E34F26" stroke-width="7"/&gt;
+  &lt;text x="60" y="80" font-size="56" text-anchor="middle"
+        fill="#A6300F" font-family="Georgia"&gt;P&lt;/text&gt;
+&lt;/svg&gt;
+</pre>
+        </div>
+        <div class="pg" data-caption="A path is a pen walk. Nudge the numbers in d and watch the wave bend - do not memorize the letters, just recognize them." data-height="170">
+<pre class="pg-src">
+&lt;svg viewBox="0 0 320 100" width="320"&gt;
+  &lt;path d="M10,80 Q85,10 160,80 T310,80"
+        fill="none" stroke="#F06529" stroke-width="5"/&gt;
+&lt;/svg&gt;
+</pre>
+        </div>
+        <div class="prompt-box good"><span class="label">★ Try it now</span>Right-click any diagram on this page and Inspect. You will find the same rect, text, and path elements you just wrote - the course diagrams are hand-authored inline SVG, nothing more.</div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>img src=".svg" vs inline svg - the tradeoff<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>You can use an SVG two ways, and MDN's vector graphics lesson turns on this choice:</p>
+        <ul>
+          <li><strong>As a file:</strong> <code>&lt;img src="logo.svg" alt="..."&gt;</code>. Simple, cacheable, reusable across pages. But it is a sealed box - your page's CSS cannot restyle its insides.</li>
+          <li><strong>Inline:</strong> paste the <code>&lt;svg&gt;...&lt;/svg&gt;</code> straight into the body, like every playground above. Now every shape is a real element in your page - stylable with CSS, readable by screen readers via <code>role="img"</code> and <code>aria-label</code>, zero extra file requests. The cost: it bulks up your HTML and repeats on every page that uses it.</li>
+        </ul>
+        <p>Rule of thumb: decorative or reused art → file. One-off diagrams you may want to style or tweak → inline. This course inlines everything, which is why you can inspect it all.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: IFRAME ============ -->
+  <section class="section" id="iframe">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers MDN "From object to iframe"</span>
+      <h2>iframe - a page inside your page <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">An <code>&lt;iframe&gt;</code> punches a window in your page and shows another document through it - complete with its own skeleton, its own styles, its own rules. It is how YouTube videos, Google Maps, and payment forms land on millions of sites that never touch the underlying code.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Your first guest page<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Two attributes matter from day one: <code>src</code> points at the document to show, and <code>title</code> describes it for screen-reader users - an iframe without a title is an unlabeled door, so treat <code>title</code> as required. Below, the guest page is written inline via <code>srcdoc</code> so it renders in our sandbox; in the wild you will almost always use <code>src="https://..."</code>.</p>
+        <div class="pg" data-caption="A page inside your page. Edit the guest's markup inside srcdoc, or restyle the border - two documents, one view." data-height="260">
+<pre class="pg-src">
+&lt;p&gt;This paragraph lives in YOUR page.&lt;/p&gt;
+
+&lt;iframe title="A tiny guest page"
+        srcdoc="&lt;h2&gt;Hello from inside&lt;/h2&gt;
+                &lt;p&gt;I am a separate document.&lt;/p&gt;"
+        width="100%" height="120"
+        style="border: 3px solid #E34F26; border-radius: 10px"&gt;
+&lt;/iframe&gt;
+
+&lt;p&gt;And this one lives in your page again.&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout tip">
+          <strong>Meta-reveal</strong>
+          Every orange playground on this course is an iframe. Your edits become a fresh guest document on every keystroke, sandboxed so nothing you type can touch the course page around it. You have been using today's element since Session 1.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The embed pattern: YouTube, maps, and the safety belt<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The pattern every "share → embed" button hands you is the same five lines. Our sandboxed playgrounds cannot load external sites, so this one is copy-paste for your own file - drop it in your project page and reload:</p>
+        <div class="prompt-box good"><span class="label">Copy-paste</span>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID"<br>&nbsp;&nbsp;title="Video: what it shows"<br>&nbsp;&nbsp;width="560" height="315"<br>&nbsp;&nbsp;loading="lazy" allowfullscreen&gt;&lt;/iframe&gt;<br><em>Honest note: this only comes alive in a real page, not in the course playgrounds - external sites refuse to load inside our no-script sandbox.</em></div>
+        <ul>
+          <li><strong><code>sandbox</code> is the safety belt.</strong> Adding a bare <code>sandbox</code> attribute strips the guest of its powers: no scripts, no forms, no popups. You then hand back only what it needs, like <code>sandbox="allow-scripts"</code>. Embedding content you do not fully trust without it is lending your page to a stranger.</li>
+          <li><strong><code>loading="lazy"</code></strong> tells the browser not to fetch the iframe until the reader scrolls near it - free speed for below-the-fold embeds, same attribute you will meet again on images in deep dive 6.3.</li>
+          <li><strong>Some sites refuse to be framed.</strong> If an embed shows up blank, the site likely sends headers forbidding embedding (banks and login pages do this on purpose). Use their official embed URL, not the normal page URL.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Dashboards live this way too: Tableau Public, Looker Studio, and Streamlit apps all ship "embed" snippets that are plain iframes. A data person who knows the iframe pattern can put a live dashboard into any wiki, portal, or personal page in one paste - title and lazy loading included.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>embed and object - the honest history card<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Before iframes won, pages bolted on external content with plugins: <code>&lt;embed&gt;</code> and <code>&lt;object&gt;</code> were the sockets that Flash movies, Java applets, and PDF viewers plugged into. The plugins are gone (Flash retired in 2020), but you still meet these elements in older codebases, so recognize them:</p>
+        <ul>
+          <li><code>&lt;object data="report.pdf" type="application/pdf"&gt;</code> - the one still-legitimate use: showing a PDF inline, with fallback content between the tags for browsers that cannot.</li>
+          <li><code>&lt;embed&gt;</code> - same era, fewer features, no fallback mechanism. If you are writing new code, you basically never want it.</li>
+        </ul>
+        <p>Why iframe wins today: it embeds real web documents rather than plugin content, it has the sandbox security model, lazy loading, and a title for accessibility. MDN's own lesson title tells the story - "from object to iframe" is the direction of travel.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: TEMPLATE + SHADOW ============ -->
+  <section class="section" id="template">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers web.dev "Template, slot, and shadow" · recognition level</span>
+      <h2>template, slot, and shadow DOM - HTML that waits for JavaScript <span class="tag concept">honesty-first</span></h2>
+    </div>
+    <p class="lede">One family of elements exists purely as raw material for JavaScript. This course teaches HTML, not JS - so the goal here is honest recognition: know what these look like and what they are for, so nothing in view-source ever mystifies you.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>template - the invisible element (that is the lesson)<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Everything inside a <code>&lt;template&gt;</code> is parsed and held in memory but never rendered - no display, no image loading, no effect on the page. It is a stamp waiting for JavaScript to press it, once per row of data, once per card in a feed.</p>
+        <div class="pg" data-caption="You should see paragraphs one and three with NO gap between them - the template truly renders nothing. That invisibility is the whole point." data-height="180">
+<pre class="pg-src">
+&lt;p&gt;Before the template.&lt;/p&gt;
+
+&lt;template&gt;
+  &lt;p&gt;Without JavaScript, you will never see me.&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;p&gt;After the template. Notice the missing middle.&lt;/p&gt;
+</pre>
+        </div>
+        <p>Why it exists: before <code>&lt;template&gt;</code>, developers hid stamp-out markup in strings or hidden divs - which still loaded images and confused screen readers. The template element is the honest version: real HTML, officially inert.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>slot and shadow DOM - recognize the component model<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Needs JavaScript - shown here so you recognize it in the wild, not to run it today.</strong> Custom elements (tags with a dash, like <code>&lt;user-card&gt;</code>) combine three ideas: a template for the stamp, a <em>shadow DOM</em> (a private, sealed subtree where the component's internals live, safe from the page's CSS), and <code>&lt;slot&gt;</code> - a labeled hole in the template where your content gets projected in.</p>
+        <div class="prompt-box"><span class="label">Recognize this</span>&lt;template id="card-tpl"&gt;<br>&nbsp;&nbsp;&lt;h3&gt;&lt;slot name="title"&gt;Untitled&lt;/slot&gt;&lt;/h3&gt;<br>&nbsp;&nbsp;&lt;p&gt;&lt;slot&gt;No description.&lt;/slot&gt;&lt;/p&gt;<br>&lt;/template&gt;<br><br>&lt;user-card&gt;<br>&nbsp;&nbsp;&lt;span slot="title"&gt;Phoebe Fu&lt;/span&gt;<br>&nbsp;&nbsp;Data and AI person.<br>&lt;/user-card&gt;<br><em>Inert until a script calls attachShadow and stamps the template. In our no-JS playgrounds this renders as plain text, so it lives in a box, not a playground.</em></div>
+        <p>Where you meet this daily: the <code>&lt;video&gt;</code> controls, browser date pickers, and design-system components (many Google and GitHub UI pieces) are all shadow DOM. When DevTools shows you <code>#shadow-root</code>, you now know what you are looking at.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The HTML APIs tour - where this course hands over<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>web.dev's "HTML APIs" chapter makes one big point worth carrying out of this course: <strong>every element you have learned also has a JavaScript surface.</strong> The document is queryable (<code>querySelector</code> finds elements the way CSS selectors do), every attribute is readable and writable from code, and rich elements expose whole method sets - <code>&lt;video&gt;</code> has play and pause, <code>&lt;dialog&gt;</code> has showModal, forms can validate themselves on demand.</p>
+        <p>Nothing to do today. Just know the door exists: the clean, semantic HTML you now write is precisely what makes the JavaScript course after this one pleasant - scripts navigate pages by the same structure and meaning you have been building since Session 1.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 20-30 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Ship one inline SVG to your live page:</strong> a decorative divider (the path wave above, recolored to your palette) or a monogram icon next to your h1. Give it <code>role="img"</code> and an <code>aria-label</code>, push, and admire a drawing that weighs a few hundred bytes.</li>
+      <li>Build a second SVG from scratch in a playground: three shapes minimum, one text element, painted in your own colors. Copy your best one into a note - it is your icon starter kit.</li>
+      <li>Embed one thing you love on your project page with the iframe pattern: a YouTube video or a public dashboard. Required: <code>title</code>, <code>loading="lazy"</code>. Bonus: try a bare <code>sandbox</code> attribute on it and observe what breaks.</li>
+      <li>View source on a page with a YouTube embed and find the iframe. Then open DevTools on any page with a video player and hunt for <code>#shadow-root</code> - wave at the component model.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This dive teaches the working content of <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Including_vector_graphics_in_HTML" target="_blank" rel="noopener">MDN's Including vector graphics in HTML</a> and <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/General_embedding_technologies" target="_blank" rel="noopener">From object to iframe</a>, plus the recognition layer of <a href="https://web.dev/learn/html/template/" target="_blank" rel="noopener">web.dev's Template, slot, and shadow</a> chapter.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Including vector graphics in HTML</span><span class="note">Part 1 - shapes, viewBox, img-vs-inline tradeoff</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: From object to iframe</span><span class="note">Part 2 - iframe, sandbox, lazy loading, object/embed history</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">web.dev: Template, slot, and shadow</span><span class="note">Part 3 - concept + recognition; the JS half belongs to a JS course</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">web.dev: HTML APIs</span><span class="note">Part 3 - one-card "what exists" tour; the next course starts here</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Your logo needs to stay sharp at any size AND change color with your page's CSS. Best move?</p>
+      <button class="qopt" type="button">A · A high-resolution PNG via img</button>
+      <button class="qopt" type="button">B · img src="logo.svg"</button>
+      <button class="qopt" type="button">C · Inline svg pasted into the body</button>
+      <p class="qwhy">SVG stays sharp either way, but only inline SVG exposes its shapes as real elements your CSS can restyle. An img-loaded SVG is a sealed box.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2 · You embed a third-party widget you do not fully trust. Which attribute is the safety belt?</p>
+      <button class="qopt" type="button">A · loading="lazy"</button>
+      <button class="qopt" type="button">B · sandbox</button>
+      <button class="qopt" type="button">C · title</button>
+      <p class="qwhy">sandbox strips the guest page of scripts, forms, and popups until you explicitly hand powers back. lazy is speed, title is accessibility - both good, neither is security.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · A template element full of markup renders as... what?</p>
+      <button class="qopt" type="button">A · Nothing - it is inert until JavaScript stamps it out</button>
+      <button class="qopt" type="button">B · Its content, once, where it appears</button>
+      <button class="qopt" type="button">C · An error in strict browsers</button>
+      <p class="qwhy">Templates are parsed but never rendered - the invisible playground earlier was working correctly. That inertness is the feature JavaScript builds on.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Deep dive 6.2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>SVG = shapes as text</b><span>rect (x, y, width, height), circle (cx, cy, r), line (x1, y1, x2, y2), text, path (d). Later elements paint on top.</span></div>
+      <div class="cheat-item"><b>viewBox</b><span>viewBox="0 0 W H" defines the drawing's own coordinates; width/height set display size. Scales perfectly - it re-draws, never stretches.</span></div>
+      <div class="cheat-item"><b>File vs inline</b><span>img src=".svg" = simple, cacheable, sealed. Inline svg = stylable, accessible (role="img" + aria-label), zero requests.</span></div>
+      <div class="cheat-item"><b>iframe basics</b><span>src + title (treat title as required). A whole separate document with its own skeleton, shown through a window.</span></div>
+      <div class="cheat-item"><b>Embed pattern</b><span>iframe src="...embed URL..." title loading="lazy" allowfullscreen. Blank embed? The site forbids framing - use its official embed URL.</span></div>
+      <div class="cheat-item"><b>sandbox</b><span>Bare sandbox strips all powers; add back only what is needed (allow-scripts...). Untrusted embed without it = lending your page to a stranger.</span></div>
+      <div class="cheat-item"><b>object / embed</b><span>Plugin-era sockets. Still seen for inline PDFs (object data="x.pdf"). New code: iframe wins - security, lazy, a11y.</span></div>
+      <div class="cheat-item"><b>template / slot / shadow</b><span>template = inert HTML waiting for JS. slot = labeled hole for content. shadow DOM = sealed internals (#shadow-root in DevTools).</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Deep dive 6.2 of 3 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="61-interactive-html.html">← Previous: Interactive HTML</a> &nbsp;·&nbsp; <a href="63-head-power-ups.html">Next: Head power-ups →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

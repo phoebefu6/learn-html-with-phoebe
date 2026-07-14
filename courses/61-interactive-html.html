@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep dive 6.1 · Interactive HTML without JS - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Deep dive 6.1 of 3</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Deep dive 6.1 of 3</div>
+    <h1>Interactive without <span class="accent">JavaScript</span>: HTML's hidden superpowers</h1>
+    <p class="sub">A decade ago, an accordion meant a jQuery plugin, a modal meant a library, and a tooltip meant a fight with z-index. Today all three are attributes. This dive tours the interactive side of pure HTML: details, dialog, popover, and the keyboard focus system that makes them usable by everyone.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Self-paced</span>
+      <span class="chip time">~30 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:3">details / summary</span>
+      <span class="a2" style="flex:3">dialog</span>
+      <span class="a3" style="flex:3">popover</span>
+      <span class="a4" style="flex:3">focus + tabindex</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this deep dive exists</h2>
+    </div>
+    <p class="lede">This course has quietly held a line: HTML says what things ARE, and behavior belongs elsewhere. Here is the plot twist - the "elsewhere" has been shrinking. Browsers absorbed the most common interactive patterns into HTML itself, so a growing family of clicks, toggles, and overlays now ships with zero scripts. Every example below runs live in this page's script-free preview panels, which is itself the proof.</p>
+    <div class="legend">
+      <span class="pill solid">Core - read carefully</span>
+      <span class="pill light">Self-study - recognition level</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Orange panels are editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with</strong>
+      A working FAQ accordion for your project page (details), an in-page dialog you understand honestly (including which half still needs JavaScript), tooltips and menus via the popover attribute, and the keyboard rules - tab order, tabindex, visible focus - that decide whether real people can actually use any of it.
+    </div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison strip: four interactive patterns that needed JavaScript libraries in 2014 are single HTML features now">
+        <style>
+          .jvH { font: 700 18px Inter, sans-serif; fill: #FFFFFF; }
+          .jvT { font: 700 15px Inter, sans-serif; fill: #2B1D14; }
+          .jvM { font: 600 15px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .jvX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .jvN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .jvArr { stroke: #DDCBBE; stroke-width: 3; fill: none; marker-end: url(#jvHead); }
+        </style>
+        <defs>
+          <marker id="jvHead" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9 Z" fill="#DDCBBE"/>
+          </marker>
+        </defs>
+        <rect x="40" y="20" width="300" height="34" rx="8" fill="#A6300F"/>
+        <text class="jvH" x="110" y="43">Then: a library</text>
+        <rect x="540" y="20" width="300" height="34" rx="8" fill="#E34F26"/>
+        <text class="jvH" x="590" y="43">Now: an attribute</text>
+        <rect x="40" y="72" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvT" x="60" y="93">Accordion plugin</text>
+        <text class="jvX" x="60" y="111">script + CSS + init call</text>
+        <line class="jvArr" x1="352" y1="96" x2="528" y2="96"/>
+        <rect x="540" y="72" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvM" x="560" y="93">&lt;details name="faq"&gt;</text>
+        <text class="jvX" x="560" y="111">exclusive open built in</text>
+        <rect x="40" y="132" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvT" x="60" y="153">Modal library</text>
+        <text class="jvX" x="60" y="171">overlay, focus trap, Esc key</text>
+        <line class="jvArr" x1="352" y1="156" x2="528" y2="156"/>
+        <rect x="540" y="132" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvM" x="560" y="153">&lt;dialog&gt;</text>
+        <text class="jvX" x="560" y="171">one JS line for modal mode</text>
+        <rect x="40" y="192" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvT" x="60" y="213">Tooltip / dropdown library</text>
+        <text class="jvX" x="60" y="231">positioning + z-index wars</text>
+        <line class="jvArr" x1="352" y1="216" x2="528" y2="216"/>
+        <rect x="540" y="192" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvM" x="560" y="213">popover + popovertarget</text>
+        <text class="jvX" x="560" y="231">top layer, light dismiss, free</text>
+        <rect x="40" y="252" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvT" x="60" y="273">Hand-rolled focus code</text>
+        <text class="jvX" x="60" y="291">onclick on divs, broken Tab</text>
+        <line class="jvArr" x1="352" y1="276" x2="528" y2="276"/>
+        <rect x="540" y="252" width="300" height="48" rx="10" fill="#FDF0EA"/>
+        <text class="jvM" x="560" y="273">real buttons + tabindex</text>
+        <text class="jvX" x="560" y="291">source order = tab order</text>
+        <rect x="40" y="312" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="jvN" x="64" y="324">Fewer scripts is not just less code: built-in behavior is accessible, consistent, and future-proof by default.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - four patterns that each cost a JavaScript library in 2014, now shipping inside HTML itself.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ PART 1: DETAILS / SUMMARY ============ -->
+  <section class="section" id="details">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers web.dev "Details and summary"</span>
+      <h2>details and summary - the disclosure widget <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">A disclosure widget is a click-to-reveal: question closed, answer hidden, click, answer shown. You have used it on this very page all course long - every collapsible card here is a <code>&lt;details&gt;</code> element wearing a <code>class="card"</code> outfit. Underneath the styling, the open-close behavior is 100% free HTML.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>One element, zero scripts<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The recipe: a <code>&lt;details&gt;</code> element whose first child is a <code>&lt;summary&gt;</code> (the always-visible clickable line). Everything after the summary is hidden until the user opens it. Add the <code>open</code> attribute to start expanded. The browser supplies the click handling, the keyboard handling, and the screen-reader announcement ("collapsed" / "expanded") - all of it.</p>
+        <div class="pg" data-caption="A real FAQ, no scripts anywhere. Click the questions in the preview. Add a third question yourself." data-height="230">
+<pre class="pg-src">
+&lt;h3&gt;FAQ&lt;/h3&gt;
+&lt;details open&gt;
+  &lt;summary&gt;Does this need JavaScript?&lt;/summary&gt;
+  &lt;p&gt;No. The browser handles the click,
+  the keyboard, and the screen reader.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+  &lt;summary&gt;Can it start open?&lt;/summary&gt;
+  &lt;p&gt;Yes - put the open attribute on it,
+  like the first question here.&lt;/p&gt;
+&lt;/details&gt;
+</pre>
+        </div>
+        <p>One distinction worth making: the playground above uses plain, unstyled <code>details</code> - that is the element as taught. The cards on this course page are the same element plus CSS. Same skeleton, different clothes: exactly the HTML-vs-CSS split this course keeps preaching.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>GitHub's "show more" sections, MDN's collapsible sidebars, and thousands of documentation FAQs are bare <code>details</code> elements. View source on a GitHub release changelog and you will find them - now you can read exactly what they are.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Exclusive accordions with the name attribute<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Give several <code>details</code> elements the same <code>name</code> value and they become an exclusive accordion: opening one closes the others, like radio buttons for content. This is a recent addition - supported in Chrome and Edge 120+, Safari 17.2+, and Firefox 130+ (so roughly every browser updated since 2024). Older browsers simply ignore <code>name</code> and allow multiple panels open at once - a graceful downgrade, not a breakage.</p>
+        <div class="pg" data-caption="An exclusive accordion: open Q2 and watch Q1 close itself. Then delete the name attributes and see the difference." data-height="230">
+<pre class="pg-src">
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Q1 · What closes me?&lt;/summary&gt;
+  &lt;p&gt;Opening any other panel that
+  shares my name attribute.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Q2 · Open me to test it&lt;/summary&gt;
+  &lt;p&gt;Q1 just snapped shut. Radio-button
+  logic, zero scripts.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Q3 · Me too&lt;/summary&gt;
+  &lt;p&gt;One name group, one open panel.&lt;/p&gt;
+&lt;/details&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Gotchas: summary rules and when NOT to hide content<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>summary must be the first child</strong> of details. Put it later (or omit it) and the browser renders a default "Details" label - a sure sign of a markup slip.</li>
+          <li><strong>The triangle marker is styleable, not sacred.</strong> It is the <code>::marker</code> pseudo-element in CSS; this page's cards replace it with the ▶ you see. HTML stays identical.</li>
+          <li><strong>Chrome can open them for you:</strong> find-in-page (Ctrl/Cmd+F) auto-expands a closed details if the match is inside. Handy, but do not rely on it cross-browser.</li>
+          <li><strong>Do not bury critical content.</strong> Hiding "how to cancel your subscription" three accordions deep is a dark pattern. Disclosure is for depth-on-demand, not for making things hard to find.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: DIALOG ============ -->
+  <section class="section" id="dialog">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers web.dev "Dialog"</span>
+      <h2>dialog - the conversation box <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">A dialog is a box that interrupts the page to talk to the user: confirmations, warnings, forms-in-a-box. The <code>&lt;dialog&gt;</code> element gives you the box, the semantics, and (in modal mode) the dimmed backdrop and focus handling that libraries used to charge kilobytes for.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The open attribute - a dialog living in the page<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A <code>&lt;dialog&gt;</code> without the <code>open</code> attribute exists in your markup but renders nothing - it waits. Add <code>open</code> and it appears in the flow of the page as a non-modal box: visible, styled by the browser with a strong border, but not blocking anything around it.</p>
+        <div class="pg" data-caption="A non-modal dialog, rendered by the open attribute. Remove open and watch it vanish - the element is still there, waiting." data-height="200">
+<pre class="pg-src">
+&lt;dialog open&gt;
+  &lt;p&gt;&lt;strong&gt;Heads up!&lt;/strong&gt;
+  I am a dialog with the open attribute.&lt;/p&gt;
+  &lt;p&gt;The page around me still works -
+  that is what non-modal means.&lt;/p&gt;
+&lt;/dialog&gt;
+&lt;p&gt;Regular page content, still clickable.&lt;/p&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Modal mode - the honest JavaScript half<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The famous dialog experience - dimmed page, centered box, Esc to close, focus trapped inside - is <strong>modal</strong> mode, and honesty requires saying it plainly: opening a modal takes one line of JavaScript. The element does all the hard parts; the script is just the doorbell.</p>
+        <div class="prompt-box good"><span class="label">The whole pattern</span>&lt;button id="ask"&gt;Delete account&lt;/button&gt;<br>&lt;dialog id="confirm"&gt;<br>&nbsp;&nbsp;&lt;p&gt;Really delete everything?&lt;/p&gt;<br>&nbsp;&nbsp;&lt;form method="dialog"&gt;&lt;button&gt;Cancel&lt;/button&gt;&lt;/form&gt;<br>&lt;/dialog&gt;<br>&lt;script&gt;<br>&nbsp;&nbsp;ask.onclick = () =&gt; confirm.showModal();<br>&lt;/script&gt;</div>
+        <p>What that one <code>showModal()</code> call buys, free: the page behind gets dimmed (styleable via <code>::backdrop</code>), keyboard focus is trapped inside the box, Esc closes it, and everything behind becomes inert - unclickable and invisible to screen readers. Note the second HTML gem in there: a <code>&lt;form method="dialog"&gt;</code> closes its dialog on submit, no script for the closing side.</p>
+        <div class="callout tip">
+          <strong>Preview limitation, stated honestly</strong>
+          This page's playground iframes run with scripts disabled, so <code>showModal()</code> cannot be demoed live here. Paste the pattern above into your own <code>index.html</code> and open it in a real tab - the full modal experience appears.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Dialog manners<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Modals are interruptions - spend them carefully.</strong> Destructive confirmations and must-answer questions earn one; "subscribe to our newsletter" on arrival does not.</li>
+          <li><strong>Always provide a visible close button.</strong> Esc works in modal mode, but not everyone knows that, and touch users have no Esc.</li>
+          <li><strong>Do not fake dialogs with divs.</strong> A div overlay gets none of the free behavior: no focus trap, no Esc, no inert background, no announcement. This is the "real button vs onclick div" lesson at box scale.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: POPOVER ============ -->
+  <section class="section" id="popover">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the popover attribute (MDN Popover API) · support flagged</span>
+      <h2>popover - tooltips and menus with zero scripts <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">The newest superpower of the three. Put the <code>popover</code> attribute on any element and it becomes a hidden overlay; point a button at it with <code>popovertarget</code> and the button toggles it. Tooltips, dropdown menus, hint bubbles - the pattern that launched a thousand libraries is now two attributes. Supported in all modern browsers since 2024 (Chrome 114+, Safari 17+, Firefox 125+); older browsers show the button doing nothing, so keep essential content out of popovers for a while yet.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>popover + popovertarget - the whole API<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Two halves: the overlay element carries <code>popover</code> plus an <code>id</code>; the trigger button carries <code>popovertarget</code> pointing at that id. Click toggles it open and closed. Click anywhere else and it dismisses itself ("light dismiss") - the behavior every hand-rolled dropdown gets wrong on the first try.</p>
+        <div class="pg" data-caption="Click the button in the preview - a real popover, scripts disabled. Then click elsewhere in the preview to light-dismiss it." data-height="210">
+<pre class="pg-src">
+&lt;button popovertarget="hint"&gt;
+  What is a disclosure widget?
+&lt;/button&gt;
+
+&lt;div id="hint" popover&gt;
+  &lt;p&gt;A click-to-reveal control, like the
+  details element from Part 1.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+        <p>The overlay renders in the browser's <strong>top layer</strong> - a rendering level above everything on the page. No z-index, no positioning fights: the browser guarantees the popover paints on top.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>popover vs dialog - picking the right box<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead>
+            <tr><th>Question</th><th>popover</th><th>dialog (modal)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Blocks the rest of the page?</td><td>No - page stays live</td><td>Yes - background goes inert</td></tr>
+            <tr><td>Click outside to close?</td><td>Yes, built in (light dismiss)</td><td>No - explicit close or Esc</td></tr>
+            <tr><td>Needs JavaScript to open?</td><td>No - popovertarget button</td><td>Yes - one showModal() call</td></tr>
+            <tr><td>Best for</td><td>Tooltips, menus, hints</td><td>Confirmations, blocking forms</td></tr>
+          </tbody>
+        </table>
+        <p>Rule of thumb: if the user must deal with it before continuing, dialog. If it is helpful but skippable, popover. Bonus attribute: <code>popovertargetaction="show"</code> or <code>"hide"</code> makes a button one-directional instead of a toggle - handy for a dedicated ✕ button inside the popover.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 4: FOCUS ============ -->
+  <section class="section" id="focus">
+    <div class="section-kicker">
+      <span class="klabel">Part 4 · covers web.dev "Focus" + inline text extras</span>
+      <h2>Focus and tabindex - interactivity for every hand <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">Everything above responds to a mouse. Focus is how it all responds to a keyboard: one element at a time holds the focus, <kbd>Tab</kbd> moves it forward, <kbd>Shift</kbd>+<kbd>Tab</kbd> moves it back, <kbd>Enter</kbd> or <kbd>Space</kbd> activates. Power users, screen-reader users, and anyone whose mouse just died all live on this system.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Tab order follows source order<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Interactive elements - links, buttons, form fields, <code>summary</code> - are focusable automatically, in the order they appear in your HTML. Write the source in a sensible reading order and keyboard navigation is correct with no extra work. This is why CSS tricks that visually reorder content can quietly break keyboard flow: the eye sees one order, <kbd>Tab</kbd> follows another.</p>
+        <div class="pg" data-caption="Click into the preview, then press Tab repeatedly - watch the focus ring walk the source order. Reorder the elements and Tab again." data-height="230">
+<pre class="pg-src">
+&lt;p&gt;Press Tab to walk this form:&lt;/p&gt;
+&lt;input type="text" placeholder="1st stop: name"&gt;
+&lt;input type="email" placeholder="2nd stop: email"&gt;
+&lt;p&gt;A link is a stop too:
+&lt;a href="#"&gt;3rd stop&lt;/a&gt;&lt;/p&gt;
+&lt;button&gt;4th stop: submit&lt;/button&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>tabindex: the three values that matter<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><code>tabindex="0"</code> - adds a non-interactive element into the natural tab order, at its source position. For the rare custom widget that must be focusable.</li>
+          <li><code>tabindex="-1"</code> - focusable by script or by link target, but skipped by <kbd>Tab</kbd>. This is how skip links land focus on a heading.</li>
+          <li><code>tabindex="1"</code> or any positive number - <strong>a trap, do not use.</strong> Positive values hijack the whole page's tab order ahead of everything else, and every future edit has to re-solve the numbering puzzle. Fix the source order instead; that is where tab order belongs.</li>
+        </ul>
+        <p>And the companion rule from CSS-land, stated early because it ruins lives: never remove the focus outline without replacing it. An invisible focus is a keyboard user navigating blind.</p>
+        <div class="prompt-box good"><span class="label">The skip-link pattern</span>&lt;a href="#main" class="skip-link"&gt;Skip to content&lt;/a&gt;<br>...navigation with 40 links...<br>&lt;main id="main" tabindex="-1"&gt;...&lt;/main&gt;</div>
+        <p>First focusable element on the page, usually hidden until focused: one <kbd>Tab</kbd>, one <kbd>Enter</kbd>, and a keyboard user leaps over your entire navigation. Every serious site has one - check for it with a single <kbd>Tab</kbd> press on any government website.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Bonus vocabulary: the inline elements this page just used<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>You met them in the wild above - now the formal introductions, from HTML's "other inline text elements" drawer:</p>
+        <ul>
+          <li><code>&lt;kbd&gt;</code> - a keyboard input, like <kbd>Tab</kbd> and <kbd>Esc</kbd> throughout this part. Semantics for "the user types this".</li>
+          <li><code>&lt;mark&gt;</code> - highlighted relevance, like a search-result <mark>match</mark>. Meaning: "notice this here", not "this is bold".</li>
+          <li><code>&lt;abbr title="Chief Data and AI Officer"&gt;CDAIO&lt;/abbr&gt;</code> - an abbreviation whose title attribute holds the expansion; hover one to see the built-in tooltip (popover's tiny ancestor).</li>
+          <li><code>&lt;small&gt;</code> - fine print: legal lines, side comments, the footnote voice.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 20-30 min total</span></h2>
+    </div>
+    <ul>
+      <li>Add an FAQ section to your live project page: an <code>&lt;h2&gt;</code> plus three <code>&lt;details name="faq"&gt;</code> questions people actually ask you. Push it and click through it on the live URL - an interactive feature shipped with zero scripts.</li>
+      <li>Add one popover: a "What does CDAIO mean?" style hint button next to a jargon word on your page. Test the light dismiss by clicking elsewhere.</li>
+      <li>Unplug your mouse (really) and drive your whole page by keyboard: <kbd>Tab</kbd>, <kbd>Enter</kbd>, <kbd>Esc</kbd>. Note every place you got lost - each one is a focus bug you can now name.</li>
+      <li>Paste the modal dialog pattern from Part 2 into a scratch file and open it in a real tab. Press <kbd>Esc</kbd>, watch the backdrop, try to Tab out of it. Feel how much behavior one line bought.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This dive teaches the working content of these chapters from <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API" target="_blank" rel="noopener">MDN Popover API</a> docs. Their interactive checks stay with the originals - our exercises are equivalents, not copies.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Details and summary</span><span class="note">Part 1 - disclosure, open, exclusive accordions via name</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Dialog</span><span class="note">Part 2 - open attribute live, modal half honestly labeled JS</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Popover API (HTML attributes)</span><span class="note">Part 3 - popover + popovertarget; support flagged (2024+ browsers)</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Focus</span><span class="note">Part 4 - tab order, tabindex 0 / -1 / positive, skip links</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Other inline text elements</span><span class="note">woven in - kbd, mark, abbr, small met in context</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · You want an FAQ where opening one question closes the others. The pure-HTML move is...</p>
+      <button class="qopt" type="button">A · Add onclick handlers to each summary</button>
+      <button class="qopt" type="button">B · Wrap all the details in one accordion element</button>
+      <button class="qopt" type="button">C · Give every details the same name attribute</button>
+      <p class="qwhy">Shared name = exclusive group, like radio buttons. There is no accordion element, and onclick means writing the JavaScript this whole page exists to avoid.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · A "delete your account?" confirmation that must be answered before anything else - which tool?</p>
+      <button class="qopt" type="button">A · dialog, opened with showModal()</button>
+      <button class="qopt" type="button">B · A popover with popovertarget</button>
+      <button class="qopt" type="button">C · A details element that starts open</button>
+      <p class="qwhy">Must-answer means modal: inert background, trapped focus, Esc handling. Popovers light-dismiss on any outside click - exactly wrong for a decision you cannot skip.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · A teammate sets tabindex="3" to "fix" the tab order. What is the professional response?</p>
+      <button class="qopt" type="button">A · Fine, as long as the numbers stay sequential</button>
+      <button class="qopt" type="button">B · Revert it and fix the source order instead - positive tabindex hijacks the whole page</button>
+      <button class="qopt" type="button">C · Change it to tabindex="0" so it comes first</button>
+      <p class="qwhy">Positive values jump ahead of every natural stop on the page and turn future edits into a numbering puzzle. Tab order lives in source order; tabindex 0 joins the natural order, it never reorders it.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Deep dive 6.1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>details / summary</b><span>summary first child = clickable line; rest hidden until opened. open attribute = starts expanded. Zero JS.</span></div>
+      <div class="cheat-item"><b>Exclusive accordion</b><span>Same name attribute on sibling details = opening one closes the rest. 2024+ browsers; older ones just allow multi-open.</span></div>
+      <div class="cheat-item"><b>dialog</b><span>Without open: invisible, waiting. With open: non-modal in-page box. Modal (backdrop, focus trap, Esc) = one showModal() JS line.</span></div>
+      <div class="cheat-item"><b>form method="dialog"</b><span>A form inside a dialog that closes it on submit - the no-script closing half of the pattern.</span></div>
+      <div class="cheat-item"><b>popover</b><span>popover attribute on the overlay + popovertarget on a button. Toggle, light dismiss, top layer - all free. 2024+ browsers.</span></div>
+      <div class="cheat-item"><b>popover vs dialog</b><span>Skippable extras = popover. Must-answer interruptions = modal dialog. Blocking is the dividing line.</span></div>
+      <div class="cheat-item"><b>Focus basics</b><span>Tab walks interactive elements in source order. Sensible source = correct keyboard flow, free.</span></div>
+      <div class="cheat-item"><b>tabindex</b><span>0 = join natural order. -1 = focusable by script/target only. Positive = trap, never use. Never hide the focus outline.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Deep dive 6.1 of 3 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="06-polish-and-ship.html">← Session 6</a> &nbsp;·&nbsp; <a href="62-embeds-and-vectors.html">Next: Embeds and vectors →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

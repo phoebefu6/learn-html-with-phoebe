@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3 · Pictures and structure - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 3 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 3 of 6</div>
+    <h1>Pictures and <span class="accent">structure</span>: media plus semantic layout</h1>
+    <p class="sub">Two upgrades today. First your page gets a face: images, video, and audio, done the honest way with alt text and captions. Then it gets a spine: the semantic regions (header, nav, main, footer) that turn a pile of headings into a page machines and humans can navigate.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Moderate</span>
+      <span class="chip audience">Total beginners welcome</span>
+      <span class="chip audience">Data &amp; AI folks too</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-23 · Concepts (live cards)</span>
+      <span class="a3" style="flex:4">23-40 · Three demos</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists</h2>
+    </div>
+    <p class="lede">After Session 2 your page has real words, working links, and a finished head. But it is still a text file that looks like one, and under the hood it is one long body with no map. Today it gets media (Part 1 and 2) and a semantic skeleton (Part 3) - the same landmark structure every professional site and every screen reader relies on.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      The img element with the alt discipline pros use, figure and figcaption for images that explain themselves, the video and audio pattern with graceful fallbacks, and a project page wrapped in header, nav, main, and footer - plus your own photo on it, served from a proper images folder. The orange panels are live: edit the left, the right re-renders.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: IMAGES ============ -->
+  <section class="section" id="images">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "Images in HTML" + web.dev "Images"</span>
+      <h2>Images done right <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">One void element, four attributes, and a habit of honesty. The img element is easy to use and easy to use badly - the difference is almost entirely in the alt text and in telling the browser the image's size up front.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>img - src, alt, width, height<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;img&gt;</code> is a void element (no content, no closing tag - Session 1) that is all attributes: <code>src</code> says which file, <code>alt</code> says what it shows, <code>width</code> and <code>height</code> declare its natural size in pixels so the browser reserves the space before the file arrives. Skip the size and the page jumps around while loading - the layout shift you feel on janky news sites.</p>
+        <div class="pg" data-caption="Change width and height to 150 and 100 - the image scales. Then change the numbers in the URL itself for a different source picture." data-height="260">
+<pre class="pg-src">
+&lt;p&gt;A photo, politely announced:&lt;/p&gt;
+&lt;img src="https://picsum.photos/300/200"
+     alt="Placeholder landscape photo from the picsum service"
+     width="300" height="200"&gt;
+</pre>
+        </div>
+        <ul>
+          <li><strong>The demo URL is a placeholder service</strong> - picsum.photos returns a random photo at the size you ask for. Handy for layouts; your real page uses your real files.</li>
+          <li><strong>Width and height set the real ratio;</strong> making images respond to screen size is a CSS job (Session 5), and serving different files to different screens (srcset) is a deep dive for 6.3.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The alt discipline - describe function, not filename<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The <code>alt</code> attribute is what a screen reader speaks, what renders if the file fails, and what search engines index. The test: if the image vanished, what words would do its job? Describe what it means in context, never what the file is called.</p>
+        <div class="prompt-box bad"><span class="label">Weak alt</span>alt="IMG_4032.jpg" or alt="photo" or alt="image of a chart" - a screen-reader user hears filename noise and learns nothing.</div>
+        <div class="prompt-box good"><span class="label">Honest alt</span>alt="Line chart: model accuracy climbing from 71% to 94% over ten training runs" - the image could vanish and the point survives.</div>
+        <ul>
+          <li><strong>Decorative images get <code>alt=""</code></strong> - empty, but present. That tells screen readers "skip me, I am decoration". Omitting alt entirely makes them read the filename aloud instead.</li>
+          <li><strong>Never start with "image of"</strong> - the screen reader already announces it is an image.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>Data folks: alt text is your chart's caption for machines.</strong> Dashboards and reports get emailed, and email clients block images by default - the alt text is often the only thing stakeholders see on first open. A one-line summary of the finding beats a broken-image icon every time.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>figure and figcaption - images that explain themselves<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>When an image needs a visible caption, wrap both in <code>&lt;figure&gt;</code> and put the caption in <code>&lt;figcaption&gt;</code>. The browser now knows the caption belongs to the image - they travel together, and assistive tech announces them as one unit. Note the two are different jobs: alt describes the image, the caption comments on it.</p>
+        <div class="pg" data-caption="Edit the figcaption text, then try moving the figcaption above the img - both positions are legal." data-height="300">
+<pre class="pg-src">
+&lt;figure&gt;
+  &lt;img src="https://picsum.photos/400/220"
+       alt="Placeholder photo standing in for a project screenshot"
+       width="400" height="220"&gt;
+  &lt;figcaption&gt;Fig 1 - the caption travels with the image.&lt;/figcaption&gt;
+&lt;/figure&gt;
+</pre>
+        </div>
+        <p>Figure is not only for images: a code block, a chart, or a table with a caption are all figures. If it could move to an appendix and still make sense with its caption, it is a figure.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where files live, which format, and whose picture it is<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Three housekeeping habits that separate tidy sites from junk drawers:</p>
+        <ul>
+          <li><strong>An images/ subfolder.</strong> Inside <code>my-site</code>, next to <code>index.html</code>, make a folder called <code>images</code> and keep every picture there. The src is then a relative path, exactly like the link paths from Session 2: <code>src="images/me.jpg"</code>.</li>
+          <li><strong>Lowercase, no spaces</strong> in filenames: <code>phoebe-portrait.jpg</code>, never <code>My Photo (1).JPG</code>. Servers are case-sensitive and spaces break URLs.</li>
+        </ul>
+        <table class="clean">
+          <thead><tr><th>Format</th><th>One-line rule</th></tr></thead>
+          <tbody>
+            <tr><td><code>.jpg</code></td><td>Photos - small files, no transparency, slight quality loss.</td></tr>
+            <tr><td><code>.png</code></td><td>Screenshots and images needing transparency - lossless, bigger files.</td></tr>
+            <tr><td><code>.webp</code></td><td>The modern all-rounder - smaller than both, supported everywhere that matters.</td></tr>
+            <tr><td><code>.svg</code></td><td>Logos, icons, diagrams - drawn from text, sharp at any size (the diagrams on this page are SVG).</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Licensing honesty</strong>
+          Found on Google is not free to use. Safe sources: photos you took, images you made, and openly licensed libraries (Unsplash, Pexels, Wikimedia Commons - check each license). Credit the creator when the license asks. Your page is public from Session 6 - build the habit now.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: AUDIO AND VIDEO ============ -->
+  <section class="section" id="media">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers MDN "Video and audio content" + web.dev "Audio and Video"</span>
+      <h2>Audio and video - media with manners <span class="tag concept">5 min live</span></h2>
+    </div>
+    <p class="lede">The video and audio elements follow the img mental model, with two upgrades: they can offer the browser several file formats to choose from, and they hold fallback content for the rare browser that understands neither.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>video - controls, source elements, fallback<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The pattern: a <code>&lt;video&gt;</code> element with <code>controls</code> (never autoplay a visitor's speakers), a <code>poster</code> image to show before play, one or more <code>&lt;source&gt;</code> children listing formats from best to safest, and plain fallback content at the bottom. The browser plays the first source it supports and shows the fallback only if it supports none.</p>
+        <div class="pg" data-caption="The src files here are made up, so you see the empty player shell - on your machine, point source at a real .mp4 and it plays. Try removing controls and watch the player lose its buttons." data-height="280">
+<pre class="pg-src">
+&lt;video controls width="320" height="180"
+       poster="images/intro-poster.jpg"&gt;
+  &lt;source src="images/intro.webm" type="video/webm"&gt;
+  &lt;source src="images/intro.mp4" type="video/mp4"&gt;
+  Your browser does not play video.
+  &lt;a href="images/intro.mp4"&gt;Download the file instead.&lt;/a&gt;
+&lt;/video&gt;
+</pre>
+        </div>
+        <ul>
+          <li><strong>controls</strong> is a boolean attribute - present means on, no value needed. It gives you play, pause, volume, and fullscreen for free.</li>
+          <li><strong>poster</strong> is the cover image before play - without it, visitors stare at a black rectangle.</li>
+          <li><strong>Captions:</strong> real published video should carry a <code>&lt;track&gt;</code> element pointing at a captions file. We mark it honest-incomplete today (◐) - the pattern is one line, writing good captions is the real work.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>audio - the same idea, minus the picture<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;audio&gt;</code> works exactly like video without width, height, or poster. Same controls attribute, same source-and-fallback pattern.</p>
+        <div class="pg" data-caption="Again a made-up src, so you get the player shell. The shape is what matters - it is video's little sibling." data-height="170">
+<pre class="pg-src">
+&lt;p&gt;Episode 1 of my someday-podcast:&lt;/p&gt;
+&lt;audio controls src="audio/episode-1.mp3"&gt;
+  Your browser does not play audio.
+&lt;/audio&gt;
+</pre>
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>This is the exact markup behind podcast pages, voice-note features, and every "listen to this article" button. And the multi-source pattern is a data lesson in disguise: ship formats in preference order, let the client pick the first one it can handle - the same graceful-degradation thinking as good API design.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: SEMANTIC LAYOUT ============ -->
+  <section class="section" id="semantics">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers MDN "Structuring documents" + web.dev "Semantic HTML"</span>
+      <h2>Semantic layout - give the page a map <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">So far everything sits loose in the body. Semantic layout elements wrap your content in named regions - landmarks that screen readers jump between, search engines weigh, and future-you navigates. Same page, now with a map legend.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Classic page regions: header on top, nav, main containing sections and an aside, footer at the bottom">
+        <style>
+          .rgM { font: 600 16px 'SF Mono', Menlo, monospace; fill: #FDF0EA; }
+          .rgMd { font: 600 16px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .rgL { font: 400 13px Inter, sans-serif; fill: #FDF0EA; }
+          .rgX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .rgN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <rect x="40" y="16" width="800" height="392" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <rect x="60" y="34" width="760" height="52" rx="8" fill="#E34F26"/>
+        <text class="rgM" x="76" y="56">&lt;header&gt;</text>
+        <text class="rgL" x="76" y="76">your name + the nav - the banner visitors see first</text>
+        <rect x="60" y="94" width="760" height="36" rx="8" fill="#F06529"/>
+        <text class="rgM" x="76" y="117">&lt;nav&gt;</text>
+        <text class="rgL" x="180" y="117">the list of links that steer the page</text>
+        <rect x="60" y="138" width="556" height="200" rx="8" fill="#FDF0EA" stroke="#E34F26" stroke-width="2"/>
+        <text class="rgMd" x="76" y="162">&lt;main&gt;</text>
+        <text class="rgX" x="160" y="162">the unique content - exactly one per page</text>
+        <rect x="76" y="174" width="524" height="46" rx="6" fill="#F8A47F"/>
+        <text class="rgMd" x="90" y="202">&lt;section id="about"&gt;</text>
+        <rect x="76" y="228" width="524" height="46" rx="6" fill="#F8A47F"/>
+        <text class="rgMd" x="90" y="256">&lt;section id="projects"&gt;</text>
+        <rect x="76" y="282" width="524" height="46" rx="6" fill="#F8A47F"/>
+        <text class="rgMd" x="90" y="310">&lt;section id="contact"&gt;</text>
+        <rect x="628" y="138" width="192" height="200" rx="8" fill="#F06529"/>
+        <text class="rgM" x="644" y="162">&lt;aside&gt;</text>
+        <text class="rgL" x="644" y="184">related but</text>
+        <text class="rgL" x="644" y="202">not the point -</text>
+        <text class="rgL" x="644" y="220">side notes,</text>
+        <text class="rgL" x="644" y="238">"now reading",</text>
+        <text class="rgL" x="644" y="256">optional</text>
+        <rect x="60" y="346" width="760" height="44" rx="8" fill="#A6300F"/>
+        <text class="rgM" x="76" y="366">&lt;footer&gt;</text>
+        <text class="rgL" x="76" y="383">small print - copyright, contact, "built by hand"</text>
+        <rect x="40" y="430" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="rgN" x="64" y="442">These are landmarks: screen-reader users jump straight between them, skipping everything else.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the classic page map. Every region is a real element wrapping your existing content.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>header, nav, main, footer - the big four<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><code>&lt;header&gt;</code> - the introduction strip: your name (the h1) and the nav. Not to be confused with the invisible <code>&lt;head&gt;</code> from Session 1 - header is visible content.</li>
+          <li><code>&lt;nav&gt;</code> - wraps your list of links from Session 2. The wrapper is what lets assistive tech announce "navigation" and offer to skip it.</li>
+          <li><code>&lt;main&gt;</code> - the unique content of this page. The one hard rule of the day: <strong>exactly one main per page</strong>, and it never holds the header or footer.</li>
+          <li><code>&lt;footer&gt;</code> - the sign-off: copyright line, contact, small print.</li>
+        </ul>
+        <div class="pg" data-raw data-caption="A full semantic page - this playground renders the whole document. Click the nav links: they still jump to the ids, exactly as in Session 2. Try adding a fourth section." data-height="300">
+<pre class="pg-src">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Phoebe Fu&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;
+      &lt;h1&gt;Phoebe Fu&lt;/h1&gt;
+      &lt;nav&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+      &lt;section id="about"&gt;
+        &lt;h2&gt;About&lt;/h2&gt;
+        &lt;p&gt;Data and AI person, building a corner of the internet.&lt;/p&gt;
+      &lt;/section&gt;
+      &lt;section id="projects"&gt;
+        &lt;h2&gt;Projects&lt;/h2&gt;
+        &lt;p&gt;Things shipped and things brewing.&lt;/p&gt;
+      &lt;/section&gt;
+      &lt;section id="contact"&gt;
+        &lt;h2&gt;Contact&lt;/h2&gt;
+        &lt;p&gt;Say hello.&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+      &lt;p&gt;Built by hand, one session at a time.&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>section vs article vs div - the decision rules<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Three wrappers, three questions, asked in order:</p>
+        <ul>
+          <li><strong>Would it make sense on its own, somewhere else?</strong> A blog post, a product card, a project entry that could appear in a feed - that is an <code>&lt;article&gt;</code>. Self-contained is the test.</li>
+          <li><strong>Is it a themed chunk of this page, deserving its own heading?</strong> About, Projects, Contact - that is a <code>&lt;section&gt;</code>. A section without a heading is usually a section that should not exist.</li>
+          <li><strong>Neither - you just need a box to style or group?</strong> That is a <code>&lt;div&gt;</code>. No meaning, no shame; it is the honest choice when no semantic element fits.</li>
+        </ul>
+        <p>And <code>&lt;aside&gt;</code> is for content related to, but separable from, the main flow: a "currently reading" box, a related-links list. Nesting is normal: articles inside sections, sections inside articles - the questions above decide each layer.</p>
+        <div class="callout tip">
+          <strong>When in doubt</strong>
+          Ask "would a screen-reader user want to jump to this?" Yes: pick the semantic element. No: div. Wrong semantics is worse than no semantics - a page of ten navs is noise, not structure.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>div, span, and the outline nuances<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;div&gt;</code> is the meaningless block, <code>&lt;span&gt;</code> its inline sibling - a way to grab a few words inside a sentence, which becomes gold in Session 5 when classes and CSS arrive. Reach for them last, not first.</p>
+        <p>One nuance from web.dev's "Headings and sections" worth knowing: browsers do not build a real document outline from nested sections - your h1-h6 ladder from Session 1 is still what defines the outline. So keep the ladder honest inside your regions: one h1 in the header, h2 per section. Regions are the map, headings are the index.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3 · the running project grows a spine</span>
+      <h2>Wrap your page in regions <span class="tag demo">★ 8 min · follow along</span></h2>
+    </div>
+    <p class="lede">Your index.html has content and a nav list. Nothing new gets written today - the existing content gets wrapped in the four regions, and the page becomes navigable by machine.</p>
+
+    <div class="steps">
+      <div class="step"><p>Open your <code>index.html</code>. Wrap your h1 and the nav list from Session 2 in a <code>&lt;header&gt;</code> element.</p></div>
+      <div class="step"><p>Wrap everything between the header and the bottom of the page in a single <code>&lt;main&gt;</code>. One per page - this is it.</p></div>
+      <div class="step"><p>Inside main, wrap each h2 block in a <code>&lt;section&gt;</code> and move the id from the heading onto the section: <code>&lt;section id="about"&gt;</code>, <code>&lt;section id="projects"&gt;</code>, <code>&lt;section id="contact"&gt;</code>. Your anchor links keep working - ids are ids.</p></div>
+      <div class="step"><p>After main, add a <code>&lt;footer&gt;</code> with one honest paragraph: your name, the year, how to reach you.</p></div>
+      <div class="step"><p>Save, reload, and observe: the page looks identical. That is correct - semantics change what the page IS, not how it looks. Session 5 pays this off when regions become styling hooks.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Indentation check</strong>
+      You just added three levels of nesting. Re-indent so each level steps in two spaces - thirty seconds now, or a headache every session after.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>Your photo, honestly captioned <span class="tag demo">★ 5 min · build your own</span></h2>
+    </div>
+    <p class="lede">The page gets a face - yours, or anything that represents you. This is the moment the images/ folder is born.</p>
+
+    <div class="steps">
+      <div class="step"><p>Create an <code>images</code> folder next to your index.html. Drop in a photo, renamed to something clean: <code>me.jpg</code> or <code>phoebe-portrait.jpg</code>. Lowercase, no spaces.</p></div>
+      <div class="step"><p>In your About section, add the image: <code>&lt;img src="images/me.jpg" alt="..." width="..." height="..."&gt;</code>. Get the real pixel size from your file manager's info panel.</p></div>
+      <div class="step"><p>Write the alt like a pro: what would a visitor need to know if the photo never loaded? "Phoebe smiling on a mountain trail" beats "photo of me".</p></div>
+      <div class="step"><p>Wrap it in a <code>&lt;figure&gt;</code> and add a <code>&lt;figcaption&gt;</code> with a visible one-liner. Save, reload - if you see a broken icon, check the path and the filename spelling first, exactly like Session 2's link debugging.</p></div>
+    </div>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p>Relative paths bite here the same way they bite in notebooks: <code>src="images/me.jpg"</code> means "from where THIS file sits". Move index.html without moving the folder and the image breaks - the same reason your pandas <code>read_csv("data/file.csv")</code> breaks when you run the notebook from a different directory.</p>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3</span>
+      <h2>The landmark tour <span class="tag demo">★ 4 min · follow along</span></h2>
+    </div>
+    <p class="lede">See your page the way a screen reader sees it. Devtools has an accessibility view that renders the landmark structure you just built - proof that semantics are real, not ceremony.</p>
+
+    <div class="steps">
+      <div class="step"><p>On your page, right-click anywhere and choose Inspect. In devtools, find the Accessibility panel (Chrome: it is a tab near Styles; Firefox: its own top-level tab).</p></div>
+      <div class="step"><p>Look at the accessibility tree: your header appears as <em>banner</em>, nav as <em>navigation</em>, main as <em>main</em>, footer as <em>contentinfo</em>. Those are the landmarks a screen-reader user jumps between.</p></div>
+      <div class="step"><p>Now inspect a plain div on any other site and compare: no landmark, no name, invisible to the tour. That is the difference you built today.</p></div>
+      <div class="step"><p>Find your image in the tree and confirm your alt text is what it announces. If you used <code>alt=""</code> anywhere, watch that image vanish from the tree entirely - as designed.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Add two more images to your Projects section - a screenshot or photo per project entry, each with honest alt, proper size attributes, and a figure/figcaption where a caption helps.</li>
+      <li>Alt audit: for each image on your page, cover it with your hand and read only the alt. Does the page still make its point? Rewrite the ones that fail.</li>
+      <li>Landmark-read three real sites (a news site, a docs site, a dashboard): open the accessibility tree and sketch their region map. Notice how consistent the pattern is.</li>
+      <li>Optional media: record a 20-second hello (voice memo works), export as .mp3 into an <code>audio</code> folder, and embed it with the audio pattern from Part 2.</li>
+      <li>Bring to Session 4: one table of data you actually care about (a CSV, a spreadsheet corner, a league standing) - it becomes your first real HTML table.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working content of these lessons from <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content" target="_blank" rel="noopener">MDN's Structuring content with HTML</a> and <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a>. Their interactive challenges stay with the originals - our exercises are equivalents, not copies.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Images in HTML</span><span class="note">Part 1 - img, alt discipline, figure/figcaption, formats, licensing</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Video and audio content</span><span class="note">Part 2 - controls, source fallback chain, poster</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Structuring documents</span><span class="note">Part 3 + Demo 1 - header, nav, main, section/article/aside, footer</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Semantic HTML + Headings and sections</span><span class="note">Part 3 - landmark thinking; outline nuance in self-study</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Images + Audio and Video</span><span class="note">Parts 1-2 - shared core taught once</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Responsive images (srcset, sizes, picture)</span><span class="note">named today; deep dive 6.3 goes pro</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">track element + captions files</span><span class="note">pattern shown; writing real captions is the deep end</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · A purely decorative divider image sits between two sections. The right alt is...</p>
+      <button class="qopt" type="button">A · alt="decorative divider image"</button>
+      <button class="qopt" type="button">B · alt="" - empty, but present</button>
+      <button class="qopt" type="button">C · No alt attribute at all</button>
+      <p class="qwhy">Empty alt tells screen readers to skip decoration. Describing it adds noise; omitting alt entirely makes some readers announce the filename instead.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · Each project entry on your page could also appear on its own in a portfolio feed. The best wrapper is...</p>
+      <button class="qopt" type="button">A · section - it is a themed chunk of the page</button>
+      <button class="qopt" type="button">B · div - it just needs grouping</button>
+      <button class="qopt" type="button">C · article - it is self-contained and makes sense elsewhere</button>
+      <p class="qwhy">Self-contained is the article test. Section is for themed chunks of THIS page; div is for when no meaning applies at all.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · How many main elements may a page have?</p>
+      <button class="qopt" type="button">A · Exactly one</button>
+      <button class="qopt" type="button">B · One per section</button>
+      <button class="qopt" type="button">C · As many as the layout needs</button>
+      <p class="qwhy">One main per page - it marks THE unique content. Screen readers offer "skip to main content" and there must be one unambiguous answer.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 3 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>img essentials</b><span>&lt;img src="images/me.jpg" alt="..." width="300" height="200"&gt;. Void element. Size attributes stop layout jumping.</span></div>
+      <div class="cheat-item"><b>The alt discipline</b><span>Describe function in context, never the filename. Decorative: alt="" (empty, present). Never start with "image of".</span></div>
+      <div class="cheat-item"><b>figure + figcaption</b><span>Wrap image and visible caption together. Alt describes, caption comments - two different jobs.</span></div>
+      <div class="cheat-item"><b>File housekeeping</b><span>images/ subfolder, lowercase filenames, no spaces. src is a relative path from the HTML file's location.</span></div>
+      <div class="cheat-item"><b>Formats</b><span>jpg photos · png screenshots/transparency · webp modern all-rounder · svg logos and diagrams.</span></div>
+      <div class="cheat-item"><b>Media pattern</b><span>video/audio + controls, source elements best-to-safest, plain fallback content last. poster = video cover image.</span></div>
+      <div class="cheat-item"><b>The region map</b><span>header (h1 + nav) → main (sections) → footer. Exactly one main per page. aside = related but separable.</span></div>
+      <div class="cheat-item"><b>section vs article vs div</b><span>Self-contained elsewhere = article. Themed chunk with heading = section. Just a styling box = div, no shame.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 3 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="02-words-that-link.html">← Words that link</a> &nbsp;·&nbsp; <a href="04-tables-and-forms.html">Next: Tables and forms →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

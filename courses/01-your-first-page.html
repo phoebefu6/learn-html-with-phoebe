@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 · Your first page - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 1 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 1 of 6</div>
+    <h1>Your <span class="accent">first page</span>, in a plain text file</h1>
+    <p class="sub">Every website you have ever visited is text in a file, wearing tags. Today you write that file yourself: elements, the skeleton every page shares, and a real page about you - open in a real browser before the session ends.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Easiest</span>
+      <span class="chip audience">Total beginners welcome</span>
+      <span class="chip audience">Data &amp; AI folks too</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-23 · Concepts (live cards)</span>
+      <span class="a3" style="flex:4">23-40 · Three demos</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists</h2>
+    </div>
+    <p class="lede">HTML is the least intimidating language in tech: no installation, no compiler, no math - a text file and a browser, both already on your machine. Over six sessions you build one real thing: your own page on the internet, "your corner of the internet", live on a real URL by Session 6. Today it is born: a file called <code>index.html</code> with your name in it.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      The element mental model (tags, content, attributes, nesting), the skeleton every page on earth wears, heading discipline that search engines and screen readers love, and a real <code>index.html</code> about you, open in your browser. The orange code panels below are live: edit the left side, the right side re-renders. Break things freely - Reset brings the original back.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: ELEMENTS ============ -->
+  <section class="section" id="elements">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers "Basic HTML syntax" + web.dev "Overview"</span>
+      <h2>Elements - the whole language in one idea <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">HTML has one move: wrap content in tags to say what it IS. A heading, a paragraph, a link, an image. Learn the anatomy of one element and you have learned the grammar of all of them.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of an HTML element: opening tag with attribute, content, closing tag">
+        <style>
+          .elC { font: 600 26px 'SF Mono', Menlo, monospace; fill: #2B1D14; }
+          .elO { font: 600 26px 'SF Mono', Menlo, monospace; fill: #E34F26; }
+          .elA { font: 600 26px 'SF Mono', Menlo, monospace; fill: #1572B6; }
+          .elT { font: 700 16px Inter, sans-serif; fill: #2B1D14; }
+          .elX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .elN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .elBr { stroke: #DDCBBE; stroke-width: 2; fill: none; }
+        </style>
+        <rect x="40" y="60" width="800" height="64" rx="12" fill="#FDF0EA"/>
+        <text class="elO" x="70" y="102">&lt;a</text>
+        <text class="elA" x="120" y="102">href="page2.html"</text>
+        <text class="elO" x="392" y="102">&gt;</text>
+        <text class="elC" x="420" y="102">Next page</text>
+        <text class="elO" x="572" y="102">&lt;/a&gt;</text>
+        <path class="elBr" d="M75,130 L75,148 L390,148 L390,130"/>
+        <text class="elT" x="150" y="176">opening tag + attribute</text>
+        <text class="elX" x="150" y="196">name="value" pairs add settings</text>
+        <path class="elBr" d="M420,130 L420,140 L560,140 L560,130"/>
+        <text class="elT" x="430" y="176">content</text>
+        <text class="elX" x="430" y="196">what readers see</text>
+        <path class="elBr" d="M580,130 L580,148 L660,148 L660,130"/>
+        <text class="elT" x="590" y="176">closing tag</text>
+        <text class="elX" x="590" y="196">same name, with /</text>
+        <rect x="40" y="226" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="elN" x="64" y="238">Tag says what the content IS. Browser decides how it looks (until Session 5, when you decide).</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one element, fully dissected. Every element on every page follows this shape.</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Tags wrap meaning around text<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Take the sentence "My cat is very grumpy". Wrap it in <code>&lt;p&gt;</code> tags and the browser knows it is a paragraph. Wrap a word in <code>&lt;strong&gt;</code> and the browser knows it matters. That is the entire job: HTML marks up what things ARE, and everything else (looks, behavior) builds on that truth.</p>
+        <div class="pg" data-caption="Your first edit: change the text, add a second paragraph with new p tags, watch the right side follow." data-height="180">
+<pre class="pg-src">
+&lt;h1&gt;My first heading&lt;/h1&gt;
+&lt;p&gt;My cat is &lt;strong&gt;very&lt;/strong&gt; grumpy.&lt;/p&gt;
+</pre>
+        </div>
+        <h4>Why this matters to you</h4>
+        <ul>
+          <li><strong>Meaning is machine-readable.</strong> Search engines, screen readers, and AI assistants all navigate pages by these tags - good markup is how your page gets understood, not just seen.</li>
+          <li><strong>The browser is forgiving but literal.</strong> It renders exactly what the tags claim. Claim a heading with <code>&lt;h1&gt;</code> and you get one; fake it with big bold text and machines see nothing.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>Every Claude artifact, every dashboard export, every email template</strong> you have ever received is this exact grammar. A data person who reads HTML can inspect any web page, fix any report template, and hand-tune any AI-generated artifact instead of regenerating and praying.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Attributes - settings on the opening tag<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Attributes are <code>name="value"</code> pairs that live in the opening tag and configure the element: where a link goes (<code>href</code>), which file an image shows (<code>src</code>), what a screen reader says about it (<code>alt</code>). Rules: space before the attribute, value in quotes, never inside the content.</p>
+        <div class="pg" data-caption="Change the href to https://mermaid.js.org and the link text to match. Attribute = setting." data-height="150">
+<pre class="pg-src">
+&lt;p&gt;My favorite reference is
+  &lt;a href="https://developer.mozilla.org"&gt;MDN&lt;/a&gt;.
+&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout tip">
+          <strong>The quote habit</strong>
+          Always quote attribute values: <code>href="page.html"</code>. Unquoted values work until a space or special character breaks them silently - quoting is the seatbelt.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Nesting - boxes inside boxes, never overlapping<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Elements go inside other elements - a <code>&lt;strong&gt;</code> inside a <code>&lt;p&gt;</code> inside the page. The one law: close inner elements before outer ones. <code>&lt;p&gt;&lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code> is nested; <code>&lt;p&gt;&lt;strong&gt;text&lt;/p&gt;&lt;/strong&gt;</code> is overlapped, and the browser has to guess what you meant.</p>
+        <ul>
+          <li><strong>Indent nested elements</strong> two spaces - the browser doesn't care, the next human (you, next month) does.</li>
+          <li><strong>Void elements</strong> have no content and no closing tag: <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;meta&gt;</code>. They are settings-only elements - all attributes, no text.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Block vs inline - the two behaviors<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every element has one of two default behaviors, and knowing which is which explains most "why is it on a new line?" surprises:</p>
+        <ul>
+          <li><strong>Block elements</strong> claim a full row and stack downward: <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;div&gt;</code>, and the structural elements from Session 3.</li>
+          <li><strong>Inline elements</strong> flow inside a line of text without breaking it: <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;span&gt;</code>.</li>
+        </ul>
+        <div class="pg" data-caption="Blocks stack, inlines flow. Move the strong tags around; try turning the p into an h2." data-height="190">
+<pre class="pg-src">
+&lt;h2&gt;A block claims the row&lt;/h2&gt;
+&lt;p&gt;But &lt;strong&gt;inline&lt;/strong&gt; elements like
+&lt;em&gt;emphasis&lt;/em&gt; and &lt;code&gt;code&lt;/code&gt;
+flow inside the text.&lt;/p&gt;
+</pre>
+        </div>
+        <p>One consequence worth knowing early: nesting a block inside an inline (a <code>&lt;div&gt;</code> inside an <code>&lt;a&gt;</code>'s text) is usually a smell. Blocks hold inlines, not the reverse.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: THE SKELETON ============ -->
+  <section class="section" id="skeleton">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers "document structure" (MDN + web.dev)</span>
+      <h2>The skeleton every page wears <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">View the source of any site on earth - your bank, a newspaper, this page - and the same five-line skeleton stares back. Learn it once, recognize it everywhere.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The HTML document skeleton: doctype, html wrapping head and body">
+        <style>
+          .skT { font: 700 17px Inter, sans-serif; fill: #2B1D14; }
+          .skW { font: 700 16px Inter, sans-serif; fill: #FFFFFF; }
+          .skM { font: 600 15px 'SF Mono', Menlo, monospace; fill: #FFFFFF; }
+          .skMd { font: 600 15px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .skX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .skN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <rect x="40" y="20" width="800" height="34" rx="8" fill="#A6300F"/>
+        <text class="skM" x="60" y="43">&lt;!DOCTYPE html&gt;</text>
+        <text class="skX" x="620" y="43" fill="#F8A47F">"modern HTML, please"</text>
+        <rect x="40" y="62" width="800" height="196" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <text class="skMd" x="60" y="90">&lt;html lang="en"&gt;</text>
+        <rect x="80" y="102" width="340" height="64" rx="10" fill="#E34F26"/>
+        <text class="skM" x="100" y="128">&lt;head&gt;</text>
+        <text class="skW" x="100" y="152">about the page - invisible</text>
+        <rect x="460" y="102" width="340" height="64" rx="10" fill="#F06529"/>
+        <text class="skM" x="480" y="128">&lt;body&gt;</text>
+        <text class="skW" x="480" y="152">on the page - visible</text>
+        <text class="skX" x="80" y="196">title, character set, favicon,</text>
+        <text class="skX" x="80" y="214">CSS links (Session 5 lives here)</text>
+        <text class="skX" x="460" y="196">headings, text, images, links -</text>
+        <text class="skX" x="460" y="214">everything a visitor sees</text>
+        <text class="skMd" x="60" y="248">&lt;/html&gt;</text>
+        <rect x="40" y="272" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="skN" x="64" y="284">Head is the label on the box. Body is what is in the box. Nothing renders from the head.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the skeleton: doctype, then html wrapping an invisible head and a visible body.</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The five lines, one by one<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><code>&lt;!DOCTYPE html&gt;</code> - a historical handshake that now just means "render this in modern standards mode". Always line 1, exactly like this.</li>
+          <li><code>&lt;html lang="en"&gt;</code> - the root element wrapping everything. The <code>lang</code> attribute tells screen readers which voice to use and translators which language they're leaving.</li>
+          <li><code>&lt;head&gt;</code> - metadata: the browser-tab title, character encoding, favicon, CSS. Visitors never see the head directly.</li>
+          <li><code>&lt;body&gt;</code> - everything visible. All of today's work after this line.</li>
+          <li><code>&lt;meta charset="utf-8"&gt;</code> - first line inside the head. Declares the character encoding so names, accents, emoji and every non-English character survive. Skip it and "Phoebe's café" can render as garbage.</li>
+        </ul>
+        <div class="pg" data-caption="A complete legal page - this playground renders your FULL document, head and all. Change the title, then the h1. Notice which one you can see." data-raw data-height="240">
+<pre class="pg-src">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;This shows in the browser tab&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;This shows on the page&lt;/h1&gt;
+    &lt;p&gt;The head is the label. The body is the box.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </div>
+        <div class="prompt-box good"><span class="label">★ Try it now</span>Right-click any page you have open (this one included) and choose "View Page Source". Find the doctype, the head, the title, and where the body starts. You can now read the skeleton of the entire web.</div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What browsers forgive (and why you shouldn't lean on it)<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Browsers are heroically forgiving: forget a closing tag, skip the doctype, misspell an attribute - something still renders. That's a design choice from 1995 (never punish the reader for the author's mistakes), and it cuts both ways:</p>
+        <ul>
+          <li><strong>Good:</strong> your learning pages never explode with error messages. Experimentation is safe.</li>
+          <li><strong>Bad:</strong> mistakes hide. The page "works" while the structure underneath is quietly wrong - until a style, a screen reader, or another edit exposes it.</li>
+        </ul>
+        <p>The professional habit: don't rely on forgiveness. Session 6 introduces the W3C validator, which reads your file with zero mercy and lists every technical sin. Until then: close what you open, quote your attributes, nest cleanly.</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>A marketing team's email template rendered fine in Chrome for months - one unclosed <code>&lt;div&gt;</code>. Then Outlook, far less forgiving, showed half the email inside a button. Forgiveness is a browser feature, not a file property: write it right and it works everywhere.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: HEADINGS + PARAGRAPHS ============ -->
+  <section class="section" id="headings">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers "Headings and paragraphs" + web.dev "Headings and sections"</span>
+      <h2>Headings and paragraphs - structure readers feel <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">Six heading levels and one paragraph tag carry most of the meaning on most pages. Used with discipline they give your page an outline that humans skim, screen readers jump through, and search engines rank with.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The heading ladder, used honestly<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> are an outline, not a font-size menu. Three rules cover professional use:</p>
+        <ul>
+          <li><strong>One <code>&lt;h1&gt;</code> per page</strong> - the page's own title. Everything else nests under it.</li>
+          <li><strong>Never skip levels going down.</strong> h1 → h2 → h3. Jumping h1 → h4 because "it looks right" breaks the outline; size is a Session 5 problem.</li>
+          <li><strong>Headings label the section that follows</strong> - if nothing follows it, it wasn't a heading.</li>
+        </ul>
+        <div class="pg" data-caption="A page outline. Add an h3 under Projects, add a paragraph after it - keep the ladder honest." data-height="260">
+<pre class="pg-src">
+&lt;h1&gt;Phoebe Fu&lt;/h1&gt;
+&lt;p&gt;Data and AI person. This page is my corner of the internet.&lt;/p&gt;
+
+&lt;h2&gt;Projects&lt;/h2&gt;
+&lt;p&gt;Things I have built and shipped.&lt;/p&gt;
+
+&lt;h2&gt;Now&lt;/h2&gt;
+&lt;p&gt;What I am learning this season.&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Screen-reader users routinely navigate by a headings list - h1 to h6 as a table of contents. A page with honest headings takes seconds to skim by ear; a page of bolded fake headings is an unbroken wall. The same outline is what search engines use to understand what your page covers.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Paragraphs, line breaks, and collapsing whitespace<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Each <code>&lt;p&gt;</code> is one thought. The browser adds the spacing between paragraphs - you never add blank lines for layout. And a surprise for every beginner: <strong>whitespace collapses</strong>. Ten spaces, five newlines - the browser renders one space.</p>
+        <div class="pg" data-caption="All that source whitespace becomes one space. Add a second p element - THAT is how you make a new block." data-height="190">
+<pre class="pg-src">
+&lt;p&gt;This    sentence      has
+wild        spacing
+in the source.&lt;/p&gt;
+&lt;p&gt;New thought? New paragraph element.&lt;/p&gt;
+</pre>
+        </div>
+        <ul>
+          <li><code>&lt;br&gt;</code> forces a line break INSIDE a paragraph - for poems and addresses, not for spacing between blocks.</li>
+          <li><code>&lt;hr&gt;</code> draws a thematic break - a scene change between paragraphs.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Comments - notes the browser skips<span class="mini">1 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Anything between <code>&lt;!--</code> and <code>--&gt;</code> is invisible to visitors: <code>&lt;!-- TODO: add photo here --&gt;</code>. Use comments to leave notes for future-you, to label sections of a long file, or to temporarily hide an element while testing ("comment it out"). One caution: comments are visible to anyone who views source - no secrets in them.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3 · the running project starts here</span>
+      <h2>Birth of index.html <span class="tag demo">★ 8 min · follow along</span></h2>
+    </div>
+    <p class="lede">Your corner of the internet starts as one file in one folder. We create it with a real editor, write the skeleton from memory, and open it in the browser - the moment the file becomes a page.</p>
+
+    <div class="steps">
+      <div class="step"><p>Get a real text editor if you don't have one - <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a> is free and what we'll reference. (TextEdit and Word secretly reformat files; they are the one wrong tool for this job.)</p></div>
+      <div class="step"><p>Make a folder called <code>my-site</code> somewhere you'll find it again. Inside it, create a new file named exactly <code>index.html</code> - lowercase, no spaces. That name is special: it's the page servers show by default.</p></div>
+      <div class="step"><p>Type the skeleton from memory - doctype, html with lang, head with <code>meta charset</code> and a <code>&lt;title&gt;Your Name&lt;/title&gt;</code>, empty body. Typing it builds the muscle; pasting doesn't.</p></div>
+      <div class="step"><p>In the body: an <code>&lt;h1&gt;</code> with your name, and one honest <code>&lt;p&gt;</code> about who you are. Save.</p></div>
+      <div class="step"><p>Open the file in your browser - double-click it, or drag it onto the browser window. Your name, in a page you built. Check the browser tab: there's your title.</p></div>
+      <div class="step"><p>The loop you'll use forever: edit in the editor → save → reload the browser tab. Change your h1, save, reload. That 3-second loop is web development.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <strong>Nothing showing?</strong>
+      Check the file really ends in <code>.html</code> (not <code>.html.txt</code> - turn on file extensions in your file manager), and that you saved before reloading. Those two cover 90% of first-page confusion.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>Outline your page like a pro <span class="tag demo">★ 5 min · build your own</span></h2>
+    </div>
+    <p class="lede">Before writing content, professionals write the outline. Give your page its heading ladder now - the sections will be filled across the next five sessions.</p>
+
+    <div class="steps">
+      <div class="step"><p>Under your h1 and intro paragraph, add three <code>&lt;h2&gt;</code> sections: <code>About</code>, <code>Projects</code> (or Interests), and <code>Contact</code>.</p></div>
+      <div class="step"><p>Give each h2 one placeholder paragraph - a single honest sentence about what will live there.</p></div>
+      <div class="step"><p>Under Projects, practice level 3: two <code>&lt;h3&gt;</code> entries for real things you've made or want to make, each with a one-line <code>&lt;p&gt;</code>.</p></div>
+      <div class="step"><p>Add one comment to future-you: <code>&lt;!-- Session 3: photo goes here --&gt;</code>. Save, reload, admire the outline.</p></div>
+    </div>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p>This h1 → h2 → h3 discipline is the same outline discipline as a good doc or a good deck. People who write clean HTML outlines tend to write clean documents - it's one skill wearing two outfits.</p>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3</span>
+      <h2>Break it on purpose <span class="tag demo">★ 4 min · build your own</span></h2>
+    </div>
+    <p class="lede">The fastest way to lose fear of a language: break it deliberately and watch how it fails. HTML fails gently - see it once and error messages never scare you again.</p>
+
+    <div class="steps">
+      <div class="step"><p>In any playground above (or your own file): delete a closing <code>&lt;/strong&gt;</code>. Watch the bold leak forward - the browser guessed where it ends, and guessed wrong.</p></div>
+      <div class="step"><p>Overlap two elements: <code>&lt;p&gt;&lt;strong&gt;text&lt;/p&gt;&lt;/strong&gt;</code>. Still renders! The browser silently rewrote your structure - forgiveness hiding a mistake.</p></div>
+      <div class="step"><p>Break an attribute: remove the quotes from an href with a space in it. The link now goes somewhere strange - the unquoted value ended at the space.</p></div>
+      <div class="step"><p>Fix all three (or hit Reset). Diagnosis habit acquired: when a page looks weird, suspect an unclosed tag or unquoted attribute first.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Finish your outline: every h2 section gets 2-3 real paragraphs. Write like you talk - the markup matters this week, not the prose.</li>
+      <li>View source on three sites you use daily. Find the doctype, title, and first h1 of each. Notice how much you can now read.</li>
+      <li>Rebuild the skeleton from memory in a fresh file, twice. Under 60 seconds each means it's yours forever.</li>
+      <li>The whitespace experiment: put 10 blank lines between two sentences in one paragraph, reload, watch them collapse. Now you'll never fight the browser with spaces.</li>
+      <li>Bring to Session 2: one page (yours or anyone's) whose heading structure feels messy - we dissect one together before links and lists.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working content of these lessons from <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content" target="_blank" rel="noopener">MDN's Structuring content with HTML</a> and <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev Learn HTML</a>. MDN's interactive challenges and web.dev's own quizzes stay with the originals - our exercises are equivalents, not copies.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Basic HTML syntax</span><span class="note">Part 1 - elements, attributes, nesting, void elements</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Getting started (files, editor, browser)</span><span class="note">Demo 1 - folder, index.html, the edit-save-reload loop</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Headings and paragraphs</span><span class="note">Part 3 + Demo 2 - the ladder, whitespace collapsing</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">web.dev: Overview of HTML + Document structure</span><span class="note">Parts 1-2 - shared core taught once</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">web.dev: Attributes</span><span class="note">grammar today; per-element depth lands in Sessions 2-4</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">MDN: What's in the head</span><span class="note">charset + title today; Session 2 finishes, deep dive 6.3 goes pro</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Your h1 shows on the page but the browser tab is blank. What's missing?</p>
+      <button class="qopt" type="button">A · An id attribute on the h1</button>
+      <button class="qopt" type="button">B · A title element in the head</button>
+      <button class="qopt" type="button">C · The doctype declaration</button>
+      <p class="qwhy">The tab reads the head's title element; the h1 lives in the body. Head = about the page, body = on the page.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · You want more space between two paragraphs. The right move is...</p>
+      <button class="qopt" type="button">A · Add blank lines between them in the source</button>
+      <button class="qopt" type="button">B · Chain several br elements</button>
+      <button class="qopt" type="button">C · Leave the HTML alone - spacing is a CSS job (Session 5)</button>
+      <p class="qwhy">Whitespace collapses and br-stacking is fake structure. HTML says what things are; CSS says how far apart they sit.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Which snippet is correctly nested?</p>
+      <button class="qopt" type="button">A · &lt;p&gt;&lt;strong&gt;grumpy cat&lt;/strong&gt;&lt;/p&gt;</button>
+      <button class="qopt" type="button">B · &lt;p&gt;&lt;strong&gt;grumpy cat&lt;/p&gt;&lt;/strong&gt;</button>
+      <button class="qopt" type="button">C · &lt;strong&gt;&lt;p&gt;grumpy cat&lt;/strong&gt;&lt;/p&gt;</button>
+      <p class="qwhy">Boxes inside boxes: close the inner element before the outer one. B and C overlap - the browser will rewrite them silently.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Element anatomy</b><span>&lt;tag attribute="value"&gt;content&lt;/tag&gt;. Void elements (img, br, hr, meta) have no content, no closing tag.</span></div>
+      <div class="cheat-item"><b>The skeleton</b><span>!DOCTYPE html → html lang → head (meta charset, title) → body. Line 1 always the doctype.</span></div>
+      <div class="cheat-item"><b>Head vs body</b><span>Head = about the page, invisible (title, charset, CSS). Body = on the page, visible.</span></div>
+      <div class="cheat-item"><b>Heading ladder</b><span>One h1 per page. Never skip levels down. Headings are an outline, not a font-size menu.</span></div>
+      <div class="cheat-item"><b>Nesting law</b><span>Close inner before outer. Blocks stack (h1, p, div); inlines flow (strong, em, a, code).</span></div>
+      <div class="cheat-item"><b>Whitespace collapses</b><span>Any run of spaces/newlines renders as one space. New block = new element, never blank lines.</span></div>
+      <div class="cheat-item"><b>The loop</b><span>Edit → save → reload. index.html is the special default name. Real editor only (VS Code), never Word.</span></div>
+      <div class="cheat-item"><b>Debug order</b><span>Unclosed tag → unquoted attribute → overlapped nesting. The browser forgives; the validator (Session 6) doesn't.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 1 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="02-words-that-link.html">Next: Words that link →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

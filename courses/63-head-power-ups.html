@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep dive 6.3 · Head power-ups - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Deep dive 6.3 of 3</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Deep dive 6.3 of 3</div>
+    <h1>The invisible <span class="accent">10 lines</span> that make your page shareable</h1>
+    <p class="sub">Your page went live in Session 6. Now the head - the invisible half of the skeleton - decides everything that happens to it out in the world: what the LinkedIn card looks like when you share it, what Google prints under your name, which tiny icon sits in the tab, and how fast it loads on hotel wifi. Ten lines, outsized returns.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Self-paced</span>
+      <span class="chip time">~35 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:3">SEO essentials</span>
+      <span class="a2" style="flex:4">Open Graph cards</span>
+      <span class="a3" style="flex:2">favicons</span>
+      <span class="a4" style="flex:3">performance hints</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this deep dive exists</h2>
+    </div>
+    <p class="lede">Session 1 taught the split: head is the label on the box, body is what is in the box. This dive is about who reads the label. Search engines read it to rank you, LinkedIn and Slack read it to draw your share card, browsers read it to pick a tab icon and plan image loading. None of it renders on the page - which is exactly why these are the lines most beginners never learn, and why knowing them reads as senior.</p>
+    <div class="legend">
+      <span class="pill solid">Core - read carefully</span>
+      <span class="pill light">Self-study - recognition level</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Orange panels are editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with</strong>
+      A copy-paste head block for your live page: honest title and description for search, a complete Open Graph set so your LinkedIn shares get the big image card instead of a bare grey link, a favicon that costs three lines, and the image-loading attributes (lazy, width+height, srcset) that make the page feel fast on any connection. Heads-up on the demos: head lines are invisible by design, so this page shows them as copy-paste blocks and saves the live panels for the image tricks, which do render.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: SEO ============ -->
+  <section class="section" id="seo">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN meta element + "What's in the head" going pro</span>
+      <h2>SEO essentials - the search-result pitch <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">How a search engine reads your page: it fetches the HTML, walks the heading outline you built in Session 1, uses the semantic elements from Session 3 to tell content from chrome, and then prints two head lines as your search result - the title as the blue link, the meta description as the text under it. Good markup was never just tidiness; it was always also how machines understand you.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Title and meta description - your search listing, written by you<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The <code>&lt;title&gt;</code> does triple duty: browser tab, bookmark name, and the clickable line in search results. The pattern that works for a personal page: <strong>Name - what you do</strong>. The meta description is the ~155 character pitch printed beneath it - not a ranking factor so much as the ad copy that decides whether a human clicks you or the result below you.</p>
+        <div class="prompt-box good"><span class="label">Copy-paste, then personalize</span>&lt;title&gt;Phoebe Fu - data and AI leader&lt;/title&gt;<br>&lt;meta name="description" content="Data and AI leadership, hands-on builds, and honest notes on making analytics teams ship. Based in Sydney."&gt;</div>
+        <p>These render nothing, so no playground here - the honest test is searching your own name once your page has been live a few weeks. Two rules: every page gets a unique title, and the description is written for humans (search engines happily skip keyword soup and generate their own instead).</p>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Search for any well-known person in data and read the result snippets. The crisp ones ("X - AI researcher at Y. Writing about Z.") are hand-written meta descriptions; the ragged ones with "..." mid-sentence are search engines improvising from page text because nobody wrote the line. Thirty seconds of writing beats the robot's guess.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>canonical and robots - two lines of honesty<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><code>&lt;link rel="canonical" href="https://you.github.io/"&gt;</code> - declares the one true URL when the same page is reachable several ways (with and without a trailing slash, with tracking parameters). Search engines then pool all the credit onto one address instead of splitting it.</li>
+          <li><code>&lt;meta name="robots" content="noindex"&gt;</code> - asks search engines not to list the page. For drafts and private client pages, not for your portfolio. Honesty note: it is a request, not a lock - real secrets need real access control, never just a meta tag.</li>
+        </ul>
+        <p>That is the whole beginner SEO story, and it is deliberately boring: no tricks, no meta keywords (dead since 2009), just accurate labels on well-structured content. The heading discipline from Session 1 is doing more for your ranking than any tag in this section.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: OPEN GRAPH ============ -->
+  <section class="section" id="og">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the Open Graph protocol (ogp.me) · the star section</span>
+      <h2>Open Graph - the share card that sells your link <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">Paste a link into LinkedIn and a card appears: big image, bold title, grey description. That card is not designed by LinkedIn - it is read from the shared page's head, from <code>og:</code> meta tags (the Open Graph protocol, born at Facebook, now the standard everywhere: LinkedIn, Slack, WhatsApp, iMessage, Discord). No og tags means a bare grey link nobody clicks. For anyone sharing their work on LinkedIn, these six lines are the highest-leverage HTML on the entire page.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of a LinkedIn share card: og:image on top, then og:title, og:description, and the domain, each mapped to its meta tag">
+        <style>
+          .ogT { font: 700 17px Inter, sans-serif; fill: #2B1D14; }
+          .ogW { font: 700 20px Inter, sans-serif; fill: #FFFFFF; }
+          .ogM { font: 600 14px 'SF Mono', Menlo, monospace; fill: #A6300F; }
+          .ogX { font: 400 13px Inter, sans-serif; fill: #86705F; }
+          .ogN { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+          .ogLn { stroke: #DDCBBE; stroke-width: 2.5; fill: none; }
+        </style>
+        <rect x="60" y="24" width="420" height="356" rx="14" fill="#FDF0EA" stroke="#DDCBBE" stroke-width="2"/>
+        <rect x="60" y="24" width="420" height="220" rx="14" fill="#F06529"/>
+        <rect x="60" y="212" width="420" height="32" fill="#F06529"/>
+        <text class="ogW" x="150" y="140">og:image lives here</text>
+        <text class="ogX" x="168" y="166" fill="#FDF0EA">1200 x 630, the whole card</text>
+        <rect x="84" y="264" width="330" height="18" rx="4" fill="#2B1D14"/>
+        <rect x="84" y="296" width="372" height="10" rx="3" fill="#86705F"/>
+        <rect x="84" y="312" width="300" height="10" rx="3" fill="#86705F"/>
+        <rect x="84" y="342" width="150" height="10" rx="3" fill="#DDCBBE"/>
+        <line class="ogLn" x1="480" y1="130" x2="580" y2="130"/>
+        <text class="ogM" x="592" y="126">og:image</text>
+        <text class="ogX" x="592" y="144">1200x630 PNG or JPG, absolute URL</text>
+        <line class="ogLn" x1="414" y1="273" x2="580" y2="190"/>
+        <text class="ogM" x="592" y="186">og:title</text>
+        <text class="ogX" x="592" y="204">bold line, ~60 chars before cut</text>
+        <line class="ogLn" x1="456" y1="304" x2="580" y2="250"/>
+        <text class="ogM" x="592" y="246">og:description</text>
+        <text class="ogX" x="592" y="264">grey pitch, often trimmed ~110</text>
+        <line class="ogLn" x1="234" y1="347" x2="580" y2="310"/>
+        <text class="ogM" x="592" y="306">og:url</text>
+        <text class="ogX" x="592" y="324">shown as the bare domain</text>
+        <rect x="60" y="404" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="ogN" x="84" y="416">Every platform draws the same four ingredients its own way. You write them once, in the head.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a LinkedIn share card dissected: each visible part maps to one og: meta tag in your head.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The complete OG block - copy, paste, personalize<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Six og tags plus one Twitter/X line cover every platform that matters. Head-only, invisible on the page itself, so this is a copy-paste block rather than a live panel - the "preview" happens on LinkedIn:</p>
+        <div class="prompt-box good"><span class="label">The full set for your page</span>&lt;meta property="og:type" content="website"&gt;<br>&lt;meta property="og:title" content="Phoebe Fu - data and AI leader"&gt;<br>&lt;meta property="og:description" content="Builds, essays, and honest notes on data and AI leadership."&gt;<br>&lt;meta property="og:image" content="https://you.github.io/card.png"&gt;<br>&lt;meta property="og:url" content="https://you.github.io/"&gt;<br>&lt;meta name="twitter:card" content="summary_large_image"&gt;</div>
+        <ul>
+          <li><strong>og:image is the card.</strong> Make a 1200 x 630 PNG or JPG (the universal safe size): your name big, one line of what you do, brand color background. Any slide tool exports one in five minutes. The URL must be absolute - crawlers do not resolve relative paths from your head.</li>
+          <li><strong>og:title can differ from your title tag.</strong> The title tag serves search; og:title serves the feed. "Phoebe Fu - data and AI leader" works for both, but you are allowed a punchier feed version.</li>
+          <li><strong>twitter:card summary_large_image</strong> is the one non-og line worth adding: it asks X (and several tools that reuse the tag) for the big-image layout instead of a thumbnail.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Debugging a share card - the crawler cache gotcha<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The mechanic to understand: when you paste a link, the platform's crawler fetches your page <em>right then</em>, reads the og tags, and caches the result - often for days. Two consequences:</p>
+        <ul>
+          <li><strong>Test before you post.</strong> Paste your URL into <a href="https://www.opengraph.xyz" target="_blank" rel="noopener">opengraph.xyz</a> to preview the card across platforms, or use LinkedIn's own Post Inspector (search "LinkedIn Post Inspector", it needs a login). Both show exactly what the crawler sees.</li>
+          <li><strong>Fixed a typo but the old card keeps appearing?</strong> That is the cache. The Post Inspector re-scrapes on demand; failing that, sharing the URL with a harmless query string like <code>?v=2</code> forces a fresh fetch.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Watch your LinkedIn feed for a day: posts whose links show big branded cards get read, bare grey links scroll past. Same content, different head. People who share their work weekly get more return from these six lines than from any other HTML they will ever write.</p>
+        </div>
+        <p>The whole workflow, start to finish:</p>
+        <div class="steps">
+          <div class="step"><p>Make the 1200 x 630 image: name big, one line of what you do, brand background. Export as PNG, name it <code>card.png</code>, put it next to your <code>index.html</code>.</p></div>
+          <div class="step"><p>Paste the six-line block into your head, swap in your real texts and your page's absolute URLs.</p></div>
+          <div class="step"><p>Push, wait for GitHub Pages to update, then paste your URL into opengraph.xyz. Fix anything that looks off.</p></div>
+          <div class="step"><p>Share on LinkedIn. Big card appears. Take the small victory lap - you earned it in the head.</p></div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: FAVICONS ============ -->
+  <section class="section" id="favicons">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers favicon links (MDN "What's in the head" extras)</span>
+      <h2>Favicons in 2026 - the three-line set <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">The favicon is the tiny icon in the tab, the bookmark list, and the phone home screen. The internet is full of 20-line favicon incantations from 2015; the honest modern set is three lines: an SVG that scales everywhere, a PNG for Apple home screens, and a classic .ico for old clients and stray crawlers.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The minimal honest set<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <div class="prompt-box good"><span class="label">Three lines, done</span>&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;<br>&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"&gt;<br>&lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;</div>
+        <ul>
+          <li><strong>The SVG is the star</strong> - one vector file, sharp at every size, and you can write it by hand with your Deep dive 6.2 skills. Modern browsers pick it first.</li>
+          <li><strong>apple-touch-icon</strong> is the 180 x 180 PNG iOS uses when someone saves your page to their home screen. The <code>sizes</code> attribute tells the browser which dimensions a link offers so it can choose without downloading.</li>
+          <li><strong>favicon.ico</strong> is the 1999 veteran. Browsers still request <code>/favicon.ico</code> by convention even with no link tag (check any server log), so parking one there silences 404s.</li>
+        </ul>
+        <p>And the beginner-favorite trick - an emoji as your favicon, via a handwritten SVG, no image editor involved:</p>
+        <div class="prompt-box good"><span class="label">Save as favicon.svg</span>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;<br>&nbsp;&nbsp;&lt;text y="0.9em" font-size="90"&gt;📊&lt;/text&gt;<br>&lt;/svg&gt;</div>
+        <p>Head links do not render in a page body, so no live panel - drop the file next to your <code>index.html</code>, add the link line, hard-refresh, and watch your tab. That five-second icon change is the most visible payoff in this whole dive.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The rest of the head drawer, on sight<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Three more head lines you will meet in every view-source, now demystified:</p>
+        <ul>
+          <li><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> - the line that makes pages readable on phones instead of rendering a shrunken desktop. It has been in your skeleton since Session 1; now you know its job.</li>
+          <li><code>&lt;meta name="theme-color" content="#E34F26"&gt;</code> - tints the browser chrome around your page on mobile. Pure polish, one line.</li>
+          <li><code>&lt;meta charset="UTF-8"&gt;</code> - the Session 1 veteran, mentioned once more for placement: keep it first in the head, before any text a broken encoding could scramble.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 4: PERFORMANCE ============ -->
+  <section class="section" id="performance">
+    <div class="section-kicker">
+      <span class="klabel">Part 4 · covers MDN lazy loading + responsive images (srcset, sizes, picture)</span>
+      <h2>Performance hints - attributes that buy speed <span class="tag concept">core</span></h2>
+    </div>
+    <p class="lede">The browser starts planning the page the instant HTML arrives - before images download, before CSS settles. These attributes are you leaving notes for that planner: what size things will be, what can wait, what matters most. No build tools, no JavaScript: pure HTML attributes, mostly on the <code>&lt;img&gt;</code> tag you have used since Session 3.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>width + height - the anti-jump insurance<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Give every image its <code>width</code> and <code>height</code> attributes. The browser uses their ratio to reserve the right box <em>before the image arrives</em>, so the text below does not jump when it lands. That jump has a name - layout shift - and it is the thing that makes you tap the wrong button on slow news sites. CSS still controls the displayed size; the attributes just promise the shape.</p>
+        <div class="pg" data-caption="The image declares 400 x 260, so its box exists before the pixels arrive. Delete the width and height attributes, hit Reset, and compare how the paragraph settles on each reload." data-height="240">
+<pre class="pg-src">
+&lt;img src="https://picsum.photos/seed/phoebe/400/260"
+     width="400" height="260"
+     alt="A calm placeholder landscape"&gt;
+&lt;p&gt;This paragraph never jumps: the box
+above was reserved from the ratio
+before the image finished loading.&lt;/p&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>loading="lazy" - do not load what nobody scrolled to<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>By default the browser fetches every image on the page immediately, including the ones three screens down. <code>loading="lazy"</code> defers an image (or iframe) until the reader scrolls near it. One rule saves you from the classic mistake: <strong>never lazy-load what is visible on arrival</strong> - lazy-loading your hero image makes the most important pixels arrive last.</p>
+        <div class="pg" data-caption="Scroll INSIDE the preview panel: the lower images are marked lazy, so they load as you approach them. Try adding a fourth." data-height="260">
+<pre class="pg-src">
+&lt;p&gt;Above the fold: loads eagerly.&lt;/p&gt;
+&lt;img src="https://picsum.photos/seed/one/380/220"
+     width="380" height="220" alt="First, eager"&gt;
+&lt;p&gt;Below the fold: these can wait.&lt;/p&gt;
+&lt;img src="https://picsum.photos/seed/two/380/220"
+     width="380" height="220" loading="lazy"
+     alt="Second, lazy"&gt;
+&lt;img src="https://picsum.photos/seed/three/380/220"
+     width="380" height="220" loading="lazy"
+     alt="Third, lazy"&gt;
+</pre>
+        </div>
+        <p>Sibling hint, recognition level: <code>fetchpriority="high"</code> on the one image that IS your page (the hero) tells the browser to fight for it first. New-ish but harmless where unsupported - unknown attributes are simply ignored, HTML's oldest safety feature.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>srcset + sizes - one image, several weights<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A phone on 4G should not download the 1600-pixel version of your headshot. <code>srcset</code> lists the same image at several widths (the <code>400w</code> style numbers are each file's real pixel width), and <code>sizes</code> tells the browser how wide the slot will be, so it can pick the lightest file that still looks sharp. You provide the menu; the browser orders.</p>
+        <div class="pg" data-caption="The same picture offered at three widths. The preview panel is narrow, so the browser picks a small file - your phone would too. Change sizes to 100vw and reload the thinking." data-height="240">
+<pre class="pg-src">
+&lt;img src="https://picsum.photos/seed/hero/400/250"
+     srcset="https://picsum.photos/seed/hero/400/250 400w,
+             https://picsum.photos/seed/hero/800/500 800w,
+             https://picsum.photos/seed/hero/1200/750 1200w"
+     sizes="(max-width: 600px) 90vw, 600px"
+     width="400" height="250"
+     alt="One image, three candidate files"&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>picture - art direction, not just resizing<span class="mini">3 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><code>srcset</code> serves the same picture at different weights. <code>&lt;picture&gt;</code> goes further: genuinely different images for different situations - a wide landscape crop on desktop, a tight square crop on phones. The browser walks the <code>&lt;source&gt;</code> children top to bottom, takes the first whose <code>media</code> condition matches, and falls back to the inner <code>&lt;img&gt;</code> (which also carries the alt text - always).</p>
+        <div class="pg" data-caption="The preview panel is narrower than 500px, so the media condition fails and the square fallback wins. Lower the 500 to 200 and the wide crop takes over." data-height="260">
+<pre class="pg-src">
+&lt;picture&gt;
+  &lt;source media="(min-width: 500px)"
+          srcset="https://picsum.photos/seed/wide/600/220"&gt;
+  &lt;img src="https://picsum.photos/seed/tall/260/260"
+       width="260" height="260"
+       alt="Square crop for narrow screens"&gt;
+&lt;/picture&gt;
+&lt;p&gt;Same subject, different crop per screen -
+that is art direction.&lt;/p&gt;
+</pre>
+        </div>
+        <p>Bonus use, no media queries: a <code>&lt;source type="image/avif"&gt;</code> then <code>type="image/webp"</code> then a JPG fallback img serves modern formats to modern browsers and never breaks old ones.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-40 min total</span></h2>
+    </div>
+    <ul>
+      <li>Make your 1200 x 630 card image (any slide tool: name big, one line of what you do, export as PNG), drop it in your repo, and add the full OG block from Part 2 to your live page's head.</li>
+      <li>Preview the card on opengraph.xyz or the LinkedIn Post Inspector, fix what looks off, then actually re-share your page on LinkedIn and watch the big card appear where the grey link used to be.</li>
+      <li>Ship a favicon: the emoji SVG trick from Part 3 (pick your emoji), plus the three link lines. Hard-refresh and check the tab.</li>
+      <li>Audit every img on your page: width and height on all of them, loading="lazy" on everything below the first screen, and NOT on your hero.</li>
+      <li>Write your title as "Name - what you do" and a ~155 character meta description you would be proud to see under your name in search results.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This dive teaches the working content of the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta" target="_blank" rel="noopener">MDN meta element</a> docs, the <a href="https://ogp.me" target="_blank" rel="noopener">Open Graph protocol</a>, and MDN's <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading" target="_blank" rel="noopener">lazy loading</a> and responsive images guides. Full spec depth stays with the originals - this page is the working subset.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: meta element + head essentials for SEO</span><span class="note">Part 1 - title patterns, description, canonical, robots honesty</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Open Graph protocol (ogp.me) + twitter:card</span><span class="note">Part 2 - the six-line block, 1200x630 recipe, cache debugging</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Favicon link relations</span><span class="note">Part 3 - svg + apple-touch-icon + ico, sizes attribute, emoji trick</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Lazy loading</span><span class="note">Part 4 - loading="lazy" on images and iframes, never on the hero</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Responsive images (srcset, sizes, picture)</span><span class="note">Part 4 - weight menu vs art direction, format fallbacks</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">fetchpriority</span><span class="note">recognition level - hero images first; safe where unsupported</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · You share your page on LinkedIn and get a bare grey link, no image card. The first thing to check is...</p>
+      <button class="qopt" type="button">A · Your LinkedIn account settings</button>
+      <button class="qopt" type="button">B · The og:image meta tag in your page's head - present, absolute URL, ~1200x630</button>
+      <button class="qopt" type="button">C · Whether the page has enough img elements in the body</button>
+      <p class="qwhy">The crawler reads the head, not your settings and not the body. No og:image (or a relative URL it cannot fetch) means no card - and remember the cache: after fixing, force a re-scrape with the Post Inspector.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · Your hero image sits at the very top of the page. Which attribute set is right for it?</p>
+      <button class="qopt" type="button">A · loading="lazy" - defer everything, speed is speed</button>
+      <button class="qopt" type="button">B · No attributes - the browser knows best</button>
+      <button class="qopt" type="button">C · width + height, and fetchpriority="high" if anything - never lazy</button>
+      <p class="qwhy">Lazy is for below the fold; lazy-loading the first thing visitors see delays your most important pixels. Width and height reserve its box so nothing jumps, and fetchpriority tells the browser to fight for it first.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · In srcset="photo-400.jpg 400w, photo-800.jpg 800w", what does 400w describe?</p>
+      <button class="qopt" type="button">A · The real pixel width of that image file</button>
+      <button class="qopt" type="button">B · The screen width at which the browser must use that file</button>
+      <button class="qopt" type="button">C · The file weight in kilobytes</button>
+      <p class="qwhy">Each w number states the file's actual width in pixels - facts about the menu. The browser combines them with your sizes hint and the device to choose; you never dictate the choice directly.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Deep dive 6.3 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Title pattern</b><span>"Name - what you do". Unique per page. Serves the tab, bookmarks, and the blue line in search results.</span></div>
+      <div class="cheat-item"><b>Meta description</b><span>~155 chars, written for humans - the pitch under your search result. Skip it and the robot improvises.</span></div>
+      <div class="cheat-item"><b>OG block</b><span>og:type, og:title, og:description, og:image, og:url + twitter:card summary_large_image. Six lines, every platform.</span></div>
+      <div class="cheat-item"><b>og:image recipe</b><span>1200 x 630 PNG/JPG, absolute URL. Debug with opengraph.xyz or LinkedIn Post Inspector; crawlers cache for days.</span></div>
+      <div class="cheat-item"><b>Favicon set</b><span>favicon.svg (star) + apple-touch-icon 180x180 + favicon.ico at the root. Emoji-in-SVG = icon with zero image tools.</span></div>
+      <div class="cheat-item"><b>width + height</b><span>On every img. The ratio reserves the box before pixels arrive - no layout jump. CSS still sets displayed size.</span></div>
+      <div class="cheat-item"><b>loading="lazy"</b><span>Below-fold images and iframes only. Never the hero - that one gets fetchpriority="high" instead.</span></div>
+      <div class="cheat-item"><b>srcset vs picture</b><span>srcset = same image, several weights, browser picks. picture = different crops or formats per condition, you direct.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Deep dive 6.3 of 3 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="62-embeds-and-vectors.html">← Previous: Embeds and vectors</a> &nbsp;·&nbsp; <a href="../index.html">Back to all sessions →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>

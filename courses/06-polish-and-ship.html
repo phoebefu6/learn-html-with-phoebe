@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 6 · Polish and ship - learn html with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-html-with-phoebe</a> / Session 6 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn HTML with Phoebe · Session 6 of 6</div>
+    <h1>Polish and <span class="accent">ship</span>: your page goes live</h1>
+    <p class="sub">Five sessions of building end here: today your page gets checked like a professional checks it - validator, accessibility audit, phone test - and then it goes onto the real internet with a URL you can text to your mom. Ship day. Everyone graduates.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Ship day</span>
+      <span class="chip audience">Everyone graduates</span>
+      <span class="chip audience">Data &amp; AI folks too</span>
+      <span class="chip time">45 min live + self-study depth</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-22 · Checks (live cards)</span>
+      <span class="a3" style="flex:4">22-42 · Three demos + SHIP</span>
+      <span class="a4" style="flex:1">42-45 · Grad</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why this session exists</h2>
+    </div>
+    <p class="lede">Your page has semantic regions, a nav, a photo, a skills table, a contact form, and its own <code>styles.css</code>. It works on your machine. Today it stops being a file and becomes a website: we check it the way professionals check (machines are better at finding your typos than you are), then put it on GitHub Pages - free, no credit card, no command line - and load it on a phone that is not yours.</p>
+    <div class="legend">
+      <span class="pill solid">Live - presented in session</span>
+      <span class="pill light">Self-study - read after class</span>
+      <span class="pill peach">★ Try it now</span>
+      <span class="pill inkpill">Every example on this page is editable - type and watch</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A page that passes the W3C validator with zero errors, a 6-point accessibility audit you can run on anything, and - the big one - your corner of the internet LIVE on a real URL, loaded on your own phone, link sent to someone you like. This is the graduation session. The deep dives after this are dessert.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: PRE-FLIGHT ============ -->
+  <section class="section" id="preflight">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers MDN "Debugging HTML" + validator.w3.org</span>
+      <h2>The pre-flight checks <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">Browsers forgive broken HTML silently, which means your page can look fine while being quietly wrong. Before shipping, professionals run three checks: an x-ray, a merciless proofreader, and a phone test.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Devtools inspector - the x-ray<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Right-click any element on any page and choose <strong>Inspect</strong>. Devtools shows you the DOM - the structure the browser actually built, not the source you wrote. When those two disagree (an unclosed tag the browser repaired, a paragraph that swallowed its neighbor), the inspector is where the disagreement becomes visible.</p>
+        <ul>
+          <li><strong>Hover a line in the inspector</strong> and the matching element highlights on the page - that is how you find "which tag is this box".</li>
+          <li><strong>Look for elements nested somewhere strange.</strong> If your footer appears inside your form in the inspector, the browser repaired a mistake and guessed wrong.</li>
+        </ul>
+        <div class="prompt-box good"><span class="label">★ Try it now</span>Inspect this page. Find one of the orange playground panels in the DOM tree and watch it highlight. You already read HTML; the inspector just shows you someone else's.</div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The W3C validator - zero-mercy proofreading<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Go to <a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a>, pick "Validate by File Upload" (or paste your source under "Direct Input"), and submit. It reads your file with zero forgiveness and lists every technical sin with a line number.</p>
+        <ul>
+          <li><strong>Read errors top-down and fix the FIRST one first.</strong> One unclosed tag early in the file confuses the parser about everything after it - the first error often causes half the list. Fix it, re-validate, watch ten errors become two.</li>
+          <li><strong>Warnings are advice, errors are bugs.</strong> Ship with zero errors; read the warnings and decide.</li>
+        </ul>
+        <div class="pg" data-caption="This snippet has 3 bugs the browser silently forgives. Find all 3, then fix them here - unclosed tags are the theme." data-height="230">
+<pre class="pg-src">
+&lt;h2&gt;My skills&lt;/h2&gt;
+&lt;p&gt;Things I use &lt;strong&gt;every week.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spreadsheets&lt;/li&gt;
+  &lt;li&gt;Python
+  &lt;li&gt;SQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Always learning more.
+</pre>
+        </div>
+        <div class="callout tip">
+          <strong>The answer key</strong>
+          Bug 1: <code>&lt;/strong&gt;</code> never closes, so bold leaks to the end of the paragraph. Bug 2: the Python <code>&lt;li&gt;</code> never closes. Bug 3: the last <code>&lt;p&gt;</code> never closes. All three render "fine" - which is exactly why the validator exists.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The viewport meta - why phones lie without it<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Phone browsers assume old pages were designed for desktop, so by default they render your page on a fake 980px-wide canvas and shrink the whole thing down - tiny unreadable text, pinch-zoom everywhere. One line in the head tells the phone to stop pretending:</p>
+        <div class="pg" data-caption="The shipping-grade head, complete. This playground renders the full document - change the title and h1 to yours." data-raw data-height="250">
+<pre class="pg-src">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport"
+          content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Phoebe Fu&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Ready to ship&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </div>
+        <ul>
+          <li><code>width=device-width</code> - "use the phone's real width, not the fake 980px".</li>
+          <li><code>initial-scale=1</code> - "start at 100% zoom, no shrinking".</li>
+          <li><strong>Test before shipping:</strong> open devtools, click the little phone icon (device mode), pick a phone size. If your page needs sideways scrolling at phone width, fix that before it meets a real phone.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>A debugging order that works<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>When a page looks wrong, check in this order - cheapest first: 1) Did you save and reload? 2) Validator - unclosed tags and typos surface instantly. 3) Inspector - is the DOM shaped the way you think it is? 4) Only then suspect your CSS. In practice, steps 1 and 2 catch most of it; MDN's Debugging HTML lesson walks the same route with a deliberately broken demo file worth playing with.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: ACCESSIBILITY ============ -->
+  <section class="section" id="a11y">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · accessibility essentials, distilled to 6 checks</span>
+      <h2>Accessibility - the 6-point audit <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">Accessibility is not an advanced topic bolted on at the end - it is mostly the honest HTML you have written all course, checked deliberately once before shipping. Six checks, two minutes each, and your page works for screen readers, keyboard users, and everyone squinting at a phone in the sun.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The 6-point accessibility audit: alt text, heading ladder, link text, labels, contrast, lang attribute">
+        <style>
+          .axH { font: 700 18px Inter, sans-serif; fill: #2B1D14; }
+          .axN { font: 800 26px Inter, sans-serif; fill: #FFFFFF; }
+          .axT { font: 700 15px Inter, sans-serif; fill: #2B1D14; }
+          .axX { font: 400 12.5px Inter, sans-serif; fill: #86705F; }
+          .axB { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <text class="axH" x="40" y="36">Run all six. Fix what fails. Ship.</text>
+        <rect x="40" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="101" cy="88" r="18" fill="#A6300F"/><text class="axN" x="93" y="97">1</text>
+        <text class="axT" x="70" y="130">alt text</text>
+        <text class="axX" x="58" y="150">every img says</text>
+        <text class="axX" x="58" y="166">what it shows</text>
+        <rect x="175" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="236" cy="88" r="18" fill="#E34F26"/><text class="axN" x="228" y="97">2</text>
+        <text class="axT" x="197" y="130">headings</text>
+        <text class="axX" x="193" y="150">ladder h1, h2, h3</text>
+        <text class="axX" x="193" y="166">no skipped rungs</text>
+        <rect x="310" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="371" cy="88" r="18" fill="#F06529"/><text class="axN" x="363" y="97">3</text>
+        <text class="axT" x="336" y="130">link text</text>
+        <text class="axX" x="326" y="150">says where it goes</text>
+        <text class="axX" x="326" y="166">never "click here"</text>
+        <rect x="445" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="506" cy="88" r="18" fill="#F06529"/><text class="axN" x="498" y="97">4</text>
+        <text class="axT" x="477" y="130">labels</text>
+        <text class="axX" x="463" y="150">every input has a</text>
+        <text class="axX" x="463" y="166">label, wired by for</text>
+        <rect x="580" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="641" cy="88" r="18" fill="#E34F26"/><text class="axN" x="633" y="97">5</text>
+        <text class="axT" x="605" y="130">contrast</text>
+        <text class="axX" x="598" y="150">4.5:1 for text -</text>
+        <text class="axX" x="598" y="166">check at WebAIM</text>
+        <rect x="715" y="56" width="123" height="120" rx="12" fill="#FDF0EA" stroke="#F8A47F"/>
+        <circle cx="776" cy="88" r="18" fill="#A6300F"/><text class="axN" x="768" y="97">6</text>
+        <text class="axT" x="754" y="130">lang</text>
+        <text class="axX" x="729" y="150">html lang="en" so</text>
+        <text class="axX" x="729" y="166">readers pick a voice</text>
+        <rect x="40" y="206" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="axB" x="64" y="218">You already do 1, 2, 4 and 6 from Sessions 1-4. This audit just makes the habit deliberate.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the 6-point audit strip. Two minutes per check, once per ship.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Checks 1-4: honest alt, ladder, links, labels<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Four checks you can run by reading your own source. Each one is a promise your markup makes to someone who is not looking at the screen:</p>
+        <ul>
+          <li><strong>1 · Every img has honest alt.</strong> Describe what the image shows and why it is there: <code>alt="Phoebe presenting at a data meetup"</code>, not <code>alt="photo"</code>. Purely decorative image? <code>alt=""</code> tells screen readers to skip it - honestly.</li>
+          <li><strong>2 · Headings form a ladder.</strong> One h1, then h2, then h3 - no skipping down. Screen-reader users navigate by the headings list; a skipped level is a missing stair.</li>
+          <li><strong>3 · Links say where they go.</strong> Read only the link text aloud: would you know the destination?</li>
+          <li><strong>4 · Every input has a label</strong> wired with <code>for</code> matching the input's <code>id</code> - Session 4's rule, now audited.</li>
+        </ul>
+        <div class="pg" data-caption="This snippet fails checks 1, 3 and 4. Fix all three: honest alt, descriptive link text, wire the label with for + id." data-height="230">
+<pre class="pg-src">
+&lt;img src="https://placehold.co/80x80" alt="image"&gt;
+&lt;p&gt;My talk slides are online -
+  &lt;a href="https://example.com/slides"&gt;click here&lt;/a&gt;.&lt;/p&gt;
+&lt;form&gt;
+  Your email &lt;input type="email"&gt;
+&lt;/form&gt;
+</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Checks 5-6: contrast and lang<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>5 · Color contrast.</strong> Body text needs at least a <strong>4.5:1</strong> contrast ratio against its background. Do not trust your eyes on your own monitor - paste your two hex colors into the <a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">WebAIM contrast checker</a> and let it judge.</li>
+          <li><strong>6 · The lang attribute.</strong> <code>&lt;html lang="en"&gt;</code> has been on your page since Session 1 - confirm it survived your edits. It picks the screen-reader voice and the translation source language.</li>
+        </ul>
+        <div class="pg" data-caption="This gray fails 4.5:1 on white. Darken the color value until it reads comfortably - then verify your pick at WebAIM." data-height="170">
+<pre class="pg-src">
+&lt;p style="color: #b3b3b3;"&gt;
+  Faint text feels elegant on your monitor
+  and disappears on a phone in sunlight.
+&lt;/p&gt;
+</pre>
+        </div>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p><strong>One effort, three payoffs.</strong> The same six checks that help a screen-reader user are what search engines rank with (alt text, headings, link text, lang) and what makes the page usable for everyone (labels, contrast). Accessibility, SEO, and usability are not three jobs - they are one honest-markup job wearing three name tags.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: GITHUB PAGES ============ -->
+  <section class="section" id="pages">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers GitHub Pages getting-started docs</span>
+      <h2>GitHub Pages from absolute zero <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">GitHub is a home for code folders - each folder is called a repository ("repo"), and millions of people store projects there for free. It has a bonus feature made for you: put HTML files in a repo, flip one switch, and GitHub serves them to the whole internet as a real website. No server to rent, no company to pay.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ship pipeline: local folder uploads to a GitHub repo, Pages setting publishes it to a live URL">
+        <style>
+          .shT { font: 700 17px Inter, sans-serif; fill: #2B1D14; }
+          .shW { font: 700 16px Inter, sans-serif; fill: #FFFFFF; }
+          .shM { font: 600 13px 'SF Mono', Menlo, monospace; fill: #FFFFFF; }
+          .shX { font: 400 12.5px Inter, sans-serif; fill: #86705F; }
+          .shA { font: 600 13px Inter, sans-serif; fill: #A6300F; }
+          .shB { font: 600 14px Inter, sans-serif; fill: #0E2A40; }
+        </style>
+        <defs>
+          <marker id="shArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L9,3 L0,6 Z" fill="#DDCBBE"/>
+          </marker>
+        </defs>
+        <rect x="40" y="50" width="220" height="110" rx="12" fill="#E34F26"/>
+        <text class="shW" x="60" y="80">Your laptop</text>
+        <text class="shM" x="60" y="106">my-site/</text>
+        <text class="shM" x="76" y="126">index.html</text>
+        <text class="shM" x="76" y="146">styles.css + images/</text>
+        <line x1="268" y1="105" x2="322" y2="105" stroke="#DDCBBE" stroke-width="3" marker-end="url(#shArrow)"/>
+        <text class="shA" x="262" y="90">upload</text>
+        <rect x="330" y="50" width="220" height="110" rx="12" fill="#F06529"/>
+        <text class="shW" x="350" y="80">GitHub repo</text>
+        <text class="shM" x="350" y="106">username.github.io</text>
+        <text class="shX" x="350" y="130" fill="#FDF0EA">drag and drop in the</text>
+        <text class="shX" x="350" y="148" fill="#FDF0EA">web UI - no terminal</text>
+        <line x1="558" y1="105" x2="612" y2="105" stroke="#DDCBBE" stroke-width="3" marker-end="url(#shArrow)"/>
+        <text class="shA" x="548" y="90">Pages: on</text>
+        <rect x="620" y="50" width="220" height="110" rx="12" fill="#A6300F"/>
+        <text class="shW" x="640" y="80">Live URL</text>
+        <text class="shM" x="640" y="106">https://username</text>
+        <text class="shM" x="640" y="126">.github.io</text>
+        <text class="shX" x="640" y="148" fill="#F8A47F">works on any phone</text>
+        <rect x="40" y="196" width="14" height="14" rx="3" fill="#1572B6"/>
+        <text class="shB" x="64" y="208">Updating later = re-upload the changed file. The URL stays the same forever.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the whole ship pipeline: folder, repo, switch, URL. Ten minutes the first time, two minutes forever after.</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The recipe: account, repo, upload, switch<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Account:</strong> sign up free at github.com. Your username becomes part of your URL - pick one you are happy saying out loud.</li>
+          <li><strong>Repo:</strong> click New repository and name it <strong>exactly</strong> <code>USERNAME.github.io</code> (your real username) - that magic name publishes at the root URL. Any other repo name works too via Settings, it just lives at <code>username.github.io/repo-name/</code>.</li>
+          <li><strong>Upload:</strong> in the repo, "uploading an existing file" - then drag <code>index.html</code>, <code>styles.css</code>, and your <code>images/</code> folder straight from your file manager into the browser. Commit (that is GitHub's word for "save").</li>
+          <li><strong>Switch:</strong> Settings → Pages → under "Build and deployment" choose <strong>Deploy from a branch</strong>, pick <code>main</code>, save. Your URL appears at the top of that page.</li>
+          <li><strong>Wait:</strong> first publish can take a few minutes. Refresh the URL, not your patience.</li>
+        </ul>
+        <div class="callout tip">
+          <strong>Honest note about git</strong>
+          Real git - the version-control command line underneath GitHub - is its own course and worth learning eventually. But the web UI ships pages perfectly well, and this course refuses to make you install anything. Drag, drop, done.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What that name means, and updating later<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Why <code>index.html</code> mattered all course: when someone visits <code>username.github.io</code>, the server looks for a file named exactly <code>index.html</code> and shows it. That default was set in Session 1 and pays off today.</p>
+        <ul>
+          <li><strong>Updating:</strong> edit the file locally, then upload it again with the same name - GitHub replaces the old one. Give it a minute, hard-refresh, done.</li>
+          <li><strong>Adding pages:</strong> upload <code>about.html</code> and it is live at <code>username.github.io/about.html</code> - your Session 2 links between pages now work on the real internet.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO 1 ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Demo 1 of 3</span>
+      <h2>Validate to zero <span class="tag demo">★ 6 min · follow along</span></h2>
+    </div>
+    <p class="lede">We feed the project page to the validator and fix every error live - top-down, first error first - until the green "no errors" banner appears.</p>
+    <div class="steps">
+      <div class="step"><p>Open <a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a> → "Validate by File Upload" → choose your <code>index.html</code> → Check.</p></div>
+      <div class="step"><p>Read the first error only. Note its line number, open your file at that line, fix it, save.</p></div>
+      <div class="step"><p>Re-upload and re-check. Watch errors caused by the first one vanish without being touched.</p></div>
+      <div class="step"><p>Repeat until zero errors. Skim the warnings; fix any that are cheap.</p></div>
+      <div class="step"><p>Validate <code>styles.css</code> too if you like - the CSS validator lives at jigsaw.w3.org/css-validator, same ritual.</p></div>
+    </div>
+    <div class="callout tip">
+      <strong>If the error list is scary-long</strong>
+      Do not panic and do not read it all. Fix error 1, re-validate. A 30-error list is usually a 3-mistake file.
+    </div>
+  </section>
+
+  <!-- ============ DEMO 2 ============ -->
+  <section class="section" id="demo-2">
+    <div class="section-kicker">
+      <span class="klabel">Demo 2 of 3</span>
+      <h2>The 6-point audit, live on your page <span class="tag demo">★ 5 min · build your own</span></h2>
+    </div>
+    <p class="lede">Run the strip from Part 2 against your own file. Most of you pass 4 or 5 already - fix the stragglers now, before the internet sees them.</p>
+    <div class="steps">
+      <div class="step"><p>Alt text: find every <code>&lt;img&gt;</code>, read the alt out loud, rewrite any that say "photo" or "image".</p></div>
+      <div class="step"><p>Headings: open devtools, search the DOM for h1, h2, h3 - confirm one h1 and no skipped levels.</p></div>
+      <div class="step"><p>Links: read only the link texts. Rewrite any "click here" or bare "here".</p></div>
+      <div class="step"><p>Labels: every form input gets a <code>&lt;label for&gt;</code> matched to its <code>id</code> - Session 4's form is the place to look.</p></div>
+      <div class="step"><p>Contrast: paste your text and background colors from <code>styles.css</code> into the WebAIM checker. 4.5:1 or darken.</p></div>
+      <div class="step"><p>Lang: confirm <code>&lt;html lang="en"&gt;</code> is intact. Six for six? You are cleared to ship.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ DEMO 3 ============ -->
+  <section class="section" id="demo-3">
+    <div class="section-kicker">
+      <span class="klabel">Demo 3 of 3 · the finale</span>
+      <h2>SHIP IT <span class="tag demo">★ 9 min · everyone ships</span></h2>
+    </div>
+    <p class="lede">Six sessions ago this was an empty text file. Now we put it where every website lives: on a URL. Do these steps with us, right now, and leave this session with your page on the internet.</p>
+    <div class="steps">
+      <div class="step"><p>Create your GitHub account (or sign in), click <strong>New repository</strong>, name it exactly <code>USERNAME.github.io</code>, keep it Public, create.</p></div>
+      <div class="step"><p>Click "uploading an existing file" and drag in <code>index.html</code>, <code>styles.css</code>, and your <code>images/</code> folder. Commit changes.</p></div>
+      <div class="step"><p>Settings → Pages → Deploy from a branch → <code>main</code> → Save. Copy the URL it shows you.</p></div>
+      <div class="step"><p>Wait for the first build (grab water, it earns the drama), then open the URL. There it is.</p></div>
+      <div class="step"><p>Now the real test: open the URL <strong>on your phone</strong>. Not the file - the URL. Your viewport meta from Part 1 is why it reads beautifully.</p></div>
+      <div class="step"><p>Last step, non-optional: send the link to someone you like. A friend, a parent, a group chat. The moment someone else's device shows your page, you are a person who ships websites. Welcome to the club - it has no fees and excellent members.</p></div>
+    </div>
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>This exact pipeline is professional practice</strong>, not a toy: docs sites, data project portfolios, and startup landing pages ship on GitHub Pages every day. The page you just published is built with the same skeleton, the same semantic regions, and the same checks a professional would run. The difference between you and "someone who can make websites" is now zero.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Try it yourself - this week <span class="tag exercise">◐ 30-45 min total</span></h2>
+    </div>
+    <ul>
+      <li>Share the URL somewhere that mildly scares you - a group chat, a bio, LinkedIn. Pages that no one visits quietly stop being maintained.</li>
+      <li>Add one more content section entirely solo - a "Now" section, a reading list, a project write-up. Draft to live URL without looking anything up, if you can.</li>
+      <li>Re-run the validator after your edits. New content means new chances for unclosed tags - the check is two minutes, make it a reflex.</li>
+      <li>Load your page on the slowest connection you can find (phone, one bar). Notice what loads first - that is Session 3's image sizing paying rent.</li>
+      <li>You have graduated - the remaining three deep dives are self-paced dessert: interactive HTML without JavaScript (6.1), embeds and vectors (6.2), and the professional head (6.3). Start with 6.1; it will surprise you.</li>
+    </ul>
+  </section>
+
+  <!-- ============ OFFICIAL ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>Official sources covered</h2>
+    </div>
+    <p class="lede">This session teaches the working content of <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Debugging_HTML" target="_blank" rel="noopener">MDN's Debugging HTML</a>, the <a href="https://validator.w3.org" target="_blank" rel="noopener">W3C validator</a>, and the <a href="https://docs.github.com/en/pages/getting-started-with-github-pages" target="_blank" rel="noopener">GitHub Pages getting-started docs</a>, with accessibility essentials distilled from MDN and web.dev.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">MDN: Debugging HTML</span><span class="note">Part 1 + Demo 1 - inspector as x-ray, validator workflow</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">validator.w3.org</span><span class="note">Demo 1 - upload, first-error-first, re-validate to zero</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Viewport meta tag</span><span class="note">Part 1 - why phones fake 980px, the one-line fix, device mode</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Accessibility essentials (MDN + web.dev)</span><span class="note">Part 2 + Demo 2 - the 6-point audit, WebAIM 4.5:1</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">web.dev: Focus</span><span class="note">contrast + labels today; keyboard focus goes deep in dive 6.1</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">GitHub Pages: getting started</span><span class="note">Part 3 + Demo 3 - repo naming, web-UI upload, Pages switch</span></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Your page looks perfect on desktop but is microscopic on a phone. The most likely missing piece is...</p>
+      <button class="qopt" type="button">A · A styles.css written for phones</button>
+      <button class="qopt" type="button">B · The lang attribute on the html element</button>
+      <button class="qopt" type="button">C · The viewport meta tag in the head</button>
+      <p class="qwhy">Without the viewport meta, phone browsers render on a fake 980px canvas and shrink everything. width=device-width, initial-scale=1 tells them to use the real screen.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · The validator reports 27 errors. The professional first move is...</p>
+      <button class="qopt" type="button">A · Fix only the first error, then re-validate</button>
+      <button class="qopt" type="button">B · Fix all 27 from the bottom up</button>
+      <button class="qopt" type="button">C · Ignore them - the page renders fine in Chrome</button>
+      <p class="qwhy">Early errors confuse the parser about everything after them, so the first error often causes half the list. Fix it, re-check, and watch the count collapse.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · To publish at the root URL https://phoebe.github.io, the repo must be named...</p>
+      <button class="qopt" type="button">A · index.html</button>
+      <button class="qopt" type="button">B · phoebe.github.io</button>
+      <button class="qopt" type="button">C · my-site</button>
+      <p class="qwhy">The magic user-site repo is named exactly USERNAME.github.io. Any other repo name still works, but publishes under a subpath like phoebe.github.io/my-site/.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 6 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Validator ritual</b><span>validator.w3.org → upload file → fix FIRST error → re-check. Repeat to zero errors. Warnings = advice.</span></div>
+      <div class="cheat-item"><b>Viewport line</b><span>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; in the head - or phones fake 980px and shrink.</span></div>
+      <div class="cheat-item"><b>Inspector</b><span>Right-click → Inspect shows the DOM the browser built, not the source you wrote. Disagreement = repaired mistake.</span></div>
+      <div class="cheat-item"><b>6-point audit</b><span>Honest alt · heading ladder · link text says destination · label per input · contrast · lang attribute.</span></div>
+      <div class="cheat-item"><b>Contrast bar</b><span>4.5:1 minimum for body text. Judge with the WebAIM checker, never with your own monitor.</span></div>
+      <div class="cheat-item"><b>Repo naming</b><span>USERNAME.github.io publishes at the root URL. Any other name publishes at username.github.io/repo-name/.</span></div>
+      <div class="cheat-item"><b>Ship + update loop</b><span>Upload via web UI → Settings → Pages → main → wait minutes → live. Update = re-upload same filename.</span></div>
+      <div class="cheat-item"><b>Pre-flight order</b><span>Save/reload → validate → 6-point audit → device-mode phone check → ship → test the URL on a real phone.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 6 of 6 · learn-html-with-phoebe · by Phoebe Fu</span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="05-enough-css.html">← Session 5</a> &nbsp;·&nbsp; <a href="61-interactive-html.html">Next: Deep dives →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+<script src="../assets/html-live.js?v=1"></script>
+</body>
+</html>
