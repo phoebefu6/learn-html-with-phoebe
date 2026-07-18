@@ -1,3 +1,8 @@
+<!-- learn-with-phoebe hub banner -->
+> ### 📚 Part of [**Learn with Phoebe**](https://phoebefu6.github.io/learn-with-phoebe/)
+> The shelf of 20 free, hands-on courses on AI, data, and the craft around them. **[Browse every course ↗](https://phoebefu6.github.io/learn-with-phoebe/)**
+<!-- /learn-with-phoebe hub banner -->
+
 # learn html with phoebe
 
 Six 45-minute sessions + three self-paced deep dives taking a total beginner from their very first tag to their own page live on the internet.
