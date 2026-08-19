@@ -67,6 +67,38 @@
       <summary><span class="mode live">Live</span>Title and meta description - your search listing, written by you<span class="mini">4 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>The <code>&lt;title&gt;</code> does triple duty: browser tab, bookmark name, and the clickable line in search results. The pattern that works for a personal page: <strong>Name - what you do</strong>. The meta description is the ~155 character pitch printed beneath it - not a ranking factor so much as the ad copy that decides whether a human clicks you or the result below you.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A title tag and a meta description tag next to the search result they produce: a blue clickable headline reading Phoebe Fu, data and AI leader, the page URL beneath it, and the description text printed as the grey summary line under both.">
+    <style>
+      .hp1T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .hp1H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .hp1C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .hp1L { font: 400 14px Inter, sans-serif; fill: #1572B6; }
+      .hp1U { font: 400 11px Inter, sans-serif; fill: #86705F; }
+      .hp1D { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .hp1N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="200" fill="#FFFFFF"/>
+    <text class="hp1T" x="40" y="26">The title and meta description become your search result</text>
+    <text class="hp1H" x="40" y="42">THE MARKUP</text>
+    <text class="hp1H" x="460" y="42">THE SEARCH RESULT</text>
+
+    <rect x="40" y="46" width="390" height="90" rx="8" fill="#26150D"/>
+    <text class="hp1C" x="52" y="64">&lt;title&gt;Phoebe Fu - data and AI leader&lt;/title&gt;</text>
+    <text class="hp1C" x="52" y="80">&lt;meta name="description"</text>
+    <text class="hp1C" x="64" y="94">content="Data and AI leadership,</text>
+    <text class="hp1C" x="64" y="108">hands-on builds, honest notes."&gt;</text>
+
+    <text class="hp1L" x="472" y="74">Phoebe Fu - data and AI leader</text>
+    <text class="hp1U" x="472" y="92">https://you.github.io</text>
+    <text class="hp1D" x="472" y="112">Data and AI leadership, hands-on builds,</text>
+    <text class="hp1D" x="472" y="128">honest notes on making analytics ship.</text>
+
+    <text class="hp1N" x="40" y="176">title is the blue headline; meta description is the grey pitch printed underneath it.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - two invisible head lines write your search-result ad copy</figcaption>
+</figure>
+
         <div class="prompt-box good"><span class="label">Copy-paste, then personalize</span>&lt;title&gt;Phoebe Fu - data and AI leader&lt;/title&gt;<br>&lt;meta name="description" content="Data and AI leadership, hands-on builds, and honest notes on making analytics teams ship. Based in Sydney."&gt;</div>
         <p>These render nothing, so no playground here - the honest test is searching your own name once your page has been live a few weeks. Two rules: every page gets a unique title, and the description is written for humans (search engines happily skip keyword soup and generate their own instead).</p>
         <div class="callout example">
@@ -217,6 +249,32 @@
       <summary><span class="mode live">Live</span>width + height - the anti-jump insurance<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>Give every image its <code>width</code> and <code>height</code> attributes. The browser uses their ratio to reserve the right box <em>before the image arrives</em>, so the text below does not jump when it lands. That jump has a name - layout shift - and it is the thing that makes you tap the wrong button on slow news sites. CSS still controls the displayed size; the attributes just promise the shape.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Before and after comparison of an img tag. Without width and height, the text below the image jumps down once the file loads, a layout shift. With width and height set, the browser reserves the exact box before the file arrives, so the text below never moves.">
+    <style>
+      .hp2H { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .hp2C { font: 700 11px Consolas, monospace; fill: #A6300F; }
+      .hp2B { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .hp2N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="300" fill="#FFFFFF"/>
+    <rect x="40" y="50" width="390" height="180" rx="12" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+    <text class="hp2H" x="58" y="84">&#10007; no width or height</text>
+    <text class="hp2C" x="58" y="114">&lt;img src="...400x260.jpg" alt="landscape"&gt;</text>
+    <text class="hp2B" x="58" y="134">Text below jumps when it loads.</text>
+    <text class="hp2B" x="58" y="154">That jump is called layout shift.</text>
+
+    <rect x="450" y="50" width="390" height="180" rx="12" fill="#FDF0EA" stroke="#E34F26" stroke-width="1.5"/>
+    <text class="hp2H" x="468" y="84">&#10003; width and height set</text>
+    <text class="hp2C" x="468" y="114">&lt;img src="...400x260.jpg" width="400" height="260"&gt;</text>
+    <text class="hp2B" x="468" y="134">Space is reserved before it loads.</text>
+    <text class="hp2B" x="468" y="154">Text below never moves.</text>
+
+    <text class="hp2N" x="40" y="276">CSS still controls the displayed size - these attributes just promise the shape up front.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - two attributes are the entire fix for images that make the page jump</figcaption>
+</figure>
+
         <div class="pg" data-caption="The image declares 400 x 260, so its box exists before the pixels arrive. Delete the width and height attributes, hit Reset, and compare how the paragraph settles on each reload." data-height="240">
 <pre class="pg-src">
 &lt;img src="https://picsum.photos/seed/phoebe/400/260"

@@ -101,6 +101,39 @@
       <summary><span class="mode live">Live</span>The shape vocabulary: rect, circle, line, text<span class="mini">5 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>An <code>&lt;svg&gt;</code> element is a canvas; inside it, each child element draws one thing. <code>&lt;rect&gt;</code> takes a position (<code>x</code>, <code>y</code>) and a size; <code>&lt;circle&gt;</code> takes a center (<code>cx</code>, <code>cy</code>) and a radius <code>r</code>; <code>&lt;line&gt;</code> connects two points; <code>&lt;text&gt;</code> writes real, selectable text. Shapes paint in source order - later elements sit on top.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SVG markup with a rect, a circle, a line and a text element, next to the exact drawing it produces: an orange square, a peach circle, a diagonal line and the words all of this is text, painted in the same source order they appear in the code.">
+    <style>
+      .ev1T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .ev1H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .ev1C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .ev1N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+      .ev1X { font: 400 11px Inter, sans-serif; fill: #2B1D14; }
+    </style>
+    <rect x="0" y="0" width="880" height="248" fill="#FFFFFF"/>
+    <text class="ev1T" x="40" y="26">Each child element draws one thing, in source order</text>
+    <text class="ev1H" x="40" y="42">THE MARKUP</text>
+    <text class="ev1H" x="460" y="42">THE DRAWING IT PRODUCES</text>
+
+    <rect x="40" y="46" width="390" height="116" rx="8" fill="#26150D"/>
+    <text class="ev1C" x="52" y="64">&lt;svg viewBox="0 0 320 130"&gt;</text>
+    <text class="ev1C" x="64" y="78">&lt;rect x="10" y="15" width="80" height="80"/&gt;</text>
+    <text class="ev1C" x="64" y="92">&lt;circle cx="160" cy="55" r="40"/&gt;</text>
+    <text class="ev1C" x="64" y="106">&lt;line x1="230" y1="95" x2="305" y2="15"/&gt;</text>
+    <text class="ev1C" x="64" y="120">&lt;text x="12" y="122"&gt;all of this is text&lt;/text&gt;</text>
+    <text class="ev1C" x="52" y="134">&lt;/svg&gt;</text>
+
+    <rect x="470" y="50" width="300" height="140" fill="#FFFFFF" stroke="#F4E9E1" stroke-width="1.5"/>
+    <rect x="479" y="64" width="75" height="75" rx="11" fill="#E34F26"/>
+    <circle cx="620" cy="102" r="37.5" fill="#F8A47F"/>
+    <line x1="686" y1="139" x2="756" y2="64" stroke="#2B1D14" stroke-width="3.5"/>
+    <text class="ev1X" x="481" y="164">all of this is text</text>
+
+    <text class="ev1N" x="40" y="224">The viewBox is the drawing's own coordinate system - every shape paints inside it, to scale.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - the shapes paint in the order they're written, later on top of earlier</figcaption>
+</figure>
+
         <div class="pg" data-caption="Draw live: change the circle's r and fill, move the rect, rotate nothing - just edit numbers and watch." data-height="220">
 <pre class="pg-src">
 &lt;svg viewBox="0 0 320 130" width="320"&gt;
@@ -170,6 +203,40 @@
       <summary><span class="mode live">Live</span>Your first guest page<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>Two attributes matter from day one: <code>src</code> points at the document to show, and <code>title</code> describes it for screen-reader users - an iframe without a title is an unlabeled door, so treat <code>title</code> as required. Below, the guest page is written inline via <code>srcdoc</code> so it renders in our sandbox; in the wild you will almost always use <code>src="https://..."</code>.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An iframe with title and srcdoc attributes, next to the page it produces: a paragraph in your own page, then a bordered window showing a completely separate guest document that says hello from inside, then another paragraph back in your page.">
+    <style>
+      .ev2T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .ev2H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .ev2C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .ev2P { font: 400 11.5px Inter, sans-serif; fill: #86705F; }
+      .ev2G { font: 700 12px Inter, sans-serif; fill: #2B1D14; }
+      .ev2S { font: 400 11px Inter, sans-serif; fill: #86705F; }
+      .ev2N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="268" fill="#FFFFFF"/>
+    <text class="ev2T" x="40" y="26">An iframe is a whole document inside a window</text>
+    <text class="ev2H" x="40" y="42">THE MARKUP</text>
+    <text class="ev2H" x="460" y="42">YOUR PAGE, WITH A GUEST INSIDE</text>
+
+    <rect x="40" y="46" width="390" height="90" rx="8" fill="#26150D"/>
+    <text class="ev2C" x="52" y="64">&lt;iframe title="A tiny guest page"</text>
+    <text class="ev2C" x="64" y="78">srcdoc="&lt;h2&gt;Hello from inside&lt;/h2&gt;"</text>
+    <text class="ev2C" x="64" y="92">width="100%" height="120"&gt;</text>
+    <text class="ev2C" x="52" y="106">&lt;/iframe&gt;</text>
+
+    <rect x="460" y="50" width="380" height="160" fill="#FFFFFF" stroke="#F4E9E1" stroke-width="1.5"/>
+    <text class="ev2P" x="472" y="70">This paragraph lives in YOUR page.</text>
+    <rect x="472" y="84" width="356" height="74" rx="6" fill="#FDF0EA" stroke="#E34F26" stroke-width="3"/>
+    <text class="ev2G" x="650" y="116" text-anchor="middle">Hello from inside</text>
+    <text class="ev2S" x="650" y="134" text-anchor="middle">I am a separate document.</text>
+    <text class="ev2P" x="472" y="196">And this one lives in your page again.</text>
+
+    <text class="ev2N" x="40" y="244">src or srcdoc supplies the guest document; title names it for screen-reader users.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - the guest document renders with its own rules, sealed inside the window</figcaption>
+</figure>
+
         <div class="pg" data-caption="A page inside your page. Edit the guest's markup inside srcdoc, or restyle the border - two documents, one view." data-height="260">
 <pre class="pg-src">
 &lt;p&gt;This paragraph lives in YOUR page.&lt;/p&gt;

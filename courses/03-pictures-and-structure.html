@@ -69,6 +69,36 @@
       <summary><span class="mode live">Live</span>img - src, alt, width, height<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p><code>&lt;img&gt;</code> is a void element (no content, no closing tag - Session 1) that is all attributes: <code>src</code> says which file, <code>alt</code> says what it shows, <code>width</code> and <code>height</code> declare its natural size in pixels so the browser reserves the space before the file arrives. Skip the size and the page jumps around while loading - the layout shift you feel on janky news sites.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An img tag with src, alt, width and height attributes next to the space it reserves on the page: a 300 by 200 pixel box held open before the file arrives, with the alt text ready to show if the file fails to load.">
+    <style>
+      .pc2T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .pc2H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .pc2C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .pc2R { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .pc2S { font: 400 11px Inter, sans-serif; fill: #86705F; }
+      .pc2N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="260" fill="#FFFFFF"/>
+    <text class="pc2T" x="40" y="26">One void element, four attributes reserve the shape</text>
+    <text class="pc2H" x="40" y="42">THE MARKUP</text>
+    <text class="pc2H" x="460" y="42">THE RESERVED SPACE</text>
+
+    <rect x="40" y="54" width="390" height="100" rx="8" fill="#26150D"/>
+    <text class="pc2C" x="52" y="76">&lt;img src="picsum.photos/300/200"</text>
+    <text class="pc2C" x="52" y="94">alt="Placeholder landscape photo"</text>
+    <text class="pc2C" x="52" y="112">width="300" height="200"&gt;</text>
+
+    <rect x="460" y="54" width="220" height="140" rx="8" fill="#FDF0EA" stroke="#E34F26" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text class="pc2R" x="570" y="118" text-anchor="middle">300 &#215; 200 px</text>
+    <text class="pc2S" x="570" y="138" text-anchor="middle">reserved before load</text>
+    <text class="pc2S" x="460" y="212">fails to load &#8594; shows: "Placeholder photo"</text>
+
+    <text class="pc2N" x="40" y="246">src says which file, alt is the fallback, width and height reserve the box before it loads.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - width and height stop the page from jumping while the file loads</figcaption>
+</figure>
+
         <div class="pg" data-caption="Change width and height to 150 and 100 - the image scales. Then change the numbers in the URL itself for a different source picture." data-height="260">
 <pre class="pg-src">
 &lt;p&gt;A photo, politely announced:&lt;/p&gt;
@@ -88,6 +118,31 @@
       <summary><span class="mode live">Live</span>The alt discipline - describe function, not filename<span class="mini">2 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>The <code>alt</code> attribute is what a screen reader speaks, what renders if the file fails, and what search engines index. The test: if the image vanished, what words would do its job? Describe what it means in context, never what the file is called.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Before and after comparison of alt text on the same chart image. The weak version alt equals image of a chart tells a screen reader nothing and leaves no trace if the image vanishes. The honest version alt equals line chart accuracy 71 percent to 94 percent speaks the actual finding and survives even if the image never loads.">
+    <style>
+      .pc1H { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .pc1B { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .pc1N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="300" fill="#FFFFFF"/>
+    <rect x="40" y="50" width="390" height="180" rx="12" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+    <text class="pc1H" x="58" y="84">&#10007; alt="image of a chart"</text>
+    <text class="pc1B" x="58" y="114">Screen reader announces the filename.</text>
+    <text class="pc1B" x="58" y="134">Search engines index nothing useful.</text>
+    <text class="pc1B" x="58" y="154">Image vanishes, so does the point.</text>
+
+    <rect x="450" y="50" width="390" height="180" rx="12" fill="#FDF0EA" stroke="#E34F26" stroke-width="1.5"/>
+    <text class="pc1H" x="468" y="84">&#10003; alt: names the finding</text>
+    <text class="pc1B" x="468" y="114">alt="Line chart: accuracy 71% to 94%"</text>
+    <text class="pc1B" x="468" y="134">Screen reader speaks the real finding.</text>
+    <text class="pc1B" x="468" y="154">Image vanishes - the sentence survives.</text>
+
+    <text class="pc1N" x="40" y="266">The test: if the image vanished, what words would do its job? That's honest alt text.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - honest alt text is what survives when the picture doesn't load</figcaption>
+</figure>
+
         <div class="prompt-box bad"><span class="label">Weak alt</span>alt="IMG_4032.jpg" or alt="photo" or alt="image of a chart" - a screen-reader user hears filename noise and learns nothing.</div>
         <div class="prompt-box good"><span class="label">Honest alt</span>alt="Line chart: model accuracy climbing from 71% to 94% over ten training runs" - the image could vanish and the point survives.</div>
         <ul>

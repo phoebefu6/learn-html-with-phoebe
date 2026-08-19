@@ -69,6 +69,49 @@
       <summary><span class="mode live">Live</span>Build one from four elements<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>Read it inside out: cells sit in rows, rows sit in the table. The browser draws the grid for you - column widths, alignment, all of it. Your only job is to put the right content in the right cell, one row at a time.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A five-line table markup with one header row and two data rows for Language, Job and Born, next to the grid the browser draws from it: a shaded header row above two plain data rows, HTML and CSS with their job and birth year.">
+    <style>
+      .tf1T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .tf1H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .tf1C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .tf1G { font: 700 12px Inter, sans-serif; fill: #A6300F; }
+      .tf1D { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .tf1N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="220" fill="#FFFFFF"/>
+    <text class="tf1T" x="40" y="26">Cells sit in rows, rows sit in the table</text>
+    <text class="tf1H" x="40" y="42">THE MARKUP</text>
+    <text class="tf1H" x="460" y="42">THE GRID THE BROWSER DRAWS</text>
+
+    <rect x="40" y="46" width="390" height="110" rx="8" fill="#26150D"/>
+    <text class="tf1C" x="52" y="66">&lt;table&gt;</text>
+    <text class="tf1C" x="52" y="82">&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;&lt;th&gt;Job&lt;/th&gt;&lt;th&gt;Born&lt;/th&gt;&lt;/tr&gt;</text>
+    <text class="tf1C" x="52" y="98">&lt;tr&gt;&lt;td&gt;HTML&lt;/td&gt;&lt;td&gt;Structure&lt;/td&gt;&lt;td&gt;1991&lt;/td&gt;&lt;/tr&gt;</text>
+    <text class="tf1C" x="52" y="114">&lt;tr&gt;&lt;td&gt;CSS&lt;/td&gt;&lt;td&gt;Style&lt;/td&gt;&lt;td&gt;1996&lt;/td&gt;&lt;/tr&gt;</text>
+    <text class="tf1C" x="52" y="130">&lt;/table&gt;</text>
+
+    <rect x="460" y="56" width="380" height="90" fill="#FFFFFF" stroke="#F4E9E1" stroke-width="1.5"/>
+    <rect x="460" y="56" width="380" height="30" fill="#FDF0EA"/>
+    <line x1="460" y1="86" x2="840" y2="86" stroke="#F4E9E1" stroke-width="1.5"/>
+    <line x1="460" y1="116" x2="840" y2="116" stroke="#F4E9E1" stroke-width="1.5"/>
+    <line x1="590" y1="56" x2="590" y2="146" stroke="#F4E9E1" stroke-width="1.5"/>
+    <line x1="720" y1="56" x2="720" y2="146" stroke="#F4E9E1" stroke-width="1.5"/>
+    <text class="tf1G" x="525" y="76" text-anchor="middle">Language</text>
+    <text class="tf1G" x="655" y="76" text-anchor="middle">Job</text>
+    <text class="tf1G" x="780" y="76" text-anchor="middle">Born</text>
+    <text class="tf1D" x="525" y="106" text-anchor="middle">HTML</text>
+    <text class="tf1D" x="655" y="106" text-anchor="middle">Structure</text>
+    <text class="tf1D" x="780" y="106" text-anchor="middle">1991</text>
+    <text class="tf1D" x="525" y="136" text-anchor="middle">CSS</text>
+    <text class="tf1D" x="655" y="136" text-anchor="middle">Style</text>
+    <text class="tf1D" x="780" y="136" text-anchor="middle">1996</text>
+
+    <text class="tf1N" x="40" y="192">Every row needs the same number of cells - the browser draws the columns, you fill them.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - four elements, table, tr, td, th, build any grid of data</figcaption>
+</figure>
+
         <div class="pg" data-caption="A minimal table. Add a third row for JavaScript (born 1995) - copy a tr, change the cells." data-height="220">
 <pre class="pg-src">
 &lt;table&gt;
@@ -279,6 +322,32 @@
       <summary><span class="mode live">Live</span>label + for - THE accessibility habit<span class="mini">2 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>Every input gets a <code>&lt;label&gt;</code>, and the label's <code>for</code> attribute holds the input's <code>id</code>. That one wire does three jobs: screen readers announce the label when the input gets focus, clicking the label focuses the input (a huge tap target on phones), and your form documents itself.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Before and after comparison of a name field. Without a label, an input with only a placeholder vanishes once typing starts and a screen reader announces nothing. With a label wired to the input by for and id, the text stays visible and a screen reader announces it on focus, and clicking the label text focuses the input.">
+    <style>
+      .tf2H { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .tf2C { font: 700 11.5px Consolas, monospace; fill: #A6300F; }
+      .tf2B { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .tf2N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="300" fill="#FFFFFF"/>
+    <rect x="40" y="50" width="390" height="180" rx="12" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+    <text class="tf2H" x="58" y="84">&#10007; placeholder, no label</text>
+    <text class="tf2C" x="58" y="114">&lt;input placeholder="Your name"&gt;</text>
+    <text class="tf2B" x="58" y="134">Screen reader announces nothing.</text>
+    <text class="tf2B" x="58" y="154">Vanishes once typing starts.</text>
+
+    <rect x="450" y="50" width="390" height="180" rx="12" fill="#FDF0EA" stroke="#E34F26" stroke-width="1.5"/>
+    <text class="tf2H" x="468" y="84">&#10003; label wired with for/id</text>
+    <text class="tf2C" x="468" y="114">&lt;label for="n"&gt;Name&lt;/label&gt;&lt;input id="n"&gt;</text>
+    <text class="tf2B" x="468" y="134">Screen reader announces on focus.</text>
+    <text class="tf2B" x="468" y="154">Click the label text, focus jumps in.</text>
+
+    <text class="tf2N" x="40" y="276">Label says what the field IS - always visible; placeholder is only an example, then it's gone.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - a placeholder is not a label, it disappears exactly when you need it</figcaption>
+</figure>
+
         <div class="pg" data-caption="Click the WORDS, not the boxes - focus jumps because for and id match. Break one id and feel the label go dead." data-height="200">
 <pre class="pg-src">
 &lt;label for="name"&gt;Your name&lt;/label&gt;

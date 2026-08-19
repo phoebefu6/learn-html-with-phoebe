@@ -69,6 +69,36 @@
       <summary><span class="mode live">Live</span>strong and em - meaning, not looks<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p><code>&lt;em&gt;</code> marks stress emphasis - the word you would lean on out loud, which can flip a sentence's meaning. <code>&lt;strong&gt;</code> marks strong importance - warnings, the part that must not be missed. Yes, <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> exist and look the same, but they carry no meaning: bold and italic with nothing to say. Machines hear strong and em; they shrug at b and i.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two versions of the same sentence with em in a different position: emphasizing said stresses that it happened, emphasizing ready stresses the state, showing that emphasis placement changes meaning, not just style.">
+    <style>
+      .wl1T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .wl1C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .wl1R { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .wl1E { font: 700 12px Inter, sans-serif; font-style: italic; fill: #A6300F; }
+      .wl1N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+      .wl1A { font: 700 16px Inter, sans-serif; fill: #A6300F; }
+    </style>
+    <rect x="0" y="0" width="880" height="200" fill="#FFFFFF"/>
+    <text class="wl1T" x="40" y="26">Same &lt;em&gt;, different word - the meaning moves with it</text>
+
+    <rect x="40" y="44" width="390" height="32" rx="6" fill="#26150D"/>
+    <text class="wl1C" x="52" y="65">&lt;p&gt;I &lt;em&gt;said&lt;/em&gt; the model was ready.&lt;/p&gt;</text>
+    <text class="wl1A" x="436" y="70">&#8594;</text>
+    <text class="wl1R" x="456" y="65">I <tspan class="wl1E">said</tspan> the model was ready.</text>
+    <text class="wl1N" x="456" y="82">stress: it happened</text>
+
+    <rect x="40" y="100" width="390" height="32" rx="6" fill="#26150D"/>
+    <text class="wl1C" x="52" y="121">&lt;p&gt;I said the model was &lt;em&gt;ready&lt;/em&gt;.&lt;/p&gt;</text>
+    <text class="wl1A" x="436" y="126">&#8594;</text>
+    <text class="wl1R" x="456" y="121">I said the model was <tspan class="wl1E">ready</tspan>.</text>
+    <text class="wl1N" x="456" y="138">stress: the state now</text>
+
+    <text class="wl1N" x="40" y="178">Same tag, different word - the emphasis moves the meaning, not just the style.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - the tag never moves, the meaning moves with whatever word it wraps</figcaption>
+</figure>
+
         <div class="pg" data-caption="Move the em to a different word and re-read each sentence aloud - the meaning moves with it. Then try swapping strong for b: same look, empty meaning." data-height="200">
 <pre class="pg-src">
 &lt;p&gt;I &lt;em&gt;said&lt;/em&gt; the model was ready.&lt;/p&gt;
@@ -88,6 +118,44 @@ the old weights.&lt;/p&gt;
       <summary><span class="mode live">Live</span>Lists - ul, ol, and lists inside lists<span class="mini">3 min</span><span class="caret">▶</span></summary>
       <div class="body">
         <p>Two list flavors, one rule. <code>&lt;ul&gt;</code> when order doesn't matter (groceries, skills, links you love), <code>&lt;ol&gt;</code> when it does (steps, rankings). Both hold only <code>&lt;li&gt;</code> children. To nest, put the whole inner list INSIDE an <code>&lt;li&gt;</code> - a list item can contain its own sub-list.</p>
+<figure class="zoomable">
+  <svg viewBox="0 0 880 284" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Markup for a nested list, an ol with three steps where the second step contains a ul of two sub-items, next to the rendered result: a numbered list of three steps where step two shows two bulleted sub-items, proving the browser keeps the outer numbering intact.">
+    <style>
+      .wl2T { font: 700 13px Inter, sans-serif; fill: #2B1D14; }
+      .wl2H { font: 700 11px Inter, sans-serif; fill: #86705F; letter-spacing: .05em; }
+      .wl2C { font: 400 11px Consolas, monospace; fill: #F7E3D7; }
+      .wl2R { font: 400 12px Inter, sans-serif; fill: #2B1D14; }
+      .wl2B { font: 700 12px Inter, sans-serif; fill: #A6300F; }
+      .wl2N { font: 400 12px Inter, sans-serif; fill: #86705F; }
+    </style>
+    <rect x="0" y="0" width="880" height="284" fill="#FFFFFF"/>
+    <text class="wl2T" x="40" y="26">Nest a &lt;ul&gt; inside an &lt;li&gt; - the render nests too</text>
+    <text class="wl2H" x="40" y="42">THE MARKUP</text>
+    <text class="wl2H" x="460" y="42">THE RENDERED LIST</text>
+
+    <rect x="40" y="50" width="390" height="176" rx="8" fill="#26150D"/>
+    <text class="wl2C" x="56" y="68">&lt;ol&gt;</text>
+    <text class="wl2C" x="70" y="83">&lt;li&gt;Collect the data&lt;/li&gt;</text>
+    <text class="wl2C" x="70" y="98">&lt;li&gt;Clean it</text>
+    <text class="wl2C" x="84" y="113">&lt;ul&gt;</text>
+    <text class="wl2C" x="98" y="128">&lt;li&gt;drop duplicates&lt;/li&gt;</text>
+    <text class="wl2C" x="98" y="143">&lt;li&gt;fill missing values&lt;/li&gt;</text>
+    <text class="wl2C" x="84" y="158">&lt;/ul&gt;</text>
+    <text class="wl2C" x="70" y="173">&lt;/li&gt;</text>
+    <text class="wl2C" x="70" y="188">&lt;li&gt;Train, evaluate, repeat&lt;/li&gt;</text>
+    <text class="wl2C" x="56" y="203">&lt;/ol&gt;</text>
+
+    <text class="wl2R" x="460" y="90"><tspan class="wl2B">1.</tspan> Collect the data</text>
+    <text class="wl2R" x="460" y="115"><tspan class="wl2B">2.</tspan> Clean it</text>
+    <text class="wl2R" x="480" y="138"><tspan class="wl2B">-</tspan> drop duplicates</text>
+    <text class="wl2R" x="480" y="158"><tspan class="wl2B">-</tspan> fill missing values</text>
+    <text class="wl2R" x="460" y="183"><tspan class="wl2B">3.</tspan> Train, evaluate, repeat</text>
+
+    <text class="wl2N" x="40" y="258">To nest, put the whole inner &lt;ul&gt; inside the &lt;li&gt; - a list item can hold its own sub-list.</text>
+  </svg>
+  <figcaption>🔍 Click to zoom - the sub-list lives inside the li, so numbering never breaks</figcaption>
+</figure>
+
         <div class="pg" data-caption="Add a third bullet inside the nested ul, then change the outer ol to a ul - numbers become dots because the meaning changed." data-height="240">
 <pre class="pg-src">
 &lt;h3&gt;Training a model, honestly&lt;/h3&gt;
